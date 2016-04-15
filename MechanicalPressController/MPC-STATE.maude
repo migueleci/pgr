@@ -1,0 +1,25 @@
+fmod MPC-STATE is
+  pr NAT .
+  pr BOOL .
+
+  sorts Sys .
+
+  --- [ 0] motor_actuator 
+  --- [ 1] motor_sensor
+  --- [ 2] clutch_actuator
+  --- [ 3] clutch_sensor
+  --- [ 4] door_actuator
+  --- [ 5] door_sensor
+  --- [ 6] start_motor_button
+  --- [ 7] start_motor_impulse
+  --- [ 8] stop_motor_button
+  --- [ 9] stop_motor_impulse
+  --- [10] start_clutch_button
+  --- [11] start_clutch_impulse
+  --- [12] stop_clutch_button
+  --- [13] stop_clutch_impulse
+  --- [14] m
+  op <_,_,_,_,_,_,_,_,_,_,_,_,_,_,_> : Bool Bool Bool Bool Bool Bool Bool Bool Bool Bool Bool Bool Bool Bool Bool -> Sys .
+
+endfm 
+

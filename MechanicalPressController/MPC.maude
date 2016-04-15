@@ -1,0 +1,174 @@
+mod MPC is
+  pr MPC-STATE .
+
+  vars W X Y Z : Bool .
+  vars A B C D E F G H I J K L M N O : Bool . 
+
+  --- [ 0] motor_actuator 
+  --- [ 1] motor_sensor
+  --- [ 2] clutch_actuator
+  --- [ 3] clutch_sensor
+  --- [ 4] door_actuator
+  --- [ 5] door_sensor
+  --- [ 6] start_motor_button
+  --- [ 7] start_motor_impulse
+  --- [ 8] stop_motor_button
+  --- [ 9] stop_motor_impulse
+  --- [10] start_clutch_button
+  --- [11] start_clutch_impulse
+  --- [12] stop_clutch_button
+  --- [13] stop_clutch_impulse
+  --- [14] m
+  
+  --- Environment 
+  rl [motor_start] :
+    < true, false, A, B, C, D, E, F, G, H, I, J, K, L, M >
+    =>
+    < true, true, A, B, C, D, E, F, G, H, I, J, K, L, M > .
+
+  rl [motor_stop] :
+    < false, true, A, B, C, D, E, F, G, H, I, J, K, L, M >
+    =>
+    < false, false, A, B, C, D, E, F, G, H, I, J, K, L, M > . 
+    
+  rl [clutch_start] :
+    < A, B, true, false, C, D, E, F, G, H, I, J, K, L, M >
+    =>
+    < A, B, true, true, C, D, E, F, G, H, I, J, K, L, M > .
+
+  rl [clutch_stop] :
+    < A, B, false, true, C, D, E, F, G, H, I, J, K, L, M >
+    =>
+    < A, B, false, false, C, D, E, F, G, H, I, J, K, L, M > . 
+  
+  rl [door_close] :
+    < A, B, C, D, false, true, E, F, G, H, I, J, K, L, M >
+    =>
+    < A, B, C, D, false, false, E, F, G, H, I, J, K, L, M > .
+
+  rl [door_open] :
+    < A, B, C, D, true, false, E, F, G, H, I, J, K, L, M >
+    =>
+    < A, B, C, D, true, true, E, F, G, H, I, J, K, L, M > .
+
+  rl [push_start_motor_button] :
+    < A, B, C, D, E, F, false, G, H, I, J, K, L, M, N >
+    =>
+    < A, B, C, D, E, F, true, G, H, I, J, K, L, M, N > .
+
+  rl [release_start_motor_button] :
+    < A, B, C, D, E, F, true, G, H, I, J, K, L, M, N >
+    =>
+    < A, B, C, D, E, F, false, G, H, I, J, K, L, M, N > .
+
+  rl [push_stop_motor_button] :
+    < A, B, C, D, E, F, G, H, false, I, J, K, L, M, N >
+    =>
+    < A, B, C, D, E, F, G, H, true, I, J, K, L, M, N > .
+
+  rl [release_stop_motor_button] :
+    < A, B, C, D, E, F, G, H, true, I, J, K, L, M, N >
+    =>
+    < A, B, C, D, E, F, G, H, false, I, J, K, L, M, N > .
+
+  rl [push_start_clutch_button] :
+    < A, B, C, D, E, F, G, H, I, J, false, K, L, M, N >
+    =>
+    < A, B, C, D, E, F, G, H, I, J, true, K, L, M, N > .
+
+  rl [release_start_clutch_button] :
+    < A, B, C, D, E, F, G, H, I, J, true, K, L, M, N >
+    =>
+    < A, B, C, D, E, F, G, H, I, J, false, K, L, M, N > .
+
+  rl [push_stop_clutch_button] :
+    < A, B, C, D, E, F, G, H, I, J, K, L, false, M, N >
+    =>
+    < A, B, C, D, E, F, G, H, I, J, K, L, true, M, N > .
+
+  rl [release_stop_clutch_button] :
+    < A, B, C, D, E, F, G, H, I, J, K, L, true, M, N >
+    =>
+    < A, B, C, D, E, F, G, H, I, J, K, L, false, M, N > .
+
+  --- Controller
+  rl [treat_push_start_motor_button] : 
+    < false, false, A, B, C, D, true, false, E, F, G, H, I, J, K >
+    =>
+    < true, false, A, B, C, D, true, true, E, F, G, H, I, J, K > .
+
+  crl [treat_push_start_motor_button_false] : 
+    < W, X, A, B, C, D, true, false, E, F, G, H, I, J, K >
+    =>
+    < W, X, A, B, C, D, true, true, E, F, G, H, I, J, K > 
+    if W or X .
+
+  rl [treat_push_stop_motor_button] :
+    < true, true, A, B, C, D, E, F, true, false, G, H, I, J, K >
+    =>
+    < false, true, A, B, C, D, E, F, true, true, G, H, I, J, K > .
+
+  crl [treat_push_stop_motor_button_false] : 
+    < W, X, A, B, C, D, E, F, true, false, G, H, I, J, K >
+    =>
+    < W, X, A, B, C, D, E, F, true, true, G, H, I, J, K >
+    if W or X .
+
+  rl [treat_release_start_motor_button] :
+    < A, B, C, D, E, F, false, true, G, H, I, J, K, L, M >
+    =>
+    < A, B, C, D, E, F, false, false, G, H, I, J, K, L, M > .
+
+  rl [treat_release_stop_motor_button] :
+    < A, B, C, D, E, F, G, H, false, true, I, J, K, L, M >
+    =>
+    < A, B, C, D, E, F, G, H, false, false, I, J, K, L, M > .
+
+  rl [treat_start_clutch] :
+    < true, true, false, false, false, false, A, B, C, D, E, F, G, H, true >
+    =>
+    < true, true, true, false, false, false, A, B, C, D, E, F, G, H, false > .
+
+  rl [treat_stop_clutch] :
+    < A, B, true, true, C, D, E, F, G, H, I, J, false, true, K >
+    =>
+    < A, B, false, true, C, D, E, F, G, H, I, J, false, false, K > .
+
+  rl [treat_close_door] :
+    < true, true, A, B, true, true, C, D, E, F, true, false, G, H, I >
+    =>
+    < true, true, A, B, false, true, C, D, E, F, true, true, G, H, true > .
+
+  rl [treat_open_door] :
+    < A, B, false, false, false, false, C, D, E, F, G, H, I, J, false >
+    =>
+    < A, B, false, false, true, false, C, D, E, F, G, H, I, J, false > .
+
+  crl [treat_close_door_false] :
+    < W, X, A, B, Y, Z, C, D, E, F, true, false, G, H, I >
+    =>
+    < W, X, A, B, Y, Z, C, D, E, F, true, true, G, H, true > 
+    if (W or X) and (Y or Z) .
+
+  --- rl [] :
+  ---   < _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ >
+  ---   =>
+  ---   < _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ > .
+
+endm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
