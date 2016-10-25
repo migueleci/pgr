@@ -101,7 +101,7 @@ mod MPC is
     < W, X, A, B, C, D, true, false, E, F, G, H, I, J, K >
     =>
     < W, X, A, B, C, D, true, true, E, F, G, H, I, J, K > 
-    if W or X .
+    if not( W == false and X == false ) .
 
   rl [treat_push_stop_motor_button] :
     < true, true, A, B, C, D, E, F, true, false, G, H, I, J, K >
@@ -112,7 +112,7 @@ mod MPC is
     < W, X, A, B, C, D, E, F, true, false, G, H, I, J, K >
     =>
     < W, X, A, B, C, D, E, F, true, true, G, H, I, J, K >
-    if W or X .
+    if not( W and X ) .
 
   rl [treat_release_start_motor_button] :
     < A, B, C, D, E, F, false, true, G, H, I, J, K, L, M >
@@ -148,7 +148,7 @@ mod MPC is
     < W, X, A, B, Y, Z, C, D, E, F, true, false, G, H, I >
     =>
     < W, X, A, B, Y, Z, C, D, E, F, true, true, G, H, true > 
-    if (W or X) and (Y or Z) .
+    if (W and X) and not( not(W) and not(X) ) .  
 
   --- rl [] :
   ---   < _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ >
