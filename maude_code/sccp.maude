@@ -1,1 +1,6 @@
-test
+fmod AID is
+  pr LIST{Qid} * (op __ : List{Qid} List{Qid} -> List{Qid} to _._,
+                  sort NeList{Qid} to NeAid,
+                  sort List{Qid} to Aid
+                 ) .
+endfm
