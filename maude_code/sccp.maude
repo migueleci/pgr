@@ -1,6 +1,18 @@
+load smt.maude
+
 fmod AID is
   pr LIST{Qid} * (op __ : List{Qid} List{Qid} -> List{Qid} to _._,
                   sort NeList{Qid} to NeAid,
                   sort List{Qid} to Aid
                  ) .
+endfm
+
+fmod CCP-SYNTAX is
+	pr BOOLEAN .
+	sort CCPCmd .
+
+	op 0 : -> CCPCmd . 
+	op tell_ : Boolean -> CCPCmd . 
+	op ask_->_ : Boolean CCPCmd -> CCPCmd .
+	op _||_ : CCPCmd CCPCmd -> CCPCmd .
 endfm
