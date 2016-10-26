@@ -1,12 +1,5 @@
 load smt.maude
 
-fmod AGENT-ID is
-  pr LIST{Qid} * (op __ : List{Qid} List{Qid} -> List{Qid} to _._,
-                  sort NeList{Qid} to NeAgentId,
-                  sort List{Qid} to AgentId
-                 ) .
-endfm
-
 fmod SMT-UTIL is
   pr META-LEVEL .
   pr INTEGER .
