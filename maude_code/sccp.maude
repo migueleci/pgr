@@ -1,18 +1,60 @@
 load smt.maude
+load ../smaude/smaude.maude
 
-fmod AID is
+fmod AGENT-ID is
   pr LIST{Qid} * (op __ : List{Qid} List{Qid} -> List{Qid} to _._,
-                  sort NeList{Qid} to NeAid,
-                  sort List{Qid} to Aid
+                  sort NeList{Qid} to NeAgentId,
+                  sort List{Qid} to AgentId
                  ) .
 endfm
 
 fmod CCP-SYNTAX is
-	pr BOOLEAN .
+	pr INTEGER .
 	sort CCPCmd .
 
 	op 0 : -> CCPCmd . 
 	op tell_ : Boolean -> CCPCmd . 
 	op ask_->_ : Boolean CCPCmd -> CCPCmd .
-	op _||_ : CCPCmd CCPCmd -> CCPCmd .
+---a	op _||_ : CCPCmd CCPCmd -> CCPCmd [assoc comm id: 0] .
+  op _||_ : CCPCmd CCPCmd -> CCPCmd .
 endfm
+
+mod CCP is
+  pr SMAUDE .
+  pr CCP-SYNTAX .
+---c  pr AGENT-ID .
+
+  --- element identifiers
+---c  ops store process : AgentId -> Eid .
+  ops store process : -> Eid .
+  --- attribute identifiers
+  ops const cmd : -> Aid .
+  --- Booleans and CCPCmd are values
+  subsort Boolean < Val .
+  subsort CCPCmd < Val .
+
+  eq MODULE-NAME = 'CCP .
+
+  vars B B0 B1 : Boolean .
+  vars C C0 C1 : CCPCmd .
+  vars ST      : Ctx .
+  
+  --- instantaneous and non-observable transitions
+  eq < process | cmd : tell(B0) > < process | cmd : tell(B1) >
+   = < process | cmd : tell(B0 and B1) > .
+  eq { ST < process | cmd : 0 > }
+   = { ST } .
+
+  --- non-instantaneous parallel transitions
+  rl [r-1] :
+     < store | const : B > < process | cmd : tell(B0) >
+  => < store | const : (B and B0) > < process | cmd : 0 > . 
+
+  rl [r-2] :
+     < process | cmd : C0 || C1 >
+  => < process | cmd : C0 > < process | cmd : C1 > .
+
+  rl [r-3] :
+     < process | cmd : ask B -> C >
+  => < process | cmd : C > .
+endm
