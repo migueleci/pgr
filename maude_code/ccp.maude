@@ -1,0 +1,65 @@
+load smt.maude
+
+fmod AGENT-ID is
+  pr LIST{Qid} * (op __ : List{Qid} List{Qid} -> List{Qid} to _._,
+                  sort NeList{Qid} to NeAgentId,
+                  sort List{Qid} to AgentId
+                 ) .
+endfm
+
+fmod SMT-UTIL is
+  pr META-LEVEL .
+  pr INTEGER .
+  pr CONVERSION .
+  op check-sat : Boolean -> Bool .
+  op check-unsat : Boolean -> Bool .
+  eq check-sat(B:Boolean)
+   = metaCheck(['INTEGER], upTerm(B:Boolean)) .
+  eq check-unsat(B:Boolean)
+   = not(check-sat(B:Boolean)) .
+endfm
+
+fmod CCP-SYNTAX is
+	pr INTEGER .
+	sort CCPCmd .
+
+	op 0 : -> CCPCmd . 
+	op tell_ : Boolean -> CCPCmd [prec 71] . 
+	op ask_->_ : Boolean CCPCmd -> CCPCmd [prec 71] .
+  op _||_ : CCPCmd CCPCmd -> CCPCmd [assoc prec 73 gather (e E) ] .
+endfm
+
+mod CCP is
+  pr CCP-SYNTAX .
+  inc CONFIGURATION .
+  pr NAT .
+  pr SMT-UTIL .
+
+  op o : Nat -> Oid .
+  ops process store : -> Cid .
+  op cmd:_ : CCPCmd -> Attribute [prec 90] .
+  op const:_ : Boolean -> Attribute [prec 90] .
+
+  vars B B0 B1 : Boolean .
+  vars C C0 C1 : CCPCmd .
+  vars O O0 O1 : Oid .
+
+  --- non-observable concurrent transitions
+  eq < O : process | cmd: 0 >
+   = none .
+   
+  --- observable concurrent transitions
+  rl [tell] :
+     < O : store | const: B > < O0 : process | cmd: tell(B0) >
+  => < O : store | const: (B and B0) > < O0 : process | cmd: 0 > .
+
+ crl [ask] :
+     < O : store | const: B > < O0 : process | cmd: ask B0 -> C0 >
+  => < O : store | const: B > < O0 : process | cmd: C0 >
+  if check-unsat(B and not(B0)) .
+
+  rl [parallel] :
+     < O0 : process | cmd: C0 || C1 >
+  => < O0 : process | cmd: C0 > < O0 : process | cmd: C1 > .
+
+endm
