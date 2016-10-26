@@ -1,0 +1,119 @@
+***(
+
+    This file is part of SMaude, a framework for supporting
+    synchronous set rewriting in Maude.
+
+    Copyright (C) 2008-2013 Camilo Rocha, camilo.rocha@gmail.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+)
+
+****                                                             Theory closure
+****                                                       Author: Camilo Rocha
+****                                        To be used with Maude 2.6 or higher
+
+fmod CLOSURE-CONSTANTS is
+  pr STRING .
+*** Closure constant name which is used for the name of
+*** the closure variable for the left-hand side of the rules
+*** and as a prefix for the variable for the closure map of
+*** each element
+  op CLSRCNST : -> String .
+  eq CLSRCNST = "#X#" .
+endfm
+
+fmod THEORY-CLOSURE is
+  pr CONVERSION .
+  pr META-LEVEL .
+  pr CLOSURE-CONSTANTS .
+
+  var  AtS       : AttrSet .
+  var  C         : Condition .
+  var  Cns       : Constant .
+  var  ES        : EquationSet .
+  var  H         : Header .
+  var  IL        : ImportList .
+  var  MAS       : MembAxSet .
+  var  N         : Nat .
+  var  ODS       : OpDeclSet .
+  var  Q         : Qid .
+  vars RS RS'    : RuleSet .
+  var  So        : Sort .
+  var  SS        : SortSet . 
+  var  SDS       : SubsortDeclSet .
+  var  S         : String .
+  vars T T' T''  : Term .
+  vars TL TL'    : TermList .
+  var  Var       : Variable .
+
+*** Computes the closure of the left-hand side of the rules in
+*** in the given module
+  op close-theory : Module -> Module [memo] .
+  eq close-theory(mod H is IL sorts SS . SDS ODS MAS ES RS endm)
+   = mod H is IL sorts SS . SDS ODS MAS ES 
+      close-lhs-eval(RS) endm .
+
+  op close-lhs-eval : RuleSet -> RuleSet .
+  op close-lhs-eval* : RuleSet RuleSet -> RuleSet .
+  eq close-lhs-eval(RS) = close-lhs-eval*(RS,none) .
+
+  eq close-lhs-eval*(none,RS') = RS' .
+  eq close-lhs-eval*((rl T => T' [AtS].) RS, RS')
+   = close-lhs-eval*(RS, (rl close(T) => patch-eval(T') [AtS].) RS') .
+  eq close-lhs-eval*((crl T => T' if C [AtS].) RS, RS')
+   = close-lhs-eval*(RS, (crl close(T) => patch-eval(T') if patch-eval(C) [AtS].) RS') .
+  
+*** Closes the given term that is assummed to be the metarepresentation
+*** of a term with sort Ctx. It uses the auxiliary function "close*"
+*** to close all maps of elements in the context
+  op close  : Term -> Term .
+  eq close('<_|_>[TL])
+   = close*('<_|_>[TL],CLSRCNST,0) .
+  eq close('__[TL:TermList])
+   = '__[close*(TL,CLSRCNST,0)] .
+*** Closes the give term assuming it metarepresents a list of elements
+  op close* : TermList String Nat -> TermList .
+  eq close*(empty,S,N) = empty .
+  eq close*(('<_|_>[T,'_:_[TL]],TL'),S,N)
+   = ('<_|_>[T,'_`,_['_:_[TL],qid(S + string(N,10) + ":Map")]]), close*(TL',S,s(N)) .
+  eq close*(('<_|_>[T,'_`,_[TL]],TL'),S,N)
+   = ('<_|_>[T,'_`,_[TL,qid(S + string(N,10) + ":Map")]]), close*(TL',S,s(N)) .
+
+*** Augments all occurrences of function eval with the context #STATE# 
+*** as first argument
+  op patch-eval : Term -> Term .
+  op patch-eval : Condition -> Condition .
+  op patch-eval* : TermList -> TermList .
+  eq patch-eval(Cns) = Cns .
+  eq patch-eval(Var) = Var .
+  eq patch-eval(Q[TL])
+   = if Q == 'eval
+     then Q[qid("#STATE#" + ".Ctx"),patch-eval(TL)]
+     else Q[patch-eval*(TL)]
+     fi .
+  eq patch-eval*(empty) = empty .
+  eq patch-eval*((T,TL))
+   = patch-eval(T),patch-eval*(TL) .
+
+*** The same as above, but for a condition
+  eq patch-eval((nil).Condition) = (nil).Condition .
+  eq patch-eval((T = T') /\ C)
+   = (patch-eval(T) = patch-eval(T')) /\ patch-eval(C) .
+  eq patch-eval((T : So) /\ C)
+   = (patch-eval(T) : So) /\ patch-eval(C) .
+  eq patch-eval((T := T') /\ C)
+   = (patch-eval(T) := patch-eval(T')) /\ patch-eval(C) .
+  eq patch-eval((T => T') /\ C)
+   = (patch-eval(T) => patch-eval(T')) /\ patch-eval(C) .
+endfm

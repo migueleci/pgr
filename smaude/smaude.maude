@@ -1,0 +1,48 @@
+***(
+
+    This file is part of SMaude, a framework for supporting
+    synchronous set rewriting in Maude.
+
+    Copyright (C) 2008-2013 Camilo Rocha, camilo.rocha@gmail.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+)
+
+****                                                                  Main file
+****                                                       Author: Camilo Rocha
+****                                        To be used with Maude 2.6 or higher
+
+load term-util.maude
+load tuples.maude
+load theory-closure.maude
+load base.maude
+load synchr.maude
+
+mod SMAUDE is
+  pr EVAL .
+  pr SYNCHRONOUS .
+  sort State .
+  op {_} : Ctx -> State [frozen] .
+  op ctx : State -> Ctx .
+  eq ctx({ C:Ctx }) = C:Ctx .
+
+  op #STATE# : -> Ctx .
+
+  vars C C' C1 C2  : NeCtx .
+  var  STM         : SimpleTransitionMagma .
+
+ crl [sync-rew] :
+     { C } => { update((C,C')) }
+  if (C1,C'),STM := sync-redixes(C,MODULE-NAME) .
+endm

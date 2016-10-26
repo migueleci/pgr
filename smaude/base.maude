@@ -1,0 +1,78 @@
+***(
+
+    This file is part of SMaude, a framework for supporting
+    synchronous set rewriting in Maude.
+
+    Copyright (C) 2008-2013 Camilo Rocha, camilo.rocha@gmail.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+)
+
+****                                                           Main definitions
+****                                                       Author: Camilo Rocha
+****                                        To be used with Maude 2.6 or higher
+
+fmod CONSTANTS is
+  pr QID .
+  op MODULE-NAME : -> Qid .
+endfm
+
+fmod BASE is
+  pr CONSTANTS .
+  sorts Aid Eid Expr Val .
+  subsort Val Eid < Expr .
+endfm
+
+view Aid from TRIV to BASE is
+  sort Elt to Aid .
+endv
+
+view Expr from TRIV to BASE is
+  sort Elt to Expr .
+endv
+
+fmod ELEM is
+  pr MAP{Aid,Expr} * (sort Map{Aid,Expr} to Map,
+                      sort Entry{Aid,Expr} to Cell,
+                      op _|->_ to _:_) .
+  sort Elem .
+  op <_|_> : Eid Map -> Elem [prec 122] .
+endfm 
+
+view Elem from TRIV to ELEM is
+  sort Elt to Elem .
+endv
+
+fmod CTX is
+  pr SET{Elem} * (sort Set{Elem} to Ctx,
+                  sort NeSet{Elem} to NeCtx,
+                  op _,_ : Set{Elem} Set{Elem} -> Set{Elem} 
+                    to (__) [prec 123]) .
+  op disjoint? : Ctx Ctx -> Bool .
+  eq disjoint?( (< E:Eid | M:Map > C:Ctx), (< E:Eid | M':Map > C':Ctx))
+   = false .
+  eq disjoint?(C:Ctx,C':Ctx)
+   = true [owise] .
+endfm
+
+fmod EVAL is
+  pr BASE .
+  pr CTX .
+  op eval : Expr -> Val .
+  op eval : Ctx Expr -> Val .
+endfm
+
+view Ctx from TRIV to CTX is
+  sort Elt to Ctx .
+endv
