@@ -44,8 +44,12 @@ mod CCP is
   vars B B0 B1 : Boolean .
   vars C C0 C1 : CCPCmd .
   vars O O0 O1 : Oid .
-  
-  --- concurrent transitions
+
+  --- non-observable concurrent transitions
+  eq < O : process | cmd: 0 >
+   = none .
+   
+  --- observable concurrent transitions
   rl [tell] :
      < O : store | const: B > < O0 : process | cmd: tell(B0) >
   => < O : store | const: (B and B0) > < O0 : process | cmd: 0 > .
