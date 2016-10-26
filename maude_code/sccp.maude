@@ -24,10 +24,9 @@ fmod CCP-SYNTAX is
 	sort CCPCmd .
 
 	op 0 : -> CCPCmd . 
-	op tell_ : Boolean -> CCPCmd . 
-	op ask_->_ : Boolean CCPCmd -> CCPCmd .
----a	op _||_ : CCPCmd CCPCmd -> CCPCmd [assoc comm id: 0] .
-  op _||_ : CCPCmd CCPCmd -> CCPCmd .
+	op tell_ : Boolean -> CCPCmd [prec 71] . 
+	op ask_->_ : Boolean CCPCmd -> CCPCmd [prec 71] .
+  op _||_ : CCPCmd CCPCmd -> CCPCmd [assoc prec 73 gather (e E) ] .
 endfm
 
 mod CCP is
@@ -38,8 +37,8 @@ mod CCP is
 
   op o : Nat -> Oid .
   ops process store : -> Cid .
-  op cmd:_ : CCPCmd -> Attribute .
-  op const:_ : Boolean -> Attribute .
+  op cmd:_ : CCPCmd -> Attribute [prec 90] .
+  op const:_ : Boolean -> Attribute [prec 90] .
 
   vars B B0 B1 : Boolean .
   vars C C0 C1 : CCPCmd .
@@ -54,13 +53,13 @@ mod CCP is
      < O : store | const: B > < O0 : process | cmd: tell(B0) >
   => < O : store | const: (B and B0) > < O0 : process | cmd: 0 > .
 
-  rl [parallel] :
-     < O0 : process | cmd: (C0 || C1) >
-  => < O0 : process | cmd: C0 > < O0 : process | cmd: C1 > .
-
  crl [ask] :
-     < O : store | const: B > < O0 : process | cmd: (ask B0 -> C0) >
+     < O : store | const: B > < O0 : process | cmd: ask B0 -> C0 >
   => < O : store | const: B > < O0 : process | cmd: C0 >
   if check-unsat(B and not(B0)) .
+
+  rl [parallel] :
+     < O0 : process | cmd: C0 || C1 >
+  => < O0 : process | cmd: C0 > < O0 : process | cmd: C1 > .
 
 endm

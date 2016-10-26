@@ -1,3 +1,12 @@
-rew < o(0) : store | const: true > < o(1) : process | cmd: (tell(X:Integer < 0) || (ask (X:Integer < 10) -> tell(X:Integer > -5))) > .
+rew < o(0) : store | const: true >
+    < o(1) : process | cmd: tell(X:Integer < 0) || ask X:Integer < 10 -> tell(X:Integer > -5) > .
 
-rew < o(0) : store | const: true > < o(1) : process | cmd: tell(X:Integer < 0) > < o(2) : process | cmd: (ask (X:Integer < 10) -> tell(X:Integer > -5)) > .
+rew < o(0) : store | const: true >
+    < o(1) : process | cmd: ask X:Integer <= -1 -> tell X:Integer === -20  || tell X:Integer < 0  || ask X:Integer < -10 -> tell Y:Integer > -5 > .
+
+rew < o(0) : store | const: true >
+    < o(1) : process | cmd: ask X:Integer < 10 -> tell X:Integer > -5 || tell X:Integer < 0 > .
+
+rew < o(0) : store | const: true >
+    < o(1) : process | cmd: tell X:Integer < 0 >
+    < o(2) : process | cmd: ask X:Integer < 10 -> tell X:Integer > -5 > .
