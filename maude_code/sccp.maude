@@ -57,7 +57,11 @@ mod SCCP is
    = < O : store | loc: L, const: (B0 and B1) > .
   eq < O : store | loc: L, const: (true and B0) >
    = < O : store | loc: L, const: B0 > .
-   
+  ---(ceq < O : store | loc: L, const: (B0 and B1) > 
+    = < O : store | loc: L, const: B0 > 
+   if check-unsat(B0 and not(B1)) .
+  ---)
+
   --- observable concurrent transitions
   rl [tell] :
      < O : store | loc: L, const: B > < O0 : process | loc: L, cmd: (tell B0) >
