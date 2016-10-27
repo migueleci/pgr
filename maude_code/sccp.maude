@@ -55,6 +55,8 @@ mod SCCP is
    = none .
   eq < O : store | loc: L, const: B0 > < O : store | loc: L, const: B1 >
    = < O : store | loc: L, const: (B0 and B1) > .
+  eq < O : store | loc: L, const: (true and B0) >
+   = < O : store | loc: L, const: B0 > .
    
   --- observable concurrent transitions
   rl [tell] :

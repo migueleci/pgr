@@ -7,3 +7,27 @@ rew < o(0) : store | loc: root, const: true >
 
 rew < o(0) : store | loc: root, const: (X:Integer > 0) >
     < o(1) : process | loc: root, cmd: (ask(X:Integer >= 1) -> tell(Y:Integer === 50)) > .
+
+rew < o(0) : store | loc: root, const: (X:Integer > 0) >
+    < o(1) : process | loc: root, cmd: ((ask(X:Integer >= 1) -> tell(Y:Integer === 50)) || ({1}[tell(B1:Boolean)]))> .
+
+rew < o(0) : store | loc: root, const: (X:Integer > 0) >
+    < o(1) : process | loc: root, cmd: ((ask(X:Integer >= 1) -> {1}[tell(Y:Integer === 50)]) || ({1}[tell(B1:Boolean)]))> .
+
+rew < o(0) : store | loc: root, const: (X:Integer > 0) >
+    < o(1) : process | loc: root, cmd: ((ask(X:Integer >= 1) -> {1}[tell(Y:Integer === 50)]) || ({1}[tell(B1:Boolean)]))> 
+    < o(1) : process | loc: 1, cmd: tell (Y:Integer > 4) > .
+
+rew < o(0) : store | loc: root, const: (X:Integer > 0) >
+    < o(1) : process | loc: root, cmd: ((ask(X:Integer >= 1) -> {1}[tell(Y:Integer === 50)]) || ({1}[tell(B1:Boolean)]))> 
+    < o(1) : process | loc: 1, cmd: {1}[tell (B2:Boolean)] > .
+
+rew < o(0) : store | loc: root, const: (X:Integer > 0) >
+    < o(1) : process | loc: root, cmd: (ask(X:Integer > 1) -> tell(Y:Integer === 50)) > .
+
+rew < o(0) : store | loc: root, const: (X:Integer > 0) >
+    < o(1) : process | loc: root, cmd: (ask(X:Integer > 1) -> tell(Y:Integer === 50)) > 
+    < o(1) : process | loc: root, cmd: tell (X:Integer === 10) > .
+
+rew < o(0) : store | loc: root, const: true >
+    < o(1) : process | loc: 1, cmd: tell (X:Integer < 0) > .
