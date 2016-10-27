@@ -2,7 +2,7 @@ load smt.maude
 
 fmod SMT-UTIL is
   pr META-LEVEL .
-  pr INTEGER .
+  inc INTEGER .
   pr CONVERSION .
   op check-sat : Boolean -> Bool .
   op check-unsat : Boolean -> Bool .
@@ -10,6 +10,20 @@ fmod SMT-UTIL is
    = metaCheck(['INTEGER], upTerm(B:Boolean)) .
   eq check-unsat(B:Boolean)
    = not(check-sat(B:Boolean)) .
+  eq B:Boolean and true
+   = B:Boolean .
+  eq B:Boolean and false
+   = false .
+  eq B:Boolean or true
+   = true .
+  eq B:Boolean or false
+   = false .
+  ---(
+  eq not(true)
+   = false .
+  eq not(false)
+   = true .
+  ---)
 endfm
 
 fmod AGENT-ID is
@@ -55,12 +69,6 @@ mod SCCP is
    = none .
   eq < O : store | loc: L, const: B0 > < O : store | loc: L, const: B1 >
    = < O : store | loc: L, const: (B0 and B1) > .
-  eq < O : store | loc: L, const: (true and B0) >
-   = < O : store | loc: L, const: B0 > .
-  ---(ceq < O : store | loc: L, const: (B0 and B1) > 
-    = < O : store | loc: L, const: B0 > 
-   if check-unsat(B0 and not(B1)) .
-  ---)
 
   --- observable concurrent transitions
   rl [tell] :
