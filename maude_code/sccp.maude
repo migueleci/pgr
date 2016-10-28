@@ -18,6 +18,16 @@ fmod SMT-UTIL is
    = true .
   eq B:Boolean or false
    = false .
+
+  eq true and B:Boolean
+   = B:Boolean .
+  eq false and B:Boolean
+   = false .
+  eq true or B:Boolean
+   = true .
+  eq false or B:Boolean
+   = false .
+   
   ---(
   eq not(true)
    = false .
