@@ -27,7 +27,7 @@ fmod SMT-UTIL is
    = true .
   eq false or B:Boolean
    = false .
-
+   
   ---(
   eq not(true)
    = false .
@@ -59,27 +59,26 @@ endfm
 
 mod SCCP is
   pr SCCP-SYNTAX .
+  inc CONFIGURATION .
   pr SMT-UTIL .
 
-  sorts Cid Location Constraint Command Space Process .
-
+  op o : Nat -> Oid .
   ops process store : -> Cid .
-  op loc:_ : Aid -> Location .
-  op cmd:_ : SCCPCmd -> Command .
-  op const:_ : Boolean -> Constraint .
-  op (_,_,_) : Cid Location Constraint -> Space .
-  op (_,_,_) : Cid Location Command -> Process .
+  op cmd:_ : SCCPCmd -> Attribute .
+  op const:_ : Boolean -> Attribute .
+  op loc:_ : Aid -> Attribute .
 
   vars L L0 L1 : Aid .
   vars B B0 B1 : Boolean .
   vars C C0 C1 : SCCPCmd .
+  vars O O0 O1 : Oid .
+  var  AtS     : AttributeSet .
 
   --- non-observable concurrent transitions
-  eq (store, loc: L0, const: B0) (store, loc: L0, const: B1)
-   = (store, loc: L0, const: B0 and B1 ) .
-
-endm
-eof
+  eq < O : process | (cmd: 0), AtS >
+   = none .
+  eq < O : store | loc: L, const: B0 > < O : store | loc: L, const: B1 >
+   = < O : store | loc: L, const: (B0 and B1) > .
 
   --- observable concurrent transitions
   rl [tell] :
@@ -87,7 +86,7 @@ eof
   => < O : store | loc: L, const: (B and B0) > < O0 : process | loc: L, cmd: 0 > .
 
  crl [ask] :
-     < O : store | loc: L, const: B > < O0 : process | loc: L, cmd: (ask B0  -> C0) >
+     < O : store | loc: L, const: B > < O0 : process | loc: L, cmd: (ask B0 -> C0) >
   => < O : store | loc: L, const: B > < O0 : process | loc: L, cmd: C0 >
   if check-unsat(B and not(B0)) .
 
