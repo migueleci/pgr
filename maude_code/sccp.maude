@@ -63,13 +63,12 @@ mod SCCP is
   inc CONFIGURATION .
   pr SMT-UTIL .
 
-  sorts Location Constraint Command Space Process Sys .
+  sorts Sys .
 
-  ops process store : -> Cid .
+  ops store process : -> Cid .
   op loc:_ : Aid -> Attribute .
   op cmd:_ : SCCPCmd -> Attribute .
   op const:_ : Boolean -> Attribute .
-  op [_,_,_] : Cid Attribute Attribute -> Object [ctor object] .
   op [_,_,_] : Cid Attribute Attribute -> Object [ctor object] .
   op {_} : Configuration -> Sys [ctor] .  
 
@@ -78,27 +77,32 @@ mod SCCP is
   vars C C0 C1 : SCCPCmd .
 
   --- non-observable concurrent transitions
+  eq [process, loc: L0, cmd: 0]
+   = none .
   eq [store, loc: L0, const: B0] [store, loc: L0, const: B1]
    = [store, loc: L0, const: (B0 and B1) ] .
 
-endm
-eof
-
   --- observable concurrent transitions
   rl [tell] :
-     < O : store | loc: L, const: B > < O0 : process | loc: L, cmd: (tell B0) >
-  => < O : store | loc: L, const: (B and B0) > < O0 : process | loc: L, cmd: 0 > .
+     [store, loc: L, const: B] [process, loc: L, cmd: (tell B0)] 
+  => [store, loc: L, const: (B and B0)] [process, loc: L, cmd: 0] .
 
  crl [ask] :
-     < O : store | loc: L, const: B > < O0 : process | loc: L, cmd: (ask B0  -> C0) >
-  => < O : store | loc: L, const: B > < O0 : process | loc: L, cmd: C0 >
+     [store, loc: L, const: B] [process, loc: L, cmd: (ask B0  -> C0) ]
+  => [store, loc: L, const: B] [process, loc: L, cmd: C0]
   if check-unsat(B and not(B0)) .
 
+ crl [ask] :
+     [store, loc: L, const: B] [process, loc: L0, cmd: (ask< L > B0  -> C0) ]
+  => [store, loc: L, const: B] [process, loc: L0, cmd: C0]
+  if check-unsat(B and not(B0)) . 
+
   rl [parallel] :
-     < O0 : process | loc: L, cmd: (C0 || C1) >
-  => < O0 : process | loc: L, cmd: C0 > < O0 : process | loc: L, cmd: C1 > .
+     [process, loc: L, cmd: (C0 || C1) ]
+  => [process, loc: L, cmd: C0] [process, loc: L, cmd: C1].
 
   rl [space] :
-     < O0 : process | loc: L, cmd: { L0 }[ C0 ] >
-  => < O0 : process | loc: L, cmd: 0 > < O0 : process | loc: (L . L0), cmd: C0 > < O0 : store | loc: (L . L0), const: true > .
+     [process, loc: L, cmd: < L0 >[ C0 ]] 
+  => [process, loc: L, cmd: 0 ] [process, loc: (L . L0), cmd: C0] [store, loc: (L . L0), const: true ] .
+
 endm
