@@ -59,7 +59,6 @@ endfm
 
 mod SCCP is
   pr SCCP-SYNTAX .
-  inc CONFIGURATION .
   pr SMT-UTIL .
 
   op o : Nat -> Oid .

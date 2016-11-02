@@ -46,37 +46,40 @@ fmod AGENT-ID is
 endfm
 
 fmod SCCP-SYNTAX is
-	pr INTEGER .
+  pr INTEGER .
   pr AGENT-ID .
-	sort SCCPCmd .
+  sort SCCPCmd .
 
-	op 0 : -> SCCPCmd . 
-	op tell_ : Boolean -> SCCPCmd . 
-	op ask_->_ : Boolean SCCPCmd -> SCCPCmd .
+  op 0 : -> SCCPCmd . 
+  op tell_ : Boolean -> SCCPCmd . 
+  op ask_->_ : Boolean SCCPCmd -> SCCPCmd .
+  op ask<_>_->_ : Aid Boolean SCCPCmd -> SCCPCmd .
   op _||_ : SCCPCmd SCCPCmd -> SCCPCmd [assoc gather (e E) ] .
-  op {_}[_] : Aid SCCPCmd -> SCCPCmd .
+  op <_>[_] : Aid SCCPCmd -> SCCPCmd .
 endfm
 
 mod SCCP is
   pr SCCP-SYNTAX .
+  inc CONFIGURATION .
   pr SMT-UTIL .
 
-  sorts Cid Location Constraint Command Space Process .
+  sorts Location Constraint Command Space Process Sys .
 
   ops process store : -> Cid .
-  op loc:_ : Aid -> Location .
-  op cmd:_ : SCCPCmd -> Command .
-  op const:_ : Boolean -> Constraint .
-  op (_,_,_) : Cid Location Constraint -> Space .
-  op (_,_,_) : Cid Location Command -> Process .
+  op loc:_ : Aid -> Attribute .
+  op cmd:_ : SCCPCmd -> Attribute .
+  op const:_ : Boolean -> Attribute .
+  op [_,_,_] : Cid Attribute Attribute -> Object [ctor object] .
+  op [_,_,_] : Cid Attribute Attribute -> Object [ctor object] .
+  op {_} : Configuration -> Sys [ctor] .  
 
   vars L L0 L1 : Aid .
   vars B B0 B1 : Boolean .
   vars C C0 C1 : SCCPCmd .
 
   --- non-observable concurrent transitions
-  eq (store, loc: L0, const: B0) (store, loc: L0, const: B1)
-   = (store, loc: L0, const: B0 and B1 ) .
+  eq [store, loc: L0, const: B0] [store, loc: L0, const: B1]
+   = [store, loc: L0, const: (B0 and B1) ] .
 
 endm
 eof
