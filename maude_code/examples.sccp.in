@@ -1,47 +1,47 @@
-rew { [store, loc: root, const: true]
-    [process, loc: root, cmd: tell (X:Integer < 0)] } .
+rew { [store, root, true]
+    [process, root, tell (X:Integer < 0)] } .
 
-rew { [store, loc: root, const: true]
-    [process, loc: root, cmd: < 1 >[tell (X:Integer < 0)]] 
-    [process, loc: 1, cmd: tell (Y:Integer === 10)] } .
+rew { [store, root, true]
+    [process, root, < 1 >[tell (X:Integer < 0)]] 
+    [process, 1, tell (Y:Integer === 10)] } .
 
-rew { [store, loc: root, const: (X:Integer > 0)]
-    [process, loc: root, cmd: (ask(X:Integer >= 1) -> tell(Y:Integer === 50))] } .
+rew { [store, root, (X:Integer > 0)]
+    [process, root, (ask(X:Integer >= 1) -> tell(Y:Integer === 50))] } .
 
-rew { [store, loc: root, const: (X:Integer > 0)]
-    [process, loc: root, cmd: ((ask(X:Integer >= 1) -> tell(Y:Integer === 50)) || (tell(B1:Boolean))) ] } .
+rew { [store, root, (X:Integer > 0)]
+    [process, root, ((ask(X:Integer >= 1) -> tell(Y:Integer === 50)) || (tell(B1:Boolean))) ] } .
 
-rew { [store, loc: root, const: (X:Integer > 0)]
-    [process, loc: root, cmd: ((ask(X:Integer >= 1) -> tell(Y:Integer === 50)) || (< 1 >[tell(B1:Boolean)])) ] } .
+rew { [store, root, (X:Integer > 0)]
+    [process, root, ((ask(X:Integer >= 1) -> tell(Y:Integer === 50)) || (< 1 >[tell(B1:Boolean)])) ] } .
 
-rew { [store, loc: root, const: (X:Integer > 0)]
-    [process, loc: root, cmd: ((ask(X:Integer >= 1) -> < 1 >[tell(Y:Integer === 50)]) || (< 1 >[tell(B1:Boolean)]))] } .
+rew { [store, root, (X:Integer > 0)]
+    [process, root, ((ask(X:Integer >= 1) -> < 1 >[tell(Y:Integer === 50)]) || (< 1 >[tell(B1:Boolean)]))] } .
 
-rew { [store, loc: root, const: (X:Integer > 0)]
-    [process, loc: root, cmd: ((ask(X:Integer >= 1) -> < 1 >[tell(Y:Integer === 50)]) || (< 1 >[tell(B1:Boolean)]))] 
-    [process, loc: 1, cmd: tell (Y:Integer > 4)] } .
+rew { [store, root, (X:Integer > 0)]
+    [process, root, ((ask(X:Integer >= 1) -> < 1 >[tell(Y:Integer === 50)]) || (< 1 >[tell(B1:Boolean)]))] 
+    [process, 1, tell (Y:Integer > 4)] } .
 
-rew { [store, loc: root, const: (X:Integer > 0)]
-    [process, loc: root, cmd: ((ask(X:Integer >= 1) -> < 1 >[tell(Y:Integer === 50)]) || (< 1 >[tell(B1:Boolean)]))] 
-    [process, loc: 1, cmd: < 1 >[tell (B2:Boolean)]] } .
+rew { [store, root, (X:Integer > 0)]
+    [process, root, ((ask(X:Integer >= 1) -> < 1 >[tell(Y:Integer === 50)]) || (< 1 >[tell(B1:Boolean)]))] 
+    [process, 1, < 1 >[tell (B2:Boolean)]] } .
 
-rew { [store, loc: root, const: (X:Integer > 0)]
-    [process, loc: root, cmd: (ask(X:Integer > 1) -> tell(Y:Integer === 50))] } .
+rew { [store, root, (X:Integer > 0)]
+    [process, root, (ask(X:Integer > 1) -> tell(Y:Integer === 50))] } .
 
-rew { [store, loc: root, const: (X:Integer > 0)]
-    [process, loc: root, cmd: (ask(X:Integer > 1) -> tell(Y:Integer === 50))] 
-    [process, loc: root, cmd: tell (X:Integer === 10)] } .
+rew { [store, root, (X:Integer > 0)]
+    [process, root, (ask(X:Integer > 1) -> tell(Y:Integer === 50))] 
+    [process, root, tell (X:Integer === 10)] } .
 
-rew { [store, loc: root, const: true]
-    [process, loc: 1, cmd: tell (X:Integer < 0)] } .
+rew { [store, root, true]
+    [process, 1, tell (X:Integer < 0)] } .
 
-rew { [store, loc: root, const: (X:Integer > 0)]
-      [store, loc: 1, const: B:Boolean]  
-      [process, loc: 1, cmd: (ask< root >(X:Integer >= 1) -> tell(Y:Integer === 50))] } .
+rew { [store, root, (X:Integer > 0)]
+      [store, 1, B:Boolean]  
+      [process, 1, (ask< root >(X:Integer >= 1) -> tell(Y:Integer === 50))] } .
 
-rew { [store, loc: root, const: (X:Integer > 0)]
-      [store, loc: 1, const: (Y:Integer === 50)]  
-      [process, loc: root, cmd: (ask< 1 >(Y:Integer > 0) -> tell(Z:Integer === 2))] } .
+rew { [store, root, (X:Integer > 0)]
+      [store, 1, (Y:Integer === 50)]  
+      [process, root, (ask< 1 >(Y:Integer > 0) -> tell(Z:Integer === 2))] } .
 
 
 

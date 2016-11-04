@@ -1,29 +1,29 @@
-red [store, loc: (1 . 1), const: B:Boolean] .
+red [store, 1 . 1, B:Boolean] .
 
-red [process, loc: (1 . 1), cmd: C:SCCPCmd] .
+red [process, 1 . 1, C:SCCPCmd] .
 
-red [process, loc: (1 . 1), cmd: C:SCCPCmd] [store, loc: (1 . 1), const: B:Boolean] .
+red [process, 1 . 1, C:SCCPCmd] [store, 1 . 1, B:Boolean] .
 
-red { [process, loc: (1 . 1), cmd: C:SCCPCmd] [store, loc: (1 . 1), const: B:Boolean] } .
+red { [process, 1 . 1, C:SCCPCmd] [store, 1 . 1, B:Boolean] } .
 
-red { [store, loc: (1 . 1), const: B:Boolean] [process, loc: (1 . 1), cmd: C:SCCPCmd] } .
+red { [store, 1 . 1, B:Boolean] [process, 1 . 1, C:SCCPCmd] } .
 
 red tell true .
 
-red < (1 . 1) >[tell true] .
+red < 1 . 1 >[tell true] .
 
-red < (1 . 1) >[tell true] || (ask B:Boolean -> tell false) .
+red < 1 . 1 >[tell true] || (ask B:Boolean -> tell false) .
 
 red ask< root > B:Boolean -> tell false .
 
 red ask B:Boolean -> tell false .
 
-red { [process, loc: (1 . 1), cmd: (< (1 . 1) >[tell true] || (ask B:Boolean -> tell false)) ] } .
+red { [process, 1 . 1, (< 1 . 1 >[tell true] || (ask B:Boolean -> tell false)) ] } .
 
-red { [store, loc: (1 . 1), const: B:Boolean] } .
+red { [store, 1 . 1, B:Boolean] } .
 
-red { none } .
+red { mt } .
 
-red { [store, loc: (1 . 1), const: B0:Boolean] [store, loc: (1 . 1), const: B1:Boolean] } .
+red { [store, 1 . 1, B0:Boolean] [store, 1 . 1, B1:Boolean] } .
 
-red { [store, loc: (1 . 1), const: B0:Boolean] [store, loc: (1 . 1), const: B1:Boolean] [store, loc: (1 . 1), const: B2:Boolean] } .
+red { [store, 1 . 1, B0:Boolean] [store, 1 . 1, B1:Boolean] [store, 1 . 1, B2:Boolean] } .
