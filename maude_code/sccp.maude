@@ -10,6 +10,8 @@ fmod SMT-UTIL is
    = metaCheck(['INTEGER], upTerm(B:Boolean)) .
   eq check-unsat(B:Boolean)
    = not(check-sat(B:Boolean)) .
+
+  --- some Boolean identities
   eq B:Boolean and true
    = B:Boolean .
   eq B:Boolean and false
@@ -18,7 +20,6 @@ fmod SMT-UTIL is
    = true .
   eq B:Boolean or false
    = false .
-
   eq true and B:Boolean
    = B:Boolean .
   eq false and B:Boolean
@@ -27,13 +28,10 @@ fmod SMT-UTIL is
    = true .
   eq false or B:Boolean
    = false .
-
-  ---(
-  eq not(true)
-   = false .
-  eq not(false)
-   = true .
-  ---)
+  eq not((true).Boolean)
+   = (false).Boolean .
+  eq not((false).Boolean)
+   = (true).Boolean .
 endfm
 
 fmod AGENT-ID is
@@ -58,51 +56,74 @@ fmod SCCP-SYNTAX is
   op <_>[_] : Aid SCCPCmd -> SCCPCmd .
 endfm
 
-mod SCCP is
+fmod SCCP-STATE is
   pr SCCP-SYNTAX .
-  inc CONFIGURATION .
   pr SMT-UTIL .
 
-  sorts Sys .
-
+  sorts Cid Obj Cnf Sys .
+  subsorts Obj < Cnf .
   ops store process : -> Cid .
-  op loc:_ : Aid -> Attribute .
-  op cmd:_ : SCCPCmd -> Attribute .
-  op const:_ : Boolean -> Attribute .
-  op [_,_,_] : Cid Attribute Attribute -> Object [ctor object] .
-  op {_} : Configuration -> Sys [ctor] .  
+  op [_,_,_] : Cid Aid Boolean -> Obj [ctor] .
+  op [_,_,_] : Cid Aid SCCPCmd -> Obj [ctor] .
+  op mt : -> Cnf [ctor] .
+  op __ : Cnf Cnf -> Cnf [ctor assoc comm id: mt] .
+  op {_} : Cnf -> Sys [ctor] .
+
+  vars L L0    : Aid .
+  vars C C0    : Boolean .
+  vars X       : Cnf .
+
+  --- auxiliary operations
+  op exists-store? : Cnf Aid -> Bool .
+  eq exists-store?(mt, L)
+   = false .
+  eq exists-store?( [ process, L0, C0 ] X, L)
+   = exists-store?(X,L) .
+  eq exists-store?( [ store, L0, C0 ] X, L)
+   = (L0 == L) or-else exists-store?(X,L) .
+endfm
+
+mod SCCP is
+  pr SCCP-STATE .
 
   vars L L0 L1 : Aid .
   vars B B0 B1 : Boolean .
   vars C C0 C1 : SCCPCmd .
-
+  vars X : Cnf .
+  
   --- non-observable concurrent transitions
-  eq [process, loc: L0, cmd: 0]
-   = none .
-  eq [store, loc: L0, const: B0] [store, loc: L0, const: B1]
-   = [store, loc: L0, const: (B0 and B1) ] .
+  eq [ process, L, 0 ]
+   = mt .
+  eq [ store, L, B0 ] [ store, L, B1 ]
+   = [ store, L, B0 and B1 ] .
 
   --- observable concurrent transitions
   rl [tell] :
-     [store, loc: L, const: B] [process, loc: L, cmd: (tell B0)] 
-  => [store, loc: L, const: (B and B0)] [process, loc: L, cmd: 0] .
+     { [ store, L, B] [process, L, tell B0 ] X }
+  => { [ process, L, 0 ] [ store, L, B and B0] X } .
 
  crl [ask] :
-     [store, loc: L, const: B] [process, loc: L, cmd: (ask B0  -> C0) ]
-  => [store, loc: L, const: B] [process, loc: L, cmd: C0]
+     { [ store, L, B ] [ process, L, ask B0  -> C0 ] X }
+  => { [ store, L, B ] [ process, L, C0 ] X }
   if check-unsat(B and not(B0)) .
 
- crl [ask] :
-     [store, loc: L, const: B] [process, loc: L0, cmd: (ask< L > B0  -> C0) ]
-  => [store, loc: L, const: B] [process, loc: L0, cmd: C0]
+ crl [ask-ext0] :
+     { [ store, L0 . L1, B ] [ process, L0, ask< L1 > B0  -> C0 ] X }
+  => { [ store, L0 . L1, B ] [ process, L0, C0 ] X }
   if check-unsat(B and not(B0)) . 
 
+ crl [ext-ask1] :
+     { [ process, L0, ask< L1 > B0  -> C0 ] X }
+  => { [ process, L0, C0 ] X }
+  if exists-store?(X, L0 . L1) == false
+  /\ check-unsat(not(B0)) . 
+
   rl [parallel] :
-     [process, loc: L, cmd: (C0 || C1) ]
-  => [process, loc: L, cmd: C0] [process, loc: L, cmd: C1].
+     { [ process, L, C0 || C1 ] X }
+  => { [ process, L, 0 ] [ process, L, C0 ] [ process, L, C1 ] X } .
 
   rl [space] :
-     [process, loc: L, cmd: < L0 >[ C0 ]] 
-  => [process, loc: L, cmd: 0 ] [process, loc: (L . L0), cmd: C0] [store, loc: (L . L0), const: true ] .
+     { [ process, L0, < L1 >[ C0 ] ] X } 
+  => { [ process, L0, 0 ] [ process, L0 . L1, C0] [ store, L0 . L1, true ] X } .
 
 endm
