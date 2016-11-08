@@ -1,127 +1,121 @@
-import Tkinter as tk 
-from Tkinter import * 
-import tkMessageBox
-import tkFileDialog
+import tkinter as tk
+from tkinter import *
+from tkinter import filedialog
+from tkinter import messagebox
 import subprocess
 import datetime
+
+def say_hi():
+    print("hi there, everyone!")
 
 def donothing():
     filewin = Toplevel(root)
     button = Label(filewin, text="En construccion...")
     button.pack()
 
-def maudeParser(str_maude):
-	if "result Object:" in str_maude:
-		result = str_maude.split("result Object: ")[1]
-	else:
-		result = str_maude.split("result Configuration: ")[1]
-	result = result.replace('\n','').strip()
-	# for i in range(len(result)):
-	# 	if result[-i]=='>' and result[-i+1]=='M':
-	# 		result=result[:-i]
-	# 		break	
-	while '  ' in result:
-		result= result.replace('  ',' ')
-
-	pre_spaces = result.split(" > < ")[:]
-	# print(pre_spaces)
-	spc_str = ''
-	prc_str = ''
-	spaces = []
-	process = []
-	for s in pre_spaces:
-		if "store |" in s:
-			loc = ((s.split('loc:')[1]).split('>')[0]).replace('(','').replace(')','').strip()
-			store = ((s.split('const:')[1]).split(',')[0]).strip()
-			while '('in store or ')' in store:
-				store=store.replace('(','').replace(')','')
-			pre_const = store.split('and')
-			const = []
-			spc_str += 'space: '+loc+'\nconstraint: '
-			for c in pre_const:
-				if 'true' not in c:
-					const.append(c.strip())
-					spc_str += '\n\t'+c.strip()
-			spc_str += '\n\n'
-			spaces.append([loc,const])
-
-		else: 
-			print('process loc',((s.split('loc:')[1]).split('>')[0]).replace('(','').replace(')','').strip())
-	return spc_str+prc_str
-
 def showAnswer(maude):
-	showAns = Toplevel(root)        
-	menuBarA = Menu(showAns)
+    def saveFileOuput():
+        path = subprocess.check_output("pwd",shell=True)
+        file_opt = options = {}
+        options['initialdir'] = path
+        options['parent'] = showAns
+        options['defaultextension'] = '.out'
+        options['filetypes'] = [('Plain text', '*.txt'),('Maude', '*.maude'),('Output', '*.out')]
+        options['title'] = 'Save solution as ...'
+        file = filedialog.asksaveasfile(mode='w', **file_opt)
+        if file is None:
+            return
+        text = solution.get("1.0",END)
+        file.write(text)
+        file.close()
 
-	fileMenuA = Menu(menuBarA, tearoff=0)
-	fileMenuA.add_command(label="Guardar", command=donothing)
-	fileMenuA.add_command(label="Cerrar", command=showAns.destroy)
-	menuBarA.add_cascade(label="Archivo", menu=fileMenuA)
+    showAns = Toplevel(root)
+    menuBarA = Menu(showAns)
 
-	solution = Text(showAns)
-	solution.insert(END, maudeParser(maude))
-	solution.config(relief=GROOVE, borderwidth=2, wrap=tk.WORD, state=DISABLED)
-	solution.pack(pady = 20,padx = 20)
+    fileMenuA = Menu(menuBarA, tearoff=0)
+    fileMenuA.add_command(label="Guardar", command=donothing)
+    fileMenuA.add_separator()
+    fileMenuA.add_command(label="Cerrar", command=showAns.destroy)
+    menuBarA.add_cascade(label="Archivo", menu=fileMenuA)
 
-	closeAns = Button(showAns, text="Cerrar", command = showAns.destroy)
-	closeAns.pack(pady = 10,padx = 10)
+    solution = Text(showAns)
+    solution.insert(END, maude)
+    solution.config(relief=GROOVE, borderwidth=2, wrap=WORD, state=DISABLED)
+    solution.pack(pady = 20,padx = 20)
 
-	showAns.resizable(width=False, height=False)
-	showAns.minsize(width=680, height=500)
-	showAns.maxsize(width=680, height=500)
-	showAns.config(background='gray', menu=menuBarA)
-	showAns.mainloop()
+    # Top toolbar definiton
+    toolbarAns = Frame(showAns, bd=1, relief=RAISED)
+
+    saveImgAns = PhotoImage(file="python/icon/save2.gif")  
+    saveImgAns = saveImgAns.subsample(20)
+    saveButtonAns = Button(toolbarAns, image=saveImgAns, relief=FLAT, command=saveFileOuput)
+    saveButtonAns.image = saveImgAns
+    saveButtonAns.pack(side=LEFT, padx=2, pady=2)
+    
+    quitEimgAns = PhotoImage(file="python/icon/exit.gif")  
+    quitEimgAns = quitEimgAns.subsample(20)
+    quitButtonAns = Button(toolbarAns, image=quitEimgAns, relief=FLAT, command=showAns.destroy)
+    quitButtonAns.image = quitEimgAns
+    quitButtonAns.pack(side=RIGHT, padx=2, pady=2)
+
+    toolbarAns.pack(side=BOTTOM, fill=X)
+
+    showAns.resizable(width=False, height=False)
+    showAns.minsize(width=680, height=500)
+    showAns.maxsize(width=680, height=500)
+    showAns.config(background='gray', menu=menuBarA)
+    showAns.mainloop()
 
 
 def cmpMaude():
-	now = datetime.datetime.now()
-	inFileName = '/tmp/' + now.isoformat() + '.in'
-	inFile = open(inFileName, 'w')
-	inFile.write(editor.get("1.0",END))
-	inFile.close()
-	
-	outFileName = '/tmp/' + now.isoformat() + '.out'
-	# print(inFileName,outFileName)
-	# print(editor.get("1.0",END))
-	try:
-		subprocess.check_output("maude.darwin64 maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
-		outFile = open(outFileName, 'r')		
-		ans = outFile.read()
-		# editor.delete("1.0",END)
-		# editor.insert(END, "\n\n" + ans)
-		showAnswer(ans)
-	except:
-		# editor.delete("1.0",END)
-		editor.insert(END, "\n\nSometing went wrong, please check your input!")
+    now = datetime.datetime.now()
+    inFileName = '/tmp/' + now.isoformat() + '.in'
+    inFile = open(inFileName, 'w')
+    inFile.write(editor.get("1.0",END))
+    inFile.close()
+    
+    outFileName = '/tmp/' + now.isoformat() + '.out'
+    # print(inFileName,outFileName)
+    # print(editor.get("1.0",END))
+    try:
+        subprocess.check_output("maude.darwin64 maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
+        outFile = open(outFileName, 'r')        
+        ans = outFile.read()
+        # editor.delete("1.0",END)
+        # editor.insert(END, "\n\n" + ans)
+        showAnswer(ans)
+    except:
+        # editor.delete("1.0",END)
+        editor.insert(END, "\n\nSometing went wrong, please check your input!")
 
 def openFile():
-	path = subprocess.check_output("pwd",shell=True)
-	file_opt = options = {}
-	options['initialdir'] = path
-	options['parent'] = root
-	options['filetypes'] = [('Plain text', '*.txt'),('Maude', '*.maude'),('Input', '*.in')]
-	options['title'] = 'Select specification source'
-	file = tkFileDialog.askopenfile(mode='r', **file_opt)
-	if file is None:
-		return
-	editor.delete("1.0",END)
-	spec = file.read()
-	editor.insert(END, spec)
+    path = subprocess.check_output("pwd",shell=True)
+    file_opt = options = {}
+    options['initialdir'] = path
+    options['parent'] = root
+    options['filetypes'] = [('Plain text', '*.txt'),('Maude', '*.maude'),('Input', '*.in')]
+    options['title'] = 'Select specification source'
+    file = filedialog.askopenfile(mode='r', **file_opt)
+    if file is None:
+        return
+    editor.delete("1.0",END)
+    spec = file.read()
+    editor.insert(END, spec)
 
-def saveFile():
-	path = subprocess.check_output("pwd",shell=True)
-	file_opt = options = {}
-	options['initialdir'] = path
-	options['parent'] = root
-	options['defaultextension'] = '.in'
-	options['filetypes'] = [('Plain text', '*.txt'),('Maude', '*.maude'),('Input', '*.in')]
-	options['title'] = 'Save specification as ...'
-	file = tkFileDialog.asksaveasfile(mode='w', **file_opt)
-	if file is None:
-		return
-	spec = editor.get("1.0",END)
-	file.write(spec)
-	file.close()
+def saveFileInput():
+    path = subprocess.check_output("pwd",shell=True)
+    file_opt = options = {}
+    options['initialdir'] = path
+    options['parent'] = root
+    options['defaultextension'] = '.in'
+    options['filetypes'] = [('Plain text', '*.txt'),('Maude', '*.maude'),('Input', '*.in')]
+    options['title'] = 'Save specification as ...'
+    file = filedialog.asksaveasfile(mode='w', **file_opt)
+    if file is None:
+        return
+    spec = editor.get("1.0",END)
+    file.write(spec)
+    file.close()
 
 # Window definition
 root = Tk()
@@ -131,8 +125,9 @@ menuBar = Menu(root)
 
 fileMenu = Menu(menuBar, tearoff=0)
 fileMenu.add_command(label="Abrir", command=openFile)
-fileMenu.add_command(label="Guardar", command=saveFile)
-fileMenu.add_command(label="Cerrar", command=root.quit)
+fileMenu.add_command(label="Guardar", command=saveFileInput)
+fileMenu.add_separator()
+fileMenu.add_command(label="Cerrar", command=root.destroy)
 menuBar.add_cascade(label="Archivo", menu=fileMenu)
 
 maudeMenu = Menu(menuBar, tearoff=0)
@@ -144,19 +139,42 @@ helpMenu.add_command(label="Help Index", command=donothing)
 helpMenu.add_command(label="Acerca de...", command=donothing)
 menuBar.add_cascade(label="Ayuda", menu=helpMenu)
 
+# Top toolbar definiton
+toolbar = Frame(root, bd=1, relief=RAISED)
+
+openImg = PhotoImage(file="python/icon/open1.gif")  
+openImg = openImg.subsample(20)
+openButton = Button(toolbar, image=openImg, relief=FLAT, command=openFile)
+openButton.image = openImg
+openButton.pack(side=LEFT, padx=2, pady=2)
+
+saveImg = PhotoImage(file="python/icon/save2.gif")  
+saveImg = saveImg.subsample(20)
+saveButton = Button(toolbar, image=saveImg, relief=FLAT, command=saveFileInput)
+saveButton.image = saveImg
+saveButton.pack(side=LEFT, padx=2, pady=2)
+
+compImg = PhotoImage(file="python/icon/compile.gif")  
+compImg = compImg.subsample(20)
+compButton = Button(toolbar, image=compImg, relief=FLAT, command=cmpMaude)
+compButton.image = compImg
+compButton.pack(side=LEFT, padx=2, pady=2)
+
+quitEimg = PhotoImage(file="python/icon/exit.gif")  
+quitEimg = quitEimg.subsample(20)
+quitButton = Button(toolbar, image=quitEimg, relief=FLAT, command=root.destroy)
+quitButton.image = quitEimg
+quitButton.pack(side=RIGHT, padx=2, pady=2)
+
+toolbar.pack(side=BOTTOM, fill=X)
+
 # Text editor definition
-editor = Text(root)
+editor = Text(root)#, width=450, height=300)
 editor.config(relief=GROOVE, borderwidth=2, wrap=tk.WORD)
 editor.insert(END, "Insert command here!")
 editor.pack(pady = 20,padx = 20)
 
-# Buttons definition
-compileButton = Button(root, text="Compilar", command = cmpMaude)	# , relief = 'raised')
-compileButton.pack()
-
-close = Button(root, text="Cerrar", command = root.quit)
-close.pack(pady = 10,padx = 10)
-
+# Window definition
 root.title("Spatial Concurrent Constraint Programming")
 root.resizable(width=False, height=False)
 root.minsize(width=680, height=500)
