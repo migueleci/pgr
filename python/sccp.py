@@ -13,6 +13,35 @@ def donothing():
     button = Label(filewin, text="En construccion...")
     button.pack()
 
+def maudeParser(str_maude):
+    if "result Sys: " in str_maude:
+        space = []
+        process = []
+        sys = (((str_maude.split("result Sys: ")[1]).split("{")[1]).split("}")[0]).replace("\n","")
+        while '  ' in sys:
+            sys = sys.replace('  ',' ')
+        objs = sys.split("[")[1:]
+        for obj in objs:
+            tmp = (obj.split("]")[0]).split(",")
+            if tmp[0] == 'store':
+                space.append("Location: {0}\nConstraint: {1}".format(tmp[1],tmp[2]))
+            else :
+                process.append("Location: {0}\nCommand: {1}".format(tmp[1],tmp[2]))
+        space_str ='Spaces:\n'
+        for s in space:
+            space_str+='\n'+s+'\n'
+        
+        if len(process)==0:
+            return '\nResult\n==========================================\n'+space_str
+
+        process_str ='Process:\n'
+        for p in process:
+            process_str+='\n'+p+'\n'
+
+        return '\nResult\n==========================================\n'+space_str+'\n==========================================\n'+process_str
+    else :
+        return "Sorry, there is an error!\nCheck your specification and try again."
+
 def showAnswer(maude):
     def saveFileOuput():
         path = subprocess.check_output("pwd",shell=True)
@@ -39,7 +68,7 @@ def showAnswer(maude):
     menuBarA.add_cascade(label="Archivo", menu=fileMenuA)
 
     solution = Text(showAns)
-    solution.insert(END, maude)
+    solution.insert(END, maudeParser(maude))
     solution.config(relief=GROOVE, borderwidth=2, wrap=WORD, state=DISABLED)
     solution.pack(pady = 20,padx = 20)
 
@@ -78,7 +107,11 @@ def cmpMaude():
     # print(inFileName,outFileName)
     # print(editor.get("1.0",END))
     try:
-        subprocess.check_output("maude.darwin64 maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
+        os = subprocess.check_output("uname -a", shell=True)
+        if 'Darwin' in str(os):
+            subprocess.check_output("maude.darwin64 maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
+        else:
+            subprocess.check_output("maude maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
         outFile = open(outFileName, 'r')        
         ans = outFile.read()
         # editor.delete("1.0",END)
