@@ -1,0 +1,9 @@
+var B0 B1 Bool
+var N0 N1 Int
+begin
+tell(true)
+ask true -> tell(X >= 5)
+ask < 1 . 1 > C = 3 -> tell(Y < X)
+tell(true) || ask B > 10 -> tell(false)
+[tell(X >= 5)]_2
+end
