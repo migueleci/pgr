@@ -1,10 +1,19 @@
 from SCCPVisitor import SCCPVisitor
 
 class RewriterVisitor(SCCPVisitor):
+	def visitBody(self, ctx):
+		ldata = len(ctx.line())
+		data = 'rew { [store, root, true] '
+		for i in range(ldata):
+			data += ' '+self.visit(ctx.line(i))
+		data += ' } .'
+		print('{0}'.format(data))
+		return '{0}'.format(data)
+
 	def visitLine(self, ctx):
 		data = self.visit(ctx.proc())
-		print('[process, root, {0}]'.format(data))
-		return '{0}'.format(data)
+		# print('[process, root, {0}]'.format(data))
+		return '[process, root, {0}]'.format(data)
 
 	def visitProcloc(self, ctx):
 		data = self.visit(ctx.proc())
@@ -36,6 +45,8 @@ class RewriterVisitor(SCCPVisitor):
 
 	def visitExpr(self, ctx):
 		op = ctx.op().getText()
+		if op == '=':
+			op = '==='
 		if ctx.INT() != None:
 			ID  = ctx.ID(0)
 			INT = ctx.INT()

@@ -1,8 +1,9 @@
 grammar SCCP;
-sys: 	(decl)? 'begin' (line)+ 'end' ;
+sys: 	(decl)? body ;
 decl:	(var)+ ;
 var:	'var' (ID)+ tname ;
 tname:	'Int' | 'Bool' ;
+body:	'begin' (line)+ 'end' ;
 line:	proc '.' ;
 proc: 	'tell' '(' const ')'					# tell
 	|	'ask' ('<' loc '>')? const '->' proc	# ask

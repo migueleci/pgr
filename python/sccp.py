@@ -98,15 +98,21 @@ def showAnswer(maude):
 
 def cmpMaude():
     now = datetime.datetime.now()
+    
+    parserFileName = '/tmp/' + now.isoformat() + '.parser'
+    parserFile = open(parserFileName, 'w')
+    parserFile.write(editor.get("1.0",END))
+    parserFile.close()
+    
     inFileName = '/tmp/' + now.isoformat() + '.in'
-    inFile = open(inFileName, 'w')
-    inFile.write(editor.get("1.0",END))
-    inFile.close()
     
     outFileName = '/tmp/' + now.isoformat() + '.out'
     # print(inFileName,outFileName)
     # print(editor.get("1.0",END))
+    # out = subprocess('python3 python/grammar/parser_sccp.py '+parserFileName+' > '+ inFileName, shell=True)
+
     try:
+        subprocess.check_output('python3 python/grammar/parser_sccp.py '+parserFileName+' > '+inFileName, shell=True)
         os = subprocess.check_output("uname -a", shell=True)
         if 'Darwin' in str(os):
             subprocess.check_output("maude.darwin64 maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
