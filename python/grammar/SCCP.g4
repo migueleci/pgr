@@ -1,18 +1,20 @@
 grammar SCCP;
-sys: 	(decl)? 'begin' (proc)+ 'end' ;
+sys: 	(decl)? 'begin' (line)+ 'end' ;
 decl:	(var)+ ;
 var:	'var' (ID)+ tname ;
 tname:	'Int' | 'Bool' ;
-proc: 	'tell' '(' const ')'
-	|	'ask' ('<' loc '>')? const '->' proc
-	|	proc '||' proc
-	| 	'[' proc ']_' INT
+line:	proc '.' ;
+proc: 	'tell' '(' const ')'					# tell
+	|	'ask' ('<' loc '>')? const '->' proc	# ask
+	|	proc '||' proc							# parallel
+	| 	'[' proc ']_' INT 						# procloc
 	;
-const: 	BOOL
-	|	ID
-	| 	expr
-	| 	const 'and' const
+const: 	BOOL 									# bool
+	|	ID										# id
+	| 	expr 									# cexpr
+	| 	const 'and' const 						# and
 	;
+
 loc: 	INT ('.' INT)+ ;
 expr:	ID op ( ID | INT ) ;
 op:		'>' | '<' | '=' | '>=' | '<=' ;
