@@ -1,8 +1,8 @@
 grammar SCCP;
 sys: 	(decl)? body ;
-decl:	(var)+ ;
-var:	'var' (ID)+ tname ;
-tname:	'Int' | 'Bool' ;
+decl:	(vint | vbool)+ ;
+vint:	'var' (ID)+ 'Int' ;
+vbool:	'var' (ID)+ 'Bool' ;
 body:	'begin' (line)+ 'end' ;
 line:	proc '.' ;
 proc: 	'tell' '(' const ')'					# tell

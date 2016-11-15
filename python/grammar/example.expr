@@ -1,5 +1,5 @@
-var B0 B1 Bool
-var N0 N1 Int
+var B0 Bool
+var X C Y B Int
 begin
 tell(true) .
 ask true -> tell(X >= 5) .
