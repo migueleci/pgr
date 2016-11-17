@@ -16,7 +16,7 @@ const: 	BOOL 									# bool
 	| 	const 'and' const 						# and
 	;
 
-loc: 	INT ('.' INT)+ ;
+loc: 	INT ('.' INT)* ;
 expr:	ID op ( ID | INT ) ;
 op:		'>' | '<' | '=' | '>=' | '<=' ;
 BOOL: 	'true' | 'false' ;

@@ -6,9 +6,11 @@ class RewriterVisitor(SCCPVisitor):
 		if ctx.decl() != None:
 			data = self.visit(ctx.decl())
 			for i in data[0]:
-				spec = spec.replace(i,i+":Integer")
+				spec = spec.replace(i+' ',i+":Integer ")
+				spec = spec.replace(i+')',i+":Integer)")
 			for b in data[1]:
-				spec = spec.replace(b,b+":Boolean")
+				spec = spec.replace(b+' ',b+":Boolean ")
+				spec = spec.replace(b+')',b+":Boolean)")
 		print('{0}'.format(spec))
 		return '{0}'.format(spec)
 

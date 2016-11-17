@@ -17,3 +17,15 @@ ask true -> tell(X >= 5) .
 tell(true) || ask B > 10 -> tell(false) .
 [tell(X >= 5)]_2 .
 end
+
+var B0 B1 Bool
+var X C Int
+var Y B Int
+begin
+tell(true) .
+ask true -> tell(X >= 5) .
+[[tell(B0)]_1 || ask < 1 > B0 -> tell(Y < X)]_1 .
+tell(true) || ask X > 1 -> tell(B1) .
+[tell(X >= 5)]_2 .
+ask B1 -> tell(C >= 5) .
+end
