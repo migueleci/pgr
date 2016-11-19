@@ -1,5 +1,6 @@
 install python3
 download maude-alpha110
+copy maude-alpha110 to /opt
 add maude to Path
 	sudo nano /etc/paths
 install tkinter for Python 3
@@ -9,3 +10,5 @@ install antlr4 for Python 3
 	pip3 install antlr4-python3-runtime
 download SCCP 
 	https://github.com/migueleci/pgr
+run SCCP tool
+	sccp.py
