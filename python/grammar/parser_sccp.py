@@ -5,7 +5,7 @@ from antlr4 import *
 from antlr4.InputStream import InputStream
 from SCCPLexer import SCCPLexer
 from SCCPParser import SCCPParser
-from RewriterListener import RewriterListener
+# from RewriterListener import RewriterListener
 from RewriterVisitor import RewriterVisitor
 
 if __name__ == '__main__':
