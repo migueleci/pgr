@@ -117,7 +117,7 @@ def cmpMaude():
         if 'Darwin' in str(os):
             subprocess.check_output("maude.darwin64 maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
         else:
-            subprocess.check_output("maude maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
+            subprocess.check_output("maude.linux64 maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
         outFile = open(outFileName, 'r')        
         ans = outFile.read()
         # editor.delete("1.0",END)
