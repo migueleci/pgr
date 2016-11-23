@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import filedialog
+from tkinter import font
 from tkinter import messagebox
 import subprocess
 import datetime
@@ -33,13 +34,13 @@ def maudeParser(str_maude):
             space_str+='\n'+s+'\n'
         
         if len(process)==0:
-            return '\nResult\n==========================================\n'+space_str
+            return 'Result\n==========================================\n'+space_str
 
         process_str ='Process:\n'
         for p in process:
             process_str+='\n'+p+'\n'
 
-        return '\nResult\n==========================================\n'+space_str+'\n==========================================\n'+process_str
+        return 'Result\n==========================================\n'+space_str+'\n==========================================\n'+process_str
     else :
         return "Sorry, there is an error!\nCheck your specification and try again."
 
@@ -70,7 +71,7 @@ def showAnswer(maude):
 
     solution = Text(showAns)
     solution.insert(END, maudeParser(maude))
-    solution.config(relief=GROOVE, borderwidth=2, wrap=WORD, state=DISABLED)
+    solution.config(relief=GROOVE, borderwidth=2, wrap=WORD, state=DISABLED, font=customFont_1, width=58, height=16)
     solution.pack(pady = 20,padx = 20)
 
     # Top toolbar definiton
@@ -160,6 +161,12 @@ def saveFileInput():
 # Window definition
 root = Tk()
 
+# Font definition
+customFont = font.Font(family='Helvetica', size=18)
+customFont_1 = font.Font(family='Avenir Next', size=18)
+customFont_2 = font.Font(family='Avenir', size=18)
+# print(font.families())
+
 # Top menu definition
 menuBar = Menu(root)
 
@@ -210,7 +217,7 @@ toolbar.pack(side=BOTTOM, fill=X)
 
 # Text editor definition
 editor = Text(root)#, width=450, height=300)
-editor.config(relief=GROOVE, borderwidth=2, wrap=tk.WORD)
+editor.config(relief=GROOVE, borderwidth=2, wrap=tk.WORD, font=customFont_1, width=58, height=16)
 editor.insert(END, "Insert command here!")
 editor.pack(pady = 20,padx = 20)
 
