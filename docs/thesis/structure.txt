@@ -1,0 +1,47 @@
+Objetivo:
+
+Implementar la semántica ejecutable de un lenguaje de programación
+basado en SCCP
+
+
+Contribuciones:
+
+- Definición de un lenguaje de programación basado en SCCP: ...
+
+- Semántica ejecutable del lenguaje de programación en lógica de
+  reescritura.
+
+- Ambiente de edición y ejecución del lenguaje de programación en
+  Python.
+
+
+Objetivos específicos:
+
+... vitrina ...
+
+
+
+Estructura del documento por capítulos:
+
+1. Introducción
+
+2. Preliminares
+
+3. SCCP
+
+   3.1 Modalidades espaciales y epistémicas en sistemas de reestricciones
+
+   3.2 Espacios y conocimiento en procesos
+
+   3.3 Semántica operacional estructurada para espacios y conocimiento
+       en procesos
+   
+4. Una teoría de reescritura para SCCP (R)
+
+5. Propiedades de admisibilidad de R
+
+6. El lenguaje de programación
+
+7. El ambiente para el lenguaje de programación
+
+8. Conclusiones

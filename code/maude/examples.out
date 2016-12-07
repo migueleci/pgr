@@ -1,0 +1,26 @@
+		     \||||||||||||||||||/
+		   --- Welcome to Maude ---
+		     /||||||||||||||||||\
+	    Maude alpha110 built: May 17 2016 18:03:42
+	    Copyright 1997-2014 SRI International
+		   Wed Oct 26 16:37:34 2016
+Maude> ==========================================
+rewrite in SCCP : < o(0) : store | const: true,loc: root > < o(1) : process |
+    cmd: tell (X:Integer < 0),loc: root > .
+rewrites: 2 in 0ms cpu (0ms real) (~ rewrites/second)
+result Object: < o(0) : store | const: (true and X:Integer < 0),loc: root >
+==========================================
+rewrite in SCCP : (< o(1) : process | cmd: tell (Y:Integer === (10).Integer),
+    loc: 1 > < o(1) : process | cmd: {1}[tell (X:Integer < 0)],loc: root >) <
+    o(0) : store | const: true,loc: root > .
+rewrites: 6 in 0ms cpu (0ms real) (~ rewrites/second)
+result Configuration: < o(0) : store | const: true,loc: root > < o(1) : store |
+    const: (true and X:Integer < 0 and Y:Integer === (10).Integer),loc: 1 >
+==========================================
+rewrite in SCCP : < o(0) : store | const: (X:Integer > 0),loc: root > < o(1) :
+    process | cmd: (ask X:Integer >= 1 -> tell (Y:Integer === (50).Integer)),
+    loc: root > .
+rewrites: 10 in 2ms cpu (1ms real) (5000 rewrites/second)
+result Object: < o(0) : store | const: (X:Integer > 0 and Y:Integer === (
+    50).Integer),loc: root >
+Maude> Bye.
