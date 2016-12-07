@@ -1,0 +1,62 @@
+\documentclass[12pt,fleqn,openany]{amsbook}
+
+\input{packages}
+\input{macros}
+
+\begin{document}
+
+\frontmatter
+
+\input{chapters/frontmatter/main.tex}
+
+\maketitle
+
+\input{chapters/frontmatter/abstract.tex}
+
+\input{chapters/frontmatter/ack.tex}
+
+\setcounter{page}{3}
+
+
+\tableofcontents
+
+% Prefacio
+%\input{chapters/frontmatter/preface.tex}
+
+\mainmatter
+
+% introduction
+\input{chapters/intro/main.tex}
+
+% preliminary
+\input{chapters/prelim/main.tex}
+
+%% sccp
+\input{chapters/sccp/main.tex}
+
+%% formal specification
+\input{chapters/formal/main.tex}
+
+%% properties
+\input{chapters/prop/main.tex}
+
+%% programming language
+\input{chapters/lang/main.tex}
+
+%% programming language environment
+\input{chapters/envir/main.tex}
+
+%% conclusion
+\input{chapters/conclu/main.tex}
+
+\appendix
+
+% appendix
+\input{chapters/appendix/main.tex}
+\backmatter
+
+%% bibliography
+\bibliographystyle{abbrv}
+\bibliography{biblio}
+
+\end{document}

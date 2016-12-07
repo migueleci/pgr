@@ -1,0 +1,40 @@
+\makeatletter
+\renewcommand{\@maketitle}{%
+  \thispagestyle{empty}%
+  \begingroup \topskip\z@skip
+  \null\vfil
+  \centering
+  \begingroup
+    \LARGE\bfseries
+    \@title\par\vspace{24pt}%
+    \def\and{\par\medskip}\centering
+    \mdseries\authors\par\smallskip
+    %\small{\tt miguel.romero@mail.escuelaing.edu.co}
+    \par\bigskip
+    %\Large Diciembre 12, 2016
+  \endgroup
+  \vfil
+  \begingroup
+    %\vspace{12pt}
+    \Large
+    Director \\
+    Dr. Camilo Rocha \\
+  \endgroup
+  \vfil
+  \begingroup
+  \vspace{20pt} 
+    \addresses
+  \endgroup
+  \vspace{10cm}
+  \endgroup
+  \newpage
+}
+\makeatother
+
+\author{Miguel \'Angel Romero Gonz\'alez}
+
+\address{Programa de Ingenier\'ia de Sistemas\\
+         Escuela Colombiana de Ingenier\'ia \textit{Julio Garavito} \\
+         Bogot\'a, Colombia \\
+	 Diciembre, 2016 \\}
+

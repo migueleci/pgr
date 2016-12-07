@@ -1,0 +1,109 @@
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+%
+\newcommand{\tbf}[1]{\textbf{#1}}
+
+% calligraphic 
+\newcommand{\acal}{\mathcal{A}}
+\newcommand{\bcal}{\mathcal{B}}
+\newcommand{\ccal}{\mathcal{C}}
+\newcommand{\dcal}{\mathcal{D}}
+\newcommand{\ecal}{\mathcal{E}}
+\newcommand{\fcal}{\mathcal{F}}
+\newcommand{\gcal}{\mathcal{G}}
+\newcommand{\hcal}{\mathcal{H}}
+\newcommand{\ical}{\mathcal{I}}
+\newcommand{\jcal}{\mathcal{J}}
+\newcommand{\kcal}{\mathcal{K}}
+\newcommand{\lcal}{\mathcal{L}}
+\newcommand{\mcal}{\mathcal{M}}
+\newcommand{\ncal}{\mathcal{N}}
+\newcommand{\ocal}{\mathcal{O}}
+\newcommand{\pcal}{\mathcal{P}}
+\newcommand{\qcal}{\mathcal{Q}}
+\newcommand{\rcal}{\mathcal{R}}
+\newcommand{\scal}{\mathcal{S}}
+\newcommand{\tcal}{\mathcal{T}}
+\newcommand{\ucal}{\mathcal{U}}
+\newcommand{\vcal}{\mathcal{V}}
+\newcommand{\wcal}{\mathcal{W}}
+\newcommand{\xcal}{\mathcal{X}}
+\newcommand{\ycal}{\mathcal{Y}}
+\newcommand{\zcal}{\mathcal{Z}}
+
+%Sort
+\newcommand{\states}{\mathfrak{s}}
+
+%aux
+\newcommand{\imps}{\Rightarrow}
+
+%Tool
+\newcommand{\tool}[1]{{\sf #1}}
+\newcommand{\inva}{\tool{InvA}}
+
+% auxiliary notation and functions for equations and rules
+\newcommand{\EQ}{=}
+\newcommand{\IFS}{\mathbf{if}}
+\newcommand{\REW}{\rightarrow}
+\newcommand{\eq}[2]{#1 \EQ #2}
+\newcommand{\ceq}[3]{#1 \EQ #2 \; \IFS\; #3}
+\newcommand{\rl}[2]{#1 \REW #2}
+\newcommand{\crl}[3]{#1 \REW #2 \; \IFS\; #3}
+\newcommand{\lbl}[1]{[\mathit{#1}]}
+\newcommand{\cond}{\gamma}
+\newcommand{\cuad}[1]{[#1]}
+\newcommand{\tipo}[1]{[#1]_{E}}
+\newcommand{\rel}[2]{\cuad{#1} \in T_{\Sigma / E, {#2}}}
+\newcommand{\rels}[1]{\tipo{#1} \in T_{\Sigma / E, \states}}
+\newcommand{\f}[1]{\rightarrow_{#1}}
+\newcommand{\fa}[2]{\rightarrow_{#1}^{#2}}
+\newcommand{\fl}[2]{\tipo{#1} \f{\rcal} \tipo{#2}}
+
+% code
+\newcommand{\id}[1]{\cde{#1}}
+\newcommand{\cde}[1]{\textnormal{\texttt{#1}}}
+\newcommand{\rlname}[1]{\cde{[#1]}}
+\newcommand{\opname}[1]{\cde{#1}}
+\lstdefinelanguage{Maude}{%
+   keywords={
+    , mod, fmod, endm, endfm
+    , pr , protecting 
+    , ex , extending 
+    , inc, including
+    , sort, sorts, subsort, subsorts
+    , var, vars
+    , op, ops
+    , eq, ceq
+    , rl, crl
+    , if
+    , search
+    , red, reduce
+    }
+}
+\lstnewenvironment{maude}
+{\lstset{language=Maude ,
+    keywordstyle=\color{blue}
+  , basicstyle=\ttfamily\singlespacing\small
+  , commentstyle={}
+  , columns=flexible
+  , numbers=none
+  , showstringspaces=false
+  , keepspaces=true
+  , aboveskip=-3pt
+  } 
+}
+{}
+
+\DefineVerbatimEnvironment{maude2}{Verbatim}{fontsize=\scriptsize}
