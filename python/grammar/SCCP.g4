@@ -6,7 +6,7 @@ vbool:	'var' (ID)+ 'Bool' ;
 body:	'begin' (line)+ 'end' ;
 line:	proc '.' ;
 proc: 	'tell' '(' const ')'					# tell
-	|	'ask' ('<' loc '>')? const '->' proc	# ask
+	|	'ask' ('<' loc '>')? const '->' ('(' proc ')' | proc ) # ask
 	|	proc '||' proc							# parallel
 	| 	'[' proc ']_' INT 						# procloc
 	;
@@ -18,7 +18,7 @@ const: 	BOOL 									# bool
 
 loc: 	INT ('.' INT)* ;
 expr:	ID op ( ID | INT ) ;
-op:		'>' | '<' | '=' | '>=' | '<=' ;
+op:		'>' | '<' | '=' | '=/=' | '>=' | '<=' ;
 BOOL: 	'true' | 'false' ;
 INT: 	[0-9]+ ;
 ID:		[A-Z] [A-Z0-9]* ;

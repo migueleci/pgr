@@ -91,6 +91,8 @@ class RewriterVisitor(SCCPVisitor):
 		op = ctx.op().getText()
 		if op == '=':
 			op = '==='
+		elif op == '=/=':
+			op = '=/=='
 		if ctx.INT() != None:
 			ID  = ctx.ID(0)
 			INT = ctx.INT()

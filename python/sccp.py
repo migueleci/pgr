@@ -120,7 +120,7 @@ def cmpMaude():
             subprocess.check_output("maude.darwin64 maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
         else:
             subprocess.check_output("maude.linux64 maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
-        outFile = open(outFileName, 'r')        
+        outFile = open(outFileName, 'r')
         ans = outFile.read()
         # editor.delete("1.0",END)
         # editor.insert(END, "\n\n" + ans)
@@ -128,6 +128,7 @@ def cmpMaude():
     except:
         # editor.delete("1.0",END)
         editor.insert(END, "\n\nSometing went wrong, please check your input!")
+        print("Unexpected error:", sys.exc_info())
 
 def openFile():
     path = subprocess.check_output("pwd",shell=True)

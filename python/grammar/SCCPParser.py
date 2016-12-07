@@ -1,50 +1,50 @@
 # Generated from python/grammar/SCCP.g4 by ANTLR 4.5.3
 # encoding: utf-8
-from __future__ import print_function
 from antlr4 import *
 from io import StringIO
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write(u"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3")
-        buf.write(u"\32{\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
-        buf.write(u"\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\3\2\5\2\32")
-        buf.write(u"\n\2\3\2\3\2\3\3\3\3\6\3 \n\3\r\3\16\3!\3\4\3\4\6\4&")
-        buf.write(u"\n\4\r\4\16\4\'\3\4\3\4\3\5\3\5\6\5.\n\5\r\5\16\5/\3")
-        buf.write(u"\5\3\5\3\6\3\6\6\6\66\n\6\r\6\16\6\67\3\6\3\6\3\7\3\7")
-        buf.write(u"\3\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\b")
-        buf.write(u"J\n\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\bU\n\b\3")
-        buf.write(u"\b\3\b\3\b\7\bZ\n\b\f\b\16\b]\13\b\3\t\3\t\3\t\3\t\5")
-        buf.write(u"\tc\n\t\3\t\3\t\3\t\7\th\n\t\f\t\16\tk\13\t\3\n\3\n\3")
-        buf.write(u"\n\7\np\n\n\f\n\16\ns\13\n\3\13\3\13\3\13\3\13\3\f\3")
-        buf.write(u"\f\3\f\2\4\16\20\r\2\4\6\b\n\f\16\20\22\24\26\2\4\3\2")
-        buf.write(u"\30\31\4\2\r\16\24\26}\2\31\3\2\2\2\4\37\3\2\2\2\6#\3")
-        buf.write(u"\2\2\2\b+\3\2\2\2\n\63\3\2\2\2\f;\3\2\2\2\16T\3\2\2\2")
-        buf.write(u"\20b\3\2\2\2\22l\3\2\2\2\24t\3\2\2\2\26x\3\2\2\2\30\32")
-        buf.write(u"\5\4\3\2\31\30\3\2\2\2\31\32\3\2\2\2\32\33\3\2\2\2\33")
-        buf.write(u"\34\5\n\6\2\34\3\3\2\2\2\35 \5\6\4\2\36 \5\b\5\2\37\35")
-        buf.write(u"\3\2\2\2\37\36\3\2\2\2 !\3\2\2\2!\37\3\2\2\2!\"\3\2\2")
-        buf.write(u"\2\"\5\3\2\2\2#%\7\3\2\2$&\7\31\2\2%$\3\2\2\2&\'\3\2")
-        buf.write(u"\2\2\'%\3\2\2\2\'(\3\2\2\2()\3\2\2\2)*\7\4\2\2*\7\3\2")
-        buf.write(u"\2\2+-\7\3\2\2,.\7\31\2\2-,\3\2\2\2./\3\2\2\2/-\3\2\2")
-        buf.write(u"\2/\60\3\2\2\2\60\61\3\2\2\2\61\62\7\5\2\2\62\t\3\2\2")
-        buf.write(u"\2\63\65\7\6\2\2\64\66\5\f\7\2\65\64\3\2\2\2\66\67\3")
-        buf.write(u"\2\2\2\67\65\3\2\2\2\678\3\2\2\289\3\2\2\29:\7\7\2\2")
-        buf.write(u":\13\3\2\2\2;<\5\16\b\2<=\7\b\2\2=\r\3\2\2\2>?\b\b\1")
-        buf.write(u"\2?@\7\t\2\2@A\7\n\2\2AB\5\20\t\2BC\7\13\2\2CU\3\2\2")
-        buf.write(u"\2DI\7\f\2\2EF\7\r\2\2FG\5\22\n\2GH\7\16\2\2HJ\3\2\2")
-        buf.write(u"\2IE\3\2\2\2IJ\3\2\2\2JK\3\2\2\2KL\5\20\t\2LM\7\17\2")
-        buf.write(u"\2MN\5\16\b\5NU\3\2\2\2OP\7\21\2\2PQ\5\16\b\2QR\7\22")
-        buf.write(u"\2\2RS\7\30\2\2SU\3\2\2\2T>\3\2\2\2TD\3\2\2\2TO\3\2\2")
-        buf.write(u"\2U[\3\2\2\2VW\f\4\2\2WX\7\20\2\2XZ\5\16\b\5YV\3\2\2")
-        buf.write(u"\2Z]\3\2\2\2[Y\3\2\2\2[\\\3\2\2\2\\\17\3\2\2\2][\3\2")
-        buf.write(u"\2\2^_\b\t\1\2_c\7\27\2\2`c\7\31\2\2ac\5\24\13\2b^\3")
-        buf.write(u"\2\2\2b`\3\2\2\2ba\3\2\2\2ci\3\2\2\2de\f\3\2\2ef\7\23")
-        buf.write(u"\2\2fh\5\20\t\4gd\3\2\2\2hk\3\2\2\2ig\3\2\2\2ij\3\2\2")
-        buf.write(u"\2j\21\3\2\2\2ki\3\2\2\2lq\7\30\2\2mn\7\b\2\2np\7\30")
-        buf.write(u"\2\2om\3\2\2\2ps\3\2\2\2qo\3\2\2\2qr\3\2\2\2r\23\3\2")
-        buf.write(u"\2\2sq\3\2\2\2tu\7\31\2\2uv\5\26\f\2vw\t\2\2\2w\25\3")
-        buf.write(u"\2\2\2xy\t\3\2\2y\27\3\2\2\2\16\31\37!\'/\67IT[biq")
+        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\33")
+        buf.write("\u0080\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\3\2\5\2\32")
+        buf.write("\n\2\3\2\3\2\3\3\3\3\6\3 \n\3\r\3\16\3!\3\4\3\4\6\4&\n")
+        buf.write("\4\r\4\16\4\'\3\4\3\4\3\5\3\5\6\5.\n\5\r\5\16\5/\3\5\3")
+        buf.write("\5\3\6\3\6\6\6\66\n\6\r\6\16\6\67\3\6\3\6\3\7\3\7\3\7")
+        buf.write("\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\bJ\n\b")
+        buf.write("\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\bS\n\b\3\b\3\b\3\b\3\b")
+        buf.write("\3\b\5\bZ\n\b\3\b\3\b\3\b\7\b_\n\b\f\b\16\bb\13\b\3\t")
+        buf.write("\3\t\3\t\3\t\5\th\n\t\3\t\3\t\3\t\7\tm\n\t\f\t\16\tp\13")
+        buf.write("\t\3\n\3\n\3\n\7\nu\n\n\f\n\16\nx\13\n\3\13\3\13\3\13")
+        buf.write("\3\13\3\f\3\f\3\f\2\4\16\20\r\2\4\6\b\n\f\16\20\22\24")
+        buf.write("\26\2\4\3\2\31\32\4\2\r\16\24\27\u0083\2\31\3\2\2\2\4")
+        buf.write("\37\3\2\2\2\6#\3\2\2\2\b+\3\2\2\2\n\63\3\2\2\2\f;\3\2")
+        buf.write("\2\2\16Y\3\2\2\2\20g\3\2\2\2\22q\3\2\2\2\24y\3\2\2\2\26")
+        buf.write("}\3\2\2\2\30\32\5\4\3\2\31\30\3\2\2\2\31\32\3\2\2\2\32")
+        buf.write("\33\3\2\2\2\33\34\5\n\6\2\34\3\3\2\2\2\35 \5\6\4\2\36")
+        buf.write(" \5\b\5\2\37\35\3\2\2\2\37\36\3\2\2\2 !\3\2\2\2!\37\3")
+        buf.write("\2\2\2!\"\3\2\2\2\"\5\3\2\2\2#%\7\3\2\2$&\7\32\2\2%$\3")
+        buf.write("\2\2\2&\'\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2()\3\2\2\2)*\7")
+        buf.write("\4\2\2*\7\3\2\2\2+-\7\3\2\2,.\7\32\2\2-,\3\2\2\2./\3\2")
+        buf.write("\2\2/-\3\2\2\2/\60\3\2\2\2\60\61\3\2\2\2\61\62\7\5\2\2")
+        buf.write("\62\t\3\2\2\2\63\65\7\6\2\2\64\66\5\f\7\2\65\64\3\2\2")
+        buf.write("\2\66\67\3\2\2\2\67\65\3\2\2\2\678\3\2\2\289\3\2\2\29")
+        buf.write(":\7\7\2\2:\13\3\2\2\2;<\5\16\b\2<=\7\b\2\2=\r\3\2\2\2")
+        buf.write(">?\b\b\1\2?@\7\t\2\2@A\7\n\2\2AB\5\20\t\2BC\7\13\2\2C")
+        buf.write("Z\3\2\2\2DI\7\f\2\2EF\7\r\2\2FG\5\22\n\2GH\7\16\2\2HJ")
+        buf.write("\3\2\2\2IE\3\2\2\2IJ\3\2\2\2JK\3\2\2\2KL\5\20\t\2LR\7")
+        buf.write("\17\2\2MN\7\n\2\2NO\5\16\b\2OP\7\13\2\2PS\3\2\2\2QS\5")
+        buf.write("\16\b\2RM\3\2\2\2RQ\3\2\2\2SZ\3\2\2\2TU\7\21\2\2UV\5\16")
+        buf.write("\b\2VW\7\22\2\2WX\7\31\2\2XZ\3\2\2\2Y>\3\2\2\2YD\3\2\2")
+        buf.write("\2YT\3\2\2\2Z`\3\2\2\2[\\\f\4\2\2\\]\7\20\2\2]_\5\16\b")
+        buf.write("\5^[\3\2\2\2_b\3\2\2\2`^\3\2\2\2`a\3\2\2\2a\17\3\2\2\2")
+        buf.write("b`\3\2\2\2cd\b\t\1\2dh\7\30\2\2eh\7\32\2\2fh\5\24\13\2")
+        buf.write("gc\3\2\2\2ge\3\2\2\2gf\3\2\2\2hn\3\2\2\2ij\f\3\2\2jk\7")
+        buf.write("\23\2\2km\5\20\t\4li\3\2\2\2mp\3\2\2\2nl\3\2\2\2no\3\2")
+        buf.write("\2\2o\21\3\2\2\2pn\3\2\2\2qv\7\31\2\2rs\7\b\2\2su\7\31")
+        buf.write("\2\2tr\3\2\2\2ux\3\2\2\2vt\3\2\2\2vw\3\2\2\2w\23\3\2\2")
+        buf.write("\2xv\3\2\2\2yz\7\32\2\2z{\5\26\f\2{|\t\2\2\2|\25\3\2\2")
+        buf.write("\2}~\t\3\2\2~\27\3\2\2\2\17\31\37!\'/\67IRY`gnv")
         return buf.getvalue()
 
 
@@ -58,17 +58,17 @@ class SCCPParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"'var'", u"'Int'", u"'Bool'", u"'begin'", 
-                     u"'end'", u"'.'", u"'tell'", u"'('", u"')'", u"'ask'", 
-                     u"'<'", u"'>'", u"'->'", u"'||'", u"'['", u"']_'", 
-                     u"'and'", u"'='", u"'>='", u"'<='" ]
+    literalNames = [ "<INVALID>", "'var'", "'Int'", "'Bool'", "'begin'", 
+                     "'end'", "'.'", "'tell'", "'('", "')'", "'ask'", "'<'", 
+                     "'>'", "'->'", "'||'", "'['", "']_'", "'and'", "'='", 
+                     "'=/='", "'>='", "'<='" ]
 
-    symbolicNames = [ u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"BOOL", u"INT", u"ID", u"WS" ]
+    symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                      "<INVALID>", "<INVALID>", "BOOL", "INT", "ID", "WS" ]
 
     RULE_sys = 0
     RULE_decl = 1
@@ -82,8 +82,8 @@ class SCCPParser ( Parser ):
     RULE_expr = 9
     RULE_op = 10
 
-    ruleNames =  [ u"sys", u"decl", u"vint", u"vbool", u"body", u"line", 
-                   u"proc", u"const", u"loc", u"expr", u"op" ]
+    ruleNames =  [ "sys", "decl", "vint", "vbool", "body", "line", "proc", 
+                   "const", "loc", "expr", "op" ]
 
     EOF = Token.EOF
     T__0=1
@@ -106,13 +106,14 @@ class SCCPParser ( Parser ):
     T__17=18
     T__18=19
     T__19=20
-    BOOL=21
-    INT=22
-    ID=23
-    WS=24
+    T__20=21
+    BOOL=22
+    INT=23
+    ID=24
+    WS=25
 
-    def __init__(self, input):
-        super(SCCPParser, self).__init__(input)
+    def __init__(self, input:TokenStream):
+        super().__init__(input)
         self.checkVersion("4.5.3")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
@@ -121,8 +122,8 @@ class SCCPParser ( Parser ):
 
     class SysContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(SCCPParser.SysContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def body(self):
@@ -136,16 +137,16 @@ class SCCPParser ( Parser ):
         def getRuleIndex(self):
             return SCCPParser.RULE_sys
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterSys"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterSys" ):
                 listener.enterSys(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitSys"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitSys" ):
                 listener.exitSys(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitSys"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSys" ):
                 return visitor.visitSys(self)
             else:
                 return visitor.visitChildren(self)
@@ -179,18 +180,18 @@ class SCCPParser ( Parser ):
 
     class DeclContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(SCCPParser.DeclContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
-        def vint(self, i=None):
+        def vint(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SCCPParser.VintContext)
             else:
                 return self.getTypedRuleContext(SCCPParser.VintContext,i)
 
 
-        def vbool(self, i=None):
+        def vbool(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SCCPParser.VboolContext)
             else:
@@ -200,16 +201,16 @@ class SCCPParser ( Parser ):
         def getRuleIndex(self):
             return SCCPParser.RULE_decl
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterDecl"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDecl" ):
                 listener.enterDecl(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitDecl"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDecl" ):
                 listener.exitDecl(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitDecl"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDecl" ):
                 return visitor.visitDecl(self)
             else:
                 return visitor.visitChildren(self)
@@ -258,11 +259,11 @@ class SCCPParser ( Parser ):
 
     class VintContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(SCCPParser.VintContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ID(self, i=None):
+        def ID(self, i:int=None):
             if i is None:
                 return self.getTokens(SCCPParser.ID)
             else:
@@ -271,16 +272,16 @@ class SCCPParser ( Parser ):
         def getRuleIndex(self):
             return SCCPParser.RULE_vint
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterVint"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVint" ):
                 listener.enterVint(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitVint"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVint" ):
                 listener.exitVint(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitVint"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVint" ):
                 return visitor.visitVint(self)
             else:
                 return visitor.visitChildren(self)
@@ -321,11 +322,11 @@ class SCCPParser ( Parser ):
 
     class VboolContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(SCCPParser.VboolContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ID(self, i=None):
+        def ID(self, i:int=None):
             if i is None:
                 return self.getTokens(SCCPParser.ID)
             else:
@@ -334,16 +335,16 @@ class SCCPParser ( Parser ):
         def getRuleIndex(self):
             return SCCPParser.RULE_vbool
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterVbool"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVbool" ):
                 listener.enterVbool(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitVbool"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVbool" ):
                 listener.exitVbool(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitVbool"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVbool" ):
                 return visitor.visitVbool(self)
             else:
                 return visitor.visitChildren(self)
@@ -384,11 +385,11 @@ class SCCPParser ( Parser ):
 
     class BodyContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(SCCPParser.BodyContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
-        def line(self, i=None):
+        def line(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SCCPParser.LineContext)
             else:
@@ -398,16 +399,16 @@ class SCCPParser ( Parser ):
         def getRuleIndex(self):
             return SCCPParser.RULE_body
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterBody"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBody" ):
                 listener.enterBody(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitBody"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBody" ):
                 listener.exitBody(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitBody"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBody" ):
                 return visitor.visitBody(self)
             else:
                 return visitor.visitChildren(self)
@@ -448,8 +449,8 @@ class SCCPParser ( Parser ):
 
     class LineContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(SCCPParser.LineContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def proc(self):
@@ -459,16 +460,16 @@ class SCCPParser ( Parser ):
         def getRuleIndex(self):
             return SCCPParser.RULE_line
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterLine"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLine" ):
                 listener.enterLine(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitLine"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLine" ):
                 listener.exitLine(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitLine"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLine" ):
                 return visitor.visitLine(self)
             else:
                 return visitor.visitChildren(self)
@@ -496,8 +497,8 @@ class SCCPParser ( Parser ):
 
     class ProcContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(SCCPParser.ProcContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -505,33 +506,33 @@ class SCCPParser ( Parser ):
             return SCCPParser.RULE_proc
 
      
-        def copyFrom(self, ctx):
-            super(SCCPParser.ProcContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
     class ParallelContext(ProcContext):
 
-        def __init__(self, parser, ctx): # actually a SCCPParser.ProcContext)
-            super(SCCPParser.ParallelContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a SCCPParser.ProcContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def proc(self, i=None):
+        def proc(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SCCPParser.ProcContext)
             else:
                 return self.getTypedRuleContext(SCCPParser.ProcContext,i)
 
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterParallel"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParallel" ):
                 listener.enterParallel(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitParallel"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParallel" ):
                 listener.exitParallel(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitParallel"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitParallel" ):
                 return visitor.visitParallel(self)
             else:
                 return visitor.visitChildren(self)
@@ -539,24 +540,24 @@ class SCCPParser ( Parser ):
 
     class TellContext(ProcContext):
 
-        def __init__(self, parser, ctx): # actually a SCCPParser.ProcContext)
-            super(SCCPParser.TellContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a SCCPParser.ProcContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def const(self):
             return self.getTypedRuleContext(SCCPParser.ConstContext,0)
 
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterTell"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterTell" ):
                 listener.enterTell(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitTell"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitTell" ):
                 listener.exitTell(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitTell"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitTell" ):
                 return visitor.visitTell(self)
             else:
                 return visitor.visitChildren(self)
@@ -564,8 +565,8 @@ class SCCPParser ( Parser ):
 
     class ProclocContext(ProcContext):
 
-        def __init__(self, parser, ctx): # actually a SCCPParser.ProcContext)
-            super(SCCPParser.ProclocContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a SCCPParser.ProcContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def proc(self):
@@ -574,16 +575,16 @@ class SCCPParser ( Parser ):
         def INT(self):
             return self.getToken(SCCPParser.INT, 0)
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterProcloc"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterProcloc" ):
                 listener.enterProcloc(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitProcloc"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitProcloc" ):
                 listener.exitProcloc(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitProcloc"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitProcloc" ):
                 return visitor.visitProcloc(self)
             else:
                 return visitor.visitChildren(self)
@@ -591,8 +592,8 @@ class SCCPParser ( Parser ):
 
     class AskContext(ProcContext):
 
-        def __init__(self, parser, ctx): # actually a SCCPParser.ProcContext)
-            super(SCCPParser.AskContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a SCCPParser.ProcContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def const(self):
@@ -605,23 +606,23 @@ class SCCPParser ( Parser ):
             return self.getTypedRuleContext(SCCPParser.LocContext,0)
 
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterAsk"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAsk" ):
                 listener.enterAsk(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitAsk"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAsk" ):
                 listener.exitAsk(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitAsk"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAsk" ):
                 return visitor.visitAsk(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
-    def proc(self, _p=0):
+    def proc(self, _p:int=0):
         _parentctx = self._ctx
         _parentState = self.state
         localctx = SCCPParser.ProcContext(self, self._ctx, _parentState)
@@ -631,7 +632,7 @@ class SCCPParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 82
+            self.state = 87
             token = self._input.LA(1)
             if token in [SCCPParser.T__6]:
                 localctx = SCCPParser.TellContext(self, localctx)
@@ -668,29 +669,44 @@ class SCCPParser ( Parser ):
                 self.const(0)
                 self.state = 74
                 self.match(SCCPParser.T__12)
-                self.state = 75
-                self.proc(3)
+                self.state = 80
+                token = self._input.LA(1)
+                if token in [SCCPParser.T__7]:
+                    self.state = 75
+                    self.match(SCCPParser.T__7)
+                    self.state = 76
+                    self.proc(0)
+                    self.state = 77
+                    self.match(SCCPParser.T__8)
+
+                elif token in [SCCPParser.T__6, SCCPParser.T__9, SCCPParser.T__14]:
+                    self.state = 79
+                    self.proc(0)
+
+                else:
+                    raise NoViableAltException(self)
+
 
             elif token in [SCCPParser.T__14]:
                 localctx = SCCPParser.ProclocContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 77
+                self.state = 82
                 self.match(SCCPParser.T__14)
-                self.state = 78
+                self.state = 83
                 self.proc(0)
-                self.state = 79
+                self.state = 84
                 self.match(SCCPParser.T__15)
-                self.state = 80
+                self.state = 85
                 self.match(SCCPParser.INT)
 
             else:
                 raise NoViableAltException(self)
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 89
+            self.state = 94
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,8,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,9,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -698,17 +714,17 @@ class SCCPParser ( Parser ):
                     _prevctx = localctx
                     localctx = SCCPParser.ParallelContext(self, SCCPParser.ProcContext(self, _parentctx, _parentState))
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_proc)
-                    self.state = 84
+                    self.state = 89
                     if not self.precpred(self._ctx, 2):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                    self.state = 85
+                    self.state = 90
                     self.match(SCCPParser.T__13)
-                    self.state = 86
+                    self.state = 91
                     self.proc(3) 
-                self.state = 91
+                self.state = 96
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,8,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,9,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -720,8 +736,8 @@ class SCCPParser ( Parser ):
 
     class ConstContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(SCCPParser.ConstContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -729,29 +745,29 @@ class SCCPParser ( Parser ):
             return SCCPParser.RULE_const
 
      
-        def copyFrom(self, ctx):
-            super(SCCPParser.ConstContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
     class BoolContext(ConstContext):
 
-        def __init__(self, parser, ctx): # actually a SCCPParser.ConstContext)
-            super(SCCPParser.BoolContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a SCCPParser.ConstContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def BOOL(self):
             return self.getToken(SCCPParser.BOOL, 0)
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterBool"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBool" ):
                 listener.enterBool(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitBool"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBool" ):
                 listener.exitBool(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitBool"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBool" ):
                 return visitor.visitBool(self)
             else:
                 return visitor.visitChildren(self)
@@ -759,27 +775,27 @@ class SCCPParser ( Parser ):
 
     class AndContext(ConstContext):
 
-        def __init__(self, parser, ctx): # actually a SCCPParser.ConstContext)
-            super(SCCPParser.AndContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a SCCPParser.ConstContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def const(self, i=None):
+        def const(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SCCPParser.ConstContext)
             else:
                 return self.getTypedRuleContext(SCCPParser.ConstContext,i)
 
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterAnd"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAnd" ):
                 listener.enterAnd(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitAnd"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAnd" ):
                 listener.exitAnd(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitAnd"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAnd" ):
                 return visitor.visitAnd(self)
             else:
                 return visitor.visitChildren(self)
@@ -787,24 +803,24 @@ class SCCPParser ( Parser ):
 
     class CexprContext(ConstContext):
 
-        def __init__(self, parser, ctx): # actually a SCCPParser.ConstContext)
-            super(SCCPParser.CexprContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a SCCPParser.ConstContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def expr(self):
             return self.getTypedRuleContext(SCCPParser.ExprContext,0)
 
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterCexpr"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCexpr" ):
                 listener.enterCexpr(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitCexpr"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCexpr" ):
                 listener.exitCexpr(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitCexpr"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitCexpr" ):
                 return visitor.visitCexpr(self)
             else:
                 return visitor.visitChildren(self)
@@ -812,30 +828,30 @@ class SCCPParser ( Parser ):
 
     class IdContext(ConstContext):
 
-        def __init__(self, parser, ctx): # actually a SCCPParser.ConstContext)
-            super(SCCPParser.IdContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a SCCPParser.ConstContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def ID(self):
             return self.getToken(SCCPParser.ID, 0)
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterId"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterId" ):
                 listener.enterId(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitId"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitId" ):
                 listener.exitId(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitId"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitId" ):
                 return visitor.visitId(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
-    def const(self, _p=0):
+    def const(self, _p:int=0):
         _parentctx = self._ctx
         _parentState = self.state
         localctx = SCCPParser.ConstContext(self, self._ctx, _parentState)
@@ -844,15 +860,15 @@ class SCCPParser ( Parser ):
         self.enterRecursionRule(localctx, 14, self.RULE_const, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 96
+            self.state = 101
             self._errHandler.sync(self);
-            la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,10,self._ctx)
             if la_ == 1:
                 localctx = SCCPParser.BoolContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
 
-                self.state = 93
+                self.state = 98
                 self.match(SCCPParser.BOOL)
                 pass
 
@@ -860,7 +876,7 @@ class SCCPParser ( Parser ):
                 localctx = SCCPParser.IdContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 94
+                self.state = 99
                 self.match(SCCPParser.ID)
                 pass
 
@@ -868,15 +884,15 @@ class SCCPParser ( Parser ):
                 localctx = SCCPParser.CexprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 95
+                self.state = 100
                 self.expr()
                 pass
 
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 103
+            self.state = 108
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,10,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,11,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -884,17 +900,17 @@ class SCCPParser ( Parser ):
                     _prevctx = localctx
                     localctx = SCCPParser.AndContext(self, SCCPParser.ConstContext(self, _parentctx, _parentState))
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_const)
-                    self.state = 98
+                    self.state = 103
                     if not self.precpred(self._ctx, 1):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                    self.state = 99
+                    self.state = 104
                     self.match(SCCPParser.T__16)
-                    self.state = 100
+                    self.state = 105
                     self.const(2) 
-                self.state = 105
+                self.state = 110
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,10,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,11,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -906,11 +922,11 @@ class SCCPParser ( Parser ):
 
     class LocContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(SCCPParser.LocContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
-        def INT(self, i=None):
+        def INT(self, i:int=None):
             if i is None:
                 return self.getTokens(SCCPParser.INT)
             else:
@@ -919,16 +935,16 @@ class SCCPParser ( Parser ):
         def getRuleIndex(self):
             return SCCPParser.RULE_loc
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterLoc"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLoc" ):
                 listener.enterLoc(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitLoc"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLoc" ):
                 listener.exitLoc(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitLoc"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLoc" ):
                 return visitor.visitLoc(self)
             else:
                 return visitor.visitChildren(self)
@@ -943,17 +959,17 @@ class SCCPParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 106
-            self.match(SCCPParser.INT)
             self.state = 111
+            self.match(SCCPParser.INT)
+            self.state = 116
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==SCCPParser.T__5:
-                self.state = 107
+                self.state = 112
                 self.match(SCCPParser.T__5)
-                self.state = 108
-                self.match(SCCPParser.INT)
                 self.state = 113
+                self.match(SCCPParser.INT)
+                self.state = 118
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -967,11 +983,11 @@ class SCCPParser ( Parser ):
 
     class ExprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(SCCPParser.ExprContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
-        def ID(self, i=None):
+        def ID(self, i:int=None):
             if i is None:
                 return self.getTokens(SCCPParser.ID)
             else:
@@ -987,16 +1003,16 @@ class SCCPParser ( Parser ):
         def getRuleIndex(self):
             return SCCPParser.RULE_expr
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterExpr"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterExpr" ):
                 listener.enterExpr(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitExpr"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitExpr" ):
                 listener.exitExpr(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExpr"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr" ):
                 return visitor.visitExpr(self)
             else:
                 return visitor.visitChildren(self)
@@ -1011,11 +1027,11 @@ class SCCPParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 114
+            self.state = 119
             self.match(SCCPParser.ID)
-            self.state = 115
+            self.state = 120
             self.op()
-            self.state = 116
+            self.state = 121
             _la = self._input.LA(1)
             if not(_la==SCCPParser.INT or _la==SCCPParser.ID):
                 self._errHandler.recoverInline(self)
@@ -1031,24 +1047,24 @@ class SCCPParser ( Parser ):
 
     class OpContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(SCCPParser.OpContext, self).__init__(parent, invokingState)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
         def getRuleIndex(self):
             return SCCPParser.RULE_op
 
-        def enterRule(self, listener):
-            if hasattr(listener, "enterOp"):
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterOp" ):
                 listener.enterOp(self)
 
-        def exitRule(self, listener):
-            if hasattr(listener, "exitOp"):
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitOp" ):
                 listener.exitOp(self)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitOp"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitOp" ):
                 return visitor.visitOp(self)
             else:
                 return visitor.visitChildren(self)
@@ -1063,9 +1079,9 @@ class SCCPParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 118
+            self.state = 123
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SCCPParser.T__10) | (1 << SCCPParser.T__11) | (1 << SCCPParser.T__17) | (1 << SCCPParser.T__18) | (1 << SCCPParser.T__19))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SCCPParser.T__10) | (1 << SCCPParser.T__11) | (1 << SCCPParser.T__17) | (1 << SCCPParser.T__18) | (1 << SCCPParser.T__19) | (1 << SCCPParser.T__20))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self.consume()
@@ -1079,7 +1095,7 @@ class SCCPParser ( Parser ):
 
 
 
-    def sempred(self, localctx, ruleIndex, predIndex):
+    def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
         if self._predicates == None:
             self._predicates = dict()
         self._predicates[6] = self.proc_sempred
@@ -1090,12 +1106,12 @@ class SCCPParser ( Parser ):
         else:
             return pred(localctx, predIndex)
 
-    def proc_sempred(self, localctx, predIndex):
+    def proc_sempred(self, localctx:ProcContext, predIndex:int):
             if predIndex == 0:
                 return self.precpred(self._ctx, 2)
          
 
-    def const_sempred(self, localctx, predIndex):
+    def const_sempred(self, localctx:ConstContext, predIndex:int):
             if predIndex == 1:
                 return self.precpred(self._ctx, 1)
          

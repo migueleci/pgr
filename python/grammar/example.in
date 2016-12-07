@@ -1,3 +1,19 @@
+var B0 T1 T2 Bool
+var X C Y B Int
+begin
+[tell(B0)]_2 || ask X =/= 42 -> tell(T1) .
+ask B0 -> ([tell(X = 42)]_3 || [tell(X =/= 42)]_2) .
+ask X = 42 -> tell(T2) .
+end
+
+var B0 T1 T2 Bool
+var X C Y B Int
+begin
+[tell(B0)]_2 || ask X =/= 42 -> tell(T1) .
+ask B0 -> ([tell(X = 42)]_3 || [tell(X =/= 42)]_2) .
+ask X = 42 -> tell(T2) .
+end
+
 var B0 Bool
 var X C Y B Int
 begin
