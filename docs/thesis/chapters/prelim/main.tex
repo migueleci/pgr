@@ -1,272 +1,193 @@
 \chapter{Preliminares}
 \label{p.prelim}
 
-%Sección: Lógica de reescritura
-\section{Lógica de reescritura}
+%Secci\'on: L\'ogica de reescritura
+\section{L\'ogica de reescritura}
 \label{lr.prelim}
 
-Lógica de reescritura~\cite{Meseguer199273} es una lógica de cambios
-concurrentes. Las reglas de la lógica de reescritura son patrones
-generales para acciones básicas que pueden ocurrir concurrentemente con
-otras acciones en un sistema concurrente. Por lo tanto, la lógica de
+L\'ogica de reescritura~\cite{Meseguer199273} es una l\'ogica de cambios
+concurrentes. Las reglas de la l\'ogica de reescritura son patrones
+generales para acciones b\'asicas que pueden ocurrir concurrentemente con
+otras acciones en un sistema concurrente. Por lo tanto, la l\'ogica de
 reescritura permite razonar sobre cambios complejos en un sistema,
-teniendo en cuenta que los cambios corresponden a las acciones básicas
+teniendo en cuenta que los cambios corresponden a las acciones b\'asicas
 axiomatizadas por las reglas de reescritura.
 
 
- %Subsección:
- \subsection{Teoría ecuacional}
+ %Subsecci\'on:
+ \subsection{Teor\'ia ecuacional}
  \label{te.prelim}
 
  Una {\em signatura} ordanada por tipos $\Sigma$ es una tupla
  $\Sigma = (S, \leq, F)$ con un conjunto parcialmente ordenado de tipos
- $(S, \leq)$ y un conjunto de símbolos de función $F$. La relación
- binaria $\equiv_\leq$ denota la relación de equivalencia generada por
- $\leq$ sobre $S$ y su extensión a cadenas en $S^*$.
+ $(S, \leq)$ y un conjunto de s\'imbolos de funci\'on $F$. La relaci\'on
+ binaria $\equiv_\leq$ denota la relaci\'on de equivalencia generada por
+ $\leq$ sobre $S$ y su extensi\'on a cadenas en $S^*$.
 
- La colección de variables $X$ es una familia $S$-indexada
+ La colecci\'on de variables $X$ es una familia $S$-indexada
  $X = \{ X_s \}_{s \in S}$ de conjuntos de variables disyuntos
  con cada $X_s$ infinito contable. $T_\Sigma(X)_s$ es el
- {\em conjunto de términos de tipo s} y el {\em conjunto de términos simples de tipo s}
+ {\em conjunto de t\'erminos de tipo s} y el {\em conjunto de t\'erminos simples de tipo s}
  se denota por $T_{\Sigma, s}$. Las expresiones $\tcal_\Sigma(X)$
  y $\tcal_\Sigma$ denotan las correspondientes algebras de
- $\Sigma$-términos ordenadas por tipos.
+ $\Sigma$-t\'erminos ordenadas por tipos.
 
- Una {\em $\Sigma$-ecuación} es una pareja $t = u$ con
+ Una {\em $\Sigma$-ecuaci\'on} es una pareja $t = u$ con
  $t \in T_\Sigma(X)_{s_t}$, $u \in T_\Sigma(X)_{s_u}$ y
- $s_t \equiv_\leq s_u$. Una {\em $\Sigma$-ecuación condicional} es una
- ecuación condicional $t = u$ \tbf{if} $\gamma$ con $t = u$ una
- $\Sigma$-ecuación y $\gamma$ una conjunción finita de $\Sigma$-ecuaciones.
+ $s_t \equiv_\leq s_u$. Una {\em $\Sigma$-ecuaci\'on condicional} es una
+ ecuaci\'on condicional $t = u$ \tbf{if} $\gamma$ con $t = u$ una
+ $\Sigma$-ecuaci\'on y $\gamma$ una conjunci\'on finita de $\Sigma$-ecuaciones.
  Un {\em tipo al tope} en $\Sigma$ es un tipo $s \in S$ tal
  que si $s' \in S$ y $s \equiv_\leq s'$, entonces $s' \leq s$.
 
- Una {\em teoría ecuacional} es un par $(\Sigma, E)$, donde $\Sigma$ es
- una signatura y $E$ es una colección finita de ecuaciones, posiblemente
+ Una {\em teor\'ia ecuacional} es un par $(\Sigma, E)$, donde $\Sigma$ es
+ una signatura y $E$ es una colecci\'on finita de ecuaciones, posiblemente
  condicionales.
- Una teoría ecuacional $\ecal=(\Sigma, E)$ induce la relación de
+ Una teor\'ia ecuacional $\ecal=(\Sigma, E)$ induce la relaci\'on de
  congruencia $=_\ecal$ sobre $T_\Sigma(X)$ definida por $t =_\ecal u$, 
- con $t, u \in T_\Sigma(X)$, sí y sólo sí $\ecal \vdash t=u$ por las
- reglas de deducción para lógica ecuacional ordenada por tipos
- en~\cite{meseguer97}, sí y sólo sí, en~\cite{meseguer97} $t=u$ es válido
+ con $t, u \in T_\Sigma(X)$, s\'i y s\'olo s\'i $\ecal \vdash t=u$ por las
+ reglas de deducci\'on para l\'ogica ecuacional ordenada por tipos
+ en~\cite{meseguer97}, s\'i y s\'olo s\'i, en~\cite{meseguer97} $t=u$ es v\'alido
  en todos los modelos de $\ecal$.
 
  Las expresiones $\tcal_{\Sigma/E}(X)$ y $\tcal_{\Sigma/E}$ corresponden
  a las algebras de cocientes inducidas por $=_\ecal$ sobre las algebras de
- términos $\tcal_\Sigma(X)$ y $\tcal_\Sigma$.
+ t\'erminos $\tcal_\Sigma(X)$ y $\tcal_\Sigma$.
  El algebra $\tcal_{\Sigma/E}$ es llamado el {\em algebra inicial} de
  $(\Sigma, E)$.
  
- Las $\Sigma$-ecuaciones están divididas en un conjunto $A$ de axiomas
+ Las $\Sigma$-ecuaciones est\'an divididas en un conjunto $A$ de axiomas
  estructurales (tales como asociatividad, conmutatividad y/o identidad)
  y el conjunto $E$ de ecuaciones.
 
- %Subsección:
- \subsection{Teoría de reescritura}
+ %Subsecci\'on:
+ \subsection{Teor\'ia de reescritura}
  \label{tr.prelim}
  
- Una {\em teoría de reescritura} es una tupla $\rcal = (\Sigma, E, R)$
- con una teoría ecuacional $\ecal_\rcal = (\Sigma, E)$ y un conjunto
- finito de $\Sigma$-reglas $R$. Una {\em teoría de reescritura al tope}
- es una teoría de reescritura $\rcal = (\Sigma, E, R)$, tal que cada regla
+ Una {\em teor\'ia de reescritura} es una tupla $\rcal = (\Sigma, E, R)$
+ con una teor\'ia ecuacional $\ecal_\rcal = (\Sigma, E)$ y un conjunto
+ finito de $\Sigma$-reglas $R$. Una {\em teor\'ia de reescritura al tope}
+ es una teor\'ia de reescritura $\rcal = (\Sigma, E, R)$, tal que cada regla
  $t \rightarrow u$ \tbf{if} $\gamma \in R$ es tal que $l, r \in T_{\Sigma}(X)_s$
- para algún $s = \cuad{s}$ en $\Sigma$, $l \notin X$, y no hay operadores
+ para alg\'un $s = \cuad{s}$ en $\Sigma$, $l \notin X$, y no hay operadores
  en $\Sigma$ que tengan al tipo $s$ como argumento.
 
- Una teoría de reescritura $\rcal=(\Sigma, E, R)$ induce la relación de
+ Una teor\'ia de reescritura $\rcal=(\Sigma, E, R)$ induce la relaci\'on de
  reescritura $\f{\rcal}$ sobre $T_\Sigma(X)$ definida por $t\f{\rcal}u$, 
- con $t, u \in T_\Sigma(X)$, sí y sólo sí una demostración de reescritura
+ con $t, u \in T_\Sigma(X)$, s\'i y s\'olo s\'i una demostraci\'on de reescritura
  de un paso de $\rcal \vdash t \rightarrow u$ puede ser obtenida por las
- reglas de deducción para teorías de reescritura ordenadas por tipos
- en~\cite{bruni06}, sí sólo sí, en~\cite{bruni06} $t \rightarrow u$ es
- válido en todos los modelos de $\rcal$.
- La expresión $\tcal_\rcal = (\tcal_{\Sigma/E},\fa{\rcal}{*})$ denota el
+ reglas de deducci\'on para teor\'ias de reescritura ordenadas por tipos
+ en~\cite{bruni06}, s\'i s\'olo s\'i, en~\cite{bruni06} $t \rightarrow u$ es
+ v\'alido en todos los modelos de $\rcal$.
+ La expresi\'on $\tcal_\rcal = (\tcal_{\Sigma/E},\fa{\rcal}{*})$ denota el
  modelo de alcanzabilidad inicial de $\rcal = (\Sigma, E, R)$~\cite{bruni06}, donde $\fa{\rcal}{*}$ representa la clausura
 transitiva-reflexiva de $\f{\rcal}$.
- 
 
- 
-%Sección: Maude
+%Secci\'on: Maude
 \section{Maude}
 \label{m.prelim}
 
 Maude~\cite{maude-book} es un lenguaje declarativo. Un programa en Maude
-es una teoría lógica y un cálculo en Maude es una deducción lógica que
-utiliza los axiomas especificados en la teoría o el programa, según
-corresponde, bajo el sistema deductivo de la lógica de reescritura~\cite{Meseguer199273}.
+es una teor\'ia l\'ogica y un c\'alculo en Maude es una deducci\'on l\'ogica que
+utiliza los axiomas especificados en la teor\'ia o el programa, seg\'un
+corresponde, bajo el sistema deductivo de la l\'ogica de reescritura~\cite{Meseguer199273}.
 
-Maude cuenta con dos tipos de módulos: funcional y de sistema.
+Maude cuenta con dos tipos de m\'odulos: funcional y de sistema.
 
- %Subsección:
- \subsection{Módulos funcionales}
+ %Subsecci\'on:
+ \subsection{M\'odulos funcionales}
  \label{mf.prelim}
 
- Los módulos funcionales corresponden a teorías ecuacionales y definen
+ Los m\'odulos funcionales corresponden a teor\'ias ecuacionales y definen
  tipos de datos y operaciones sobre estos tipos de datos.
 
- Los módulos funcionales de Maude suponen la propiedad de que la
- ecuaciones son consideradas reglas de simplificación que se usan
- únicamanete de izquierda a derecha y su repetida aplicación reduce un
- término a su forma canónica, la cual no depende del orden en el que se
- usen las ecuaciones. Este tipo de simplificación canónica es posible si
- la teoría ecuacional asociada a un módulo funcional es
+ Los m\'odulos funcionales de Maude suponen la propiedad de que la
+ ecuaciones son consideradas reglas de simplificaci\'on que se usan
+ \'unicamanete de izquierda a derecha y su repetida aplicaci\'on reduce un
+ t\'ermino a su forma can\'onica, la cual no depende del orden en el que se
+ usen las ecuaciones. Este tipo de simplificaci\'on can\'onica es posible si
+ la teor\'ia ecuacional asociada a un m\'odulo funcional es
  Church-Rosser~\cite{DBLP:journals/jlp/DuranM12} y terminante~\cite{Lucas2009207}.
 
- Los módulos funcionales pueden contener: ecuaciones con o sin atributos,
+ Los m\'odulos funcionales pueden contener: ecuaciones con o sin atributos,
  pertenencias y operadores con sus respectivos atributos. Las ecuaciones
- y pertenencias pueden ser condicionales o incondicionales. Un módulo
- funcional se define con la palabra clave \cde{fmod}. Para más información
- sobre conceptos básicos y sintaxis de Maude para módulos funcionales se
+ y pertenencias pueden ser condicionales o incondicionales. Un m\'odulo
+ funcional se define con la palabra clave \cde{fmod}. Para m\'as informaci\'on
+ sobre conceptos b\'asicos y sintaxis de Maude para m\'odulos funcionales se
  refiere al lector a~\cite{maude-book}.
 
- %Subsección:
- \subsection{Módulos de sistema}
+ %Subsecci\'on:
+ \subsection{M\'odulos de sistema}
  \label{ms.prelim}
 
- Un módulo de sistema especifica una teoría de reescritura. Una teoría de
+ Un m\'odulo de sistema especifica una teor\'ia de reescritura. Una teor\'ia de
  reescritura contiene tipos de datos, clases de equivalencia de
  tipos de datos, operadores, y ecuaciones, pertenencias y reglas de
  reescritura, las cuales pueden ser condicionales. De lo anterior se
- puede afirmar que toda teoría de reescritura tiene una teoría ecuacional
- subyacente. Un módulo de sistema se declara con la palabra clave
- \cde{mod}. Para más información sobre conceptos básicos y sintaxis de
- Maude para módulos de sistema se refiere al lector a~\cite{maude-book}.
+ puede afirmar que toda teor\'ia de reescritura tiene una teor\'ia ecuacional
+ subyacente. Un m\'odulo de sistema se declara con la palabra clave
+ \cde{mod}. Para m\'as informaci\'on sobre conceptos b\'asicos y sintaxis de
+ Maude para m\'odulos de sistema se refiere al lector a~\cite{maude-book}.
 
  El conjunto de $\Sigma$-reglas $R$ es coherente con respecto a las
- ecuaciones $E$ módulo $A$, si Maude puede ejecutar un módulo de sistema
+ ecuaciones $E$ m\'odulo $A$, si Maude puede ejecutar un m\'odulo de sistema
  admisible~\cite{maude-book} usando la estrategia de primero simplificar
- un término $t$ a su forma $E/A$-canónica y luego usar una regla con $R$
- módulo $A$ para lograr el efecto de reescribir con $R$ módulo $E \cup A$.
+ un t\'ermino $t$ a su forma $E/A$-can\'onica y luego usar una regla con $R$
+ m\'odulo $A$ para lograr el efecto de reescribir con $R$ m\'odulo $E \cup A$.
 
-%Sección: LTL model-checking
+%Secci\'on: LTL model-checking
 \section{{\em LTL model-checking}}
 \label{ltl.prelim}
 
-Con {\em LTL model-checking} es posible demostrar propiedades de lógica
-lineal temporal para módulos de sistema que tienen una cantidad finita de
+Con {\em LTL model-checking} es posible demostrar propiedades de l\'ogica
+lineal temporal para m\'odulos de sistema que tienen una cantidad finita de
 estados alcanzables desde un estado unicial dado.
 
 Una estructura de Kripke~\cite{clarke-book} es un sistema (total) de
-transiciones sin etiquetar al cual se le agrega una colección de
+transiciones sin etiquetar al cual se le agrega una colecci\'on de
 predicados de estados unarios en su conjunto de estados.
-Suponiendo que dado un módulo de sistema \cde{M}, el cual especifica una
-teoría de reescritura $\rcal = (\Sigma,E,R)$, se tiene:
+Suponiendo que dado un m\'odulo de sistema \cde{M}, el cual especifica una
+teor\'ia de reescritura $\rcal = (\Sigma,E,R)$, se tiene:
 
 \begin{itemize}
    \item elegido un tipo $k = \cuad{s}$ en \cde{M} para los estados.
    
-   \item definido algún conjunto de predicados de estado $\Pi$ y su
-	semántica en el conjunto de ecuaciones $D$.
+   \item definido alg\'un conjunto de predicados de estado $\Pi$ y su
+	sem\'antica en el conjunto de ecuaciones $D$.
 \end{itemize}
 
 Se define la estructura de Kripke $\kcal(\rcal,k)_{\Pi}$ sobre el conjunto
-de predicados atómicos $AP_{\Pi}$. Dado un estado inicial $\rel{t}{k}$ y
+de predicados at\'omicos $AP_{\Pi}$. Dado un estado inicial $\rel{t}{k}$ y
 una formula LTL $\varphi \in LTL(AP)_\Pi$ se quiere obtener un
-procedimiento para decidir la relación
+procedimiento para decidir la relaci\'on
 
 $\kcal(\rcal,k)_{\Pi}, \cuad{t} \models \varphi$,
 
 \noindent que significa que desde el estado inicial $\cuad{t}$ se
 satisface $\varphi$ en la estructura de Kripke $\kcal(\rcal,k)_{\Pi}$.
-En general, esta relación es indecidible pero puede convertirse en
+En general, esta relaci\'on es indecidible pero puede convertirse en
 decidible si se cumplen las siguientes condiciones:
 
 \begin{enumerate}
    \item el conjunto de estados en $\rel{t}{k}$ que son alcanzables desde
 	$\cuad{t}$ es finito, y
 
-   \item la teoría de reescritura $\rcal = (\Sigma,E,R)$ especificada
-	por el módulo \cde{M} y las ecuaciones $D$, satisfacen que:
+   \item la teor\'ia de reescritura $\rcal = (\Sigma,E,R)$ especificada
+	por el m\'odulo \cde{M} y las ecuaciones $D$, satisfacen que:
 	\begin{itemize}
 	   \item $E$ y $E \cup D$ son (simples) Church-Rosser~\cite{DBLP:journals/jlp/DuranM12}
-		y terminante~\cite{Lucas2009207}, módulo algunos axiomas
+		y terminante~\cite{Lucas2009207}, m\'odulo algunos axiomas
 		de $A$, con $(\Sigma,E) \subseteq (\Sigma \cup \Pi, E \cup D)$
-		una extensión protegida, y
+		una extensi\'on protegida, y
 
-	   \item $R$ es (simple) coherente con relación a $E$, de nuevo,
-		módulo algunos axiomas de $A$.
+	   \item $R$ es (simple) coherente con relaci\'on a $E$, de nuevo,
+		m\'odulo algunos axiomas de $A$.
 	\end{itemize}
 \end{enumerate}
 
-Bajo estas suposiciones, los predicados de estados $\Pi$ y la relación de 
-transición $\fa{\rcal}{1}$, son calculables y, dada la suposición de
-alcanzabilidad, se puede resolver el problema de satisfacción usando un
+Bajo estas suposiciones, los predicados de estados $\Pi$ y la relaci\'on de 
+transici\'on $\fa{\rcal}{1}$, son calculables y, dada la suposici\'on de
+alcanzabilidad, se puede resolver el problema de satisfacci\'on usando un
 procedimiento de {\em model-checking}~\cite{clarke-book}.
 
-%% Sección: InvA: El analizador de invariantes de Maude. %%
-\section{$\inva$: El analizador de invariantes de Maude.}
-\label{inva.prelim}
-
-Dada una propiedad de estabilidad o invariancia simple $\varphi$, $\inva$
-genera obligaciones de demostraciones ecuacionales tales que, si estas se
-satisfacen, entonces $\tcal_{\rcal} \models \varphi$~\cite{thesis-rocha}.
-
-% Subsección: Comandos de InvA
-\subsection{Comandos de $\inva$}
-\label{ci.prelim}
-
-Los comandos de $\inva$~\cite{thesis-rocha} disponibles para el usuario son los siguientes:
-
-\begin{description}
- \item[\cde{(help .)}] muestra la lista de comandos disponibles en la
-  herramienta.
- \item[\cde{(analyze-stable <pred> in <module> <module> .)}] genera las
-  obligaciones de pruebas necesarias para demostrar las premisas de
-  inferencia {\sc St} con inferencia {\sc Nr1}, para los predicados y
-  módulos dados. Este comando intenta resolver todas las obligaciones de
-  demostraciones; las obligaciones que no se pueden resolver se muestran
-  al usuario.
- \item[\cde{(analyze-stable <pred> in <module> <module> assuming <pred>
-    .)}]  genera las obligaciones de pruebas para demostrar la tercera
-  premisa de inferencia {\sc Str2} con inferencia {\sc Nr2}, para el
-  predicado y módulos dados. El primer módulo especifica ecuacionalmente
-  los predicados de estados y el segundo la teoría de reescriturura
-  al tope. Este comando intenta resolver todas las obligaciones de
-  demostraciones; las obligaciones que no se pueden resolver se muestran
-  al usuario.
- \item[\cde{(analyze <pred> implies <pred> in <module> .)}]
-  genera las obligaciones de pruebas para demostrar la implicación
-  en el módulo dado, de acuerdo a la inferencia {\sc C$\imps$}. Este
-  comando intenta resolver todas las obligaciones de demostraciones; las
-  obligaciones que no se pueden resolver se muestran al usuario.
- \item[\cde{(show pos .)}] muestra únicamente la obligaciones de
-  demostraciones calculadas en el último comando \cde{analyze} que no
-  fue posible realizar.
- \item[\cde{(show-all pos .)}] muestra únicamente la obligaciones de
-  demostraciones calculadas en el último comando \cde{analyze}. 
-\end{description}
-
-% Subsección: Técnica de InvA
-\subsection{Técnica de $\inva$}
-\label{ti.prelim}
-
-Para una teoria de reescritura $\rcal$ al tope y el conjunto de
-predicados $\Pi$, la herramienta $\inva$ mecaniza las reglas de
-inferencia {\sc St}, {\sc Inv}, {\sc Str1}, {\sc Str2}, {\sc Nr1} y
-{\sc Nr2}~\cite{thesis-rocha}. Aplicando estas reglas según las
-especificaciones del usuario, $\inva$ utiliza procedimientos de
-razonamiento y reducción basados en reescritura, y procedimientos de
-decisión SMT (i.e., Satisfiability Modulo Theories) para descargar
-automáticamente tantas obligaciones de demostraciones ecuacionales como
-sea posible.
-
-Para una especificación ecuacional $\ecal = (\Sigma, E \cup A) $
-y una obligación de prueba condicional $\varphi$ de la forma
-\begin{align*}
-  \ceq{t}{u}{\cond},
-\end{align*}
-
-\noindent $\inva$ aplica una estrategia de demostración de búsqueda tal
-que si la ecuación condicional de arriba se satisface, entonces la
-estructura de Kripke~\cite{clarke-book} asociada al modelo de
-alcanzabilidad inicial satisface $\varphi$. De otra manera, si la
-demostración de búsqueda falla, se retorna al usuario la obligación de
-prueba $\varphi$ o una variante lógicamente equivalente a esta.
-
-En la demostración de búsqueda, $\inva$ primero intenta reducir expresiones Booleanas en $\varphi$. El objetivo de la transformación
-Booleana es obtener inductivamente, si es posible, una obligación de
-prueba más fuerte $\varphi'$, para la cual las técnicas deductivas
-automáticas tienen mayor posibilidad de éxito.
-
-Para más información se refiere al lector a~\cite{thesis-rocha}
-y~\cite{springerlink:10.1007/978-3-642-22944-2_22}.
 
