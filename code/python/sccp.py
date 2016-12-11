@@ -117,9 +117,9 @@ def cmpMaude():
         subprocess.check_output('python3 python/grammar/parser_sccp.py '+parserFileName+' > '+inFileName, shell=True)
         os = subprocess.check_output("uname -a", shell=True)
         if 'Darwin' in str(os):
-            subprocess.check_output("maude.darwin64 maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
+            subprocess.check_output("maude.darwin64 maude/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
         else:
-            subprocess.check_output("maude.linux64 maude_code/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
+            subprocess.check_output("maude.linux64 maude/sccp.maude < "+ inFileName +" > " + outFileName, shell=True)
         outFile = open(outFileName, 'r')
         ans = outFile.read()
         # editor.delete("1.0",END)

@@ -55,6 +55,7 @@ class RewriterVisitor(SCCPVisitor):
 		return '{0}'.format(data)
 
 	def visitLine(self, ctx):
+		# print('line')
 		data = self.visit(ctx.proc())
 		# print('[process, root, {0}]'.format(data))
 		return '[process, root, {0}]'.format(data)
