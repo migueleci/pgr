@@ -108,3 +108,33 @@
 {}
 
 \DefineVerbatimEnvironment{maude2}{Verbatim}{fontsize=\scriptsize}
+
+%%%%%%%
+
+\usepackage{proof} 
+\usepackage{myproof}
+\usepackage{mathtools}
+\usepackage{bm}
+
+\newcommand{\CS}{\textnormal{CS}}
+\newcommand{\SCS}{\textnormal{SCS}}
+\newcommand{\CCP}{\textnormal{CCP}}
+\newcommand{\SCCP}{\textnormal{SCCP}}
+
+\newcommand{\conf}[2]{\langle #1; #2\rangle}
+\newcommand{\redi}{\longrightarrow }
+
+\newcommand{\cleq}[2]{#1 \sqsubseteq #2}
+\newcommand{\K}[2]{\left[ #2 \right] _{#1}}	
+\DeclarePairedDelimiter{\sfunc}{\bm[}{\bm]}
+
+\newcommand{\tellp}[1]{\tell(#1)}
+\newcommand{\tell}{{\bf tell}}
+\newcommand{\askp}[2]{\ask \  #1 \  \rightarrow \ #2}
+\newcommand{\ask}{{\bf ask}}
+\newcommand{\Stop}{{\bf 0}}
+
+\newcommand{\rTell}{\rm R_{TELL}}
+\newcommand{\rAsk}{\rm R_{ASK}}
+\newcommand{\rPar}{\rm R_{PAR}}
+\newcommand{\rSp}{\rm R_{SP}}

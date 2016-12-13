@@ -95,9 +95,14 @@ Ahora se presenta la sintaxis para los procesos \textbf{sccp} y \textbf{eccp}.
 \begin{definition}{Sintaxis general.}
 Los t\'erminos de ambos lenguajes es presentada por la siguiente sintaxis:
 %\begin{equation} \label{e-sccp.eq1}
-%P,Q, \mathellipsis ::=\textbf{0} | \textbf{tell(c)} | \textbf{ask(c)} \rightarrow \textbf{P} | P\|Q | [P]_i
+%\[P,Q, \mathellipsis ::=\textbf{0} | \textbf{tell(c)} | \textbf{ask(c)} \rightarrow \textbf{P} | P\|Q | [P]_i\]
 %\end{equation}
-\[P,Q, \mathellipsis ::=\textbf{0} | \textbf{tell(c)} | \textbf{ask(c)} \rightarrow \textbf{P} | P\|Q | [P]_i\]
+\[
+\begin{array}{rl}
+ \ \ \ \  \ \ \ \ P,Q\ldots & \; ::= \;\Stop\mid \tell(c) \mid \ask(c)\rightarrow P \mid P
+\parallel Q  \mid \K i P 
+\end{array}
+\]
 \end{definition}
 
 Para \textbf{sccp} el sistema de restricci\'on es n-scs, y para \textbf{eccp} es n-ecs. A continuaci\'on se describe brevemente el significado de cada operador:
@@ -118,31 +123,45 @@ Para \textbf{sccp} el sistema de restricci\'on es n-scs, y para \textbf{eccp} es
 La semantica operacional estructurada (SOS) 
 La reducci\'on es hecha por medio de configuraciones de la forma $\langle P,d\rangle \rightarrow \langle P',d'\rangle$, donde $P,P'$ denotan procesos, y $c,c'$ denotan el almac\'en de los procesos. Las reglas comunes entre ambos lenguajes se expresan a continuaci\'on. El simbolo $\gamma$ representa un grupo de configuraciones.
 
-\begin{figure*}[pthb]
-  \centering
-  \begin{minipage}[c]{0.8\textwidth}%
-	\begin{center}
-  %  \input{images/sos.png}
-    \includegraphics[width=12cm]{images/sos.png}
-  \end{center}
-\end{minipage}
-  \caption{SOS para \textbf{sccp} y \textbf{eccp}}
-  \label{fig.sos}
-\end{figure*}
+\begin{figure}
+%\resizebox{.98\textwidth}{!}{
+$
+\begin{array}{c}
+\infer[\rTell]{\conf{\tellp{c}}{d}  \redi  \conf{\Stop}{d \sqcup c}}{
+}
+\qquad
+\infer[\rAsk]{\conf{\askp{c}{P}}{d} \redi
+\conf{P}{d}} {\cleq{c}{d}}
+\\\\
+
+\infer[\rPar]{\conf{P\parallel Q}{d} \redi
+\conf{P'\parallel Q}{d'}} {\conf{P}{d} \redi \conf{P'}{d'}}
+\qquad
+\infer[\rSp]{\conf{\K i P}{c} \redi
+\conf{\K i {P'}} {c\sqcup \sfunc{c'}_i}} {\conf{P}{c^i} \redi \conf{P'}{c'}}
+\end{array}
+$
+%}
+\caption{SOS para \textbf{sccp}.}
+\label{fig:opsem}
+\end{figure}
 
 Las reglas mostradas en la figura~\ref{fig.sos} confirman lo explicado hasta este punto del trabajo. Por ejemplo, en la regla \textbf{T} la restricci\'on $c$ se agrega al almac\'en y luego el proceso se reduce a \textbf{0}. En el caso de la regla \textbf{A}, si la guarda $c$ es implicaci\'on del almac\'en, entonces el proceso se reduce y se ejecuta $P$. \textbf{PL} muestra que se puede ejecutar $P$ o $Q$. Por ultimo, el proceso que es ejecutado dentro del espacio de un agente, la restricci\'on se agrega dentro del espacio de dicho agente. Estas reglas funcionan para las reducciones comunes en \textbf{sccp} y \textbf{eccp}. Sin embargo, en \textbf{eccp} hay una regla adicional la cual permite modelar el hecho de que la informaci\'on conocida por un agente $i$ se convierte en un hecho. Esta regla se define a continuaci\'on. 
 
-\begin{figure*}[pthb]
-  \centering
-  \begin{minipage}[c]{0.8\textwidth}%
-	\begin{center}
-  %  \input{images/sos.png}
-    \includegraphics[width=6cm]{images/eccp_sos.png}
-  \end{center}
-\end{minipage}
-%  \caption{SOS para \textbf{sccp} y \textbf{eccp}}
-  \label{fig2.sos}
-\end{figure*}
+
+\begin{figure}
+%\resizebox{.98\textwidth}{!}{
+$
+\begin{array}{c}
+\infer[\rSp]{\conf{\K i P}{c} \redi
+\conf{\K i {P'}} {c\sqcup \sfunc{c'}_i}} {\conf{P}{c^i} \redi \conf{P'}{c'}}
+\end{array}
+$
+%}
+\caption{SOS para \textbf{eccp}.}
+\label{fig:opsem1}
+\end{figure}
+
 
 Despu\'es de definir el lenguaje que se va a usar, se procede a definir la especificaci\'on formal para dicho lenguaje. 
 
