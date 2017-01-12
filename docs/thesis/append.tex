@@ -1,12 +1,164 @@
 \chapter{Especificaci\'on formal en Maude}
 \label{a.appendix}
 
-Este anexo incluye el m\'odulo funcional y de sistema: \cde{SCCP}.
+Este anexo incluye los m\'odulos funcionales \cde{SMT-UTIL}, \cde{AGENT-ID}, \cde{SCCP-SYNTAX} y \cde{SCCP-STATE} y el m\'odulos de sistema: \cde{SCCP}.
 
 % Secci\'on: SCCP
-\section{\cde{SCCP}}
+\section{SMT-UTIL}
+\label{smt.appendix}
+
+\begin{maude}
+load smt.maude
+
+fmod SMT-UTIL is
+  pr META-LEVEL .
+  inc INTEGER .
+  pr CONVERSION .
+  op check-sat : Boolean -> Bool .
+  op check-unsat : Boolean -> Bool .
+  eq check-sat(B:Boolean)
+   = metaCheck(['INTEGER], upTerm(B:Boolean)) .
+  eq check-unsat(B:Boolean)
+   = not(check-sat(B:Boolean)) .
+
+  --- some Boolean identities
+  eq B:Boolean and true
+   = B:Boolean .
+  eq B:Boolean and false
+   = false .
+  eq B:Boolean or true
+   = true .
+  eq B:Boolean or false
+   = false .
+  eq true and B:Boolean
+   = B:Boolean .
+  eq false and B:Boolean
+   = false .
+  eq true or B:Boolean
+   = true .
+  eq false or B:Boolean
+   = false .
+  eq not((true).Boolean)
+   = (false).Boolean .
+  eq not((false).Boolean)
+   = (true).Boolean .
+endfm
+\end{maude}
+
+% Secci\'on: SCCP
+\section{AGENT-ID}
+\label{aid.appendix}
+
+\begin{maude}
+fmod AGENT-ID is
+  sort Aid .
+  pr NAT .
+  subsort Nat < Aid .
+
+  op root : -> Aid .
+  op _._ : Aid Aid -> Aid [assoc left id: root] .
+endfm
+\end{maude}
+
+% Secci\'on: SCCP
+\section{SCCP-SYNTAX}
+\label{syntax.appendix}
+
+\begin{maude}
+fmod SCCP-SYNTAX is
+  pr INTEGER .
+  pr AGENT-ID .
+  sort SCCPCmd .
+
+  op 0 : -> SCCPCmd . 
+  op tell_ : Boolean -> SCCPCmd . 
+  op ask_->_ : Boolean SCCPCmd -> SCCPCmd .
+  op ask<_>_->_ : Aid Boolean SCCPCmd -> SCCPCmd .
+  op _||_ : SCCPCmd SCCPCmd -> SCCPCmd [assoc gather (e E) ] .
+  op <_>[_] : Aid SCCPCmd -> SCCPCmd .
+endfm
+\end{maude}
+
+% Secci\'on: SCCP
+\section{SCCP-STATE}
+\label{state.appendix}
+
+\begin{maude}
+fmod SCCP-STATE is
+  pr SCCP-SYNTAX .
+  pr SMT-UTIL .
+
+  sorts Cid Obj Cnf Sys .
+  subsorts Obj < Cnf .
+  ops store process : -> Cid .
+  op [_,_,_] : Cid Aid Boolean -> Obj [ctor] .
+  op [_,_,_] : Cid Aid SCCPCmd -> Obj [ctor] .
+  op mt : -> Cnf [ctor] .
+  op __ : Cnf Cnf -> Cnf [ctor assoc comm id: mt] .
+  op {_} : Cnf -> Sys [ctor] .
+
+  vars L L0    : Aid .
+  vars C C0    : Boolean .
+  vars X       : Cnf .
+
+  --- auxiliary operations
+  op exists-store? : Cnf Aid -> Bool .
+  eq exists-store?(mt, L)
+   = false .
+  eq exists-store?( [ process, L0, C0 ] X, L)
+   = exists-store?(X,L) .
+  eq exists-store?( [ store, L0, C0 ] X, L)
+   = (L0 == L) or-else exists-store?(X,L) .
+endfm
+\end{maude}
+
+% Secci\'on: SCCP
+\section{SCCP}
 \label{sccp.appendix}
 
 \begin{maude}
-... formal specification
+mod SCCP is
+  pr SCCP-STATE .
+
+  vars L L0 L1 : Aid .
+  vars B B0 B1 : Boolean .
+  vars C C0 C1 : SCCPCmd .
+  vars X : Cnf .
+  
+  --- non-observable concurrent transitions
+  eq [ process, L, 0 ]
+   = mt .
+  eq [ store, L, B0 ] [ store, L, B1 ]
+   = [ store, L, B0 and B1 ] .
+
+  --- observable concurrent transitions
+  rl [tell] :
+     { [ store, L, B] [process, L, tell B0 ] X }
+  => { [ process, L, 0 ] [ store, L, B and B0] X } .
+
+ crl [ask] :
+     { [ store, L, B ] [ process, L, ask B0  -> C0 ] X }
+  => { [ store, L, B ] [ process, L, C0 ] X }
+  if check-unsat(B and not(B0)) .
+
+ crl [ask-ext0] :
+     { [ store, L0 . L1, B ] [ process, L0, ask< L1 > B0  -> C0 ] X }
+  => { [ store, L0 . L1, B ] [ process, L0, C0 ] X }
+  if check-unsat(B and not(B0)) . 
+
+ crl [ext-ask1] :
+     { [ process, L0, ask< L1 > B0  -> C0 ] X }
+  => { [ process, L0, C0 ] X }
+  if exists-store?(X, L0 . L1) == false
+  /\ check-unsat(not(B0)) . 
+
+  rl [parallel] :
+     { [ process, L, C0 || C1 ] X }
+  => { [ process, L, 0 ] [ process, L, C0 ] [ process, L, C1 ] X } .
+
+  rl [space] :
+     { [ process, L0, < L1 >[ C0 ] ] X } 
+  => { [ process, L0, 0 ] [ process, L0 . L1, C0] [ store, L0 . L1, true ] X } .
+
+endm
 \end{maude}
