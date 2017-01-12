@@ -2,17 +2,21 @@
 %%% Cap\'itulo: SCCP %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{\SCCP}
-\label{cap3.sccp}      
+\label{chapter.sccp}      
 
 Concurrent Constraint Programming (\textbf{\CCP}) es un modelo computacional en el cual agentes (procesos, usuarios, etc) interact\'uan sobre un banco de informaci\'on compartido, el cual puede contener informaci\'on parcial. La notaci\'on cl\'asica de las operaciones \textit{read} and \textit{write} es reemplazada por la notaci\'on \textit{ask} and \textit{tell}. La operaci\'on \textit{ask} intenta inferir si es posible obtener informaci\'on de los procesos, mientras que la operaci\'on \textit{tell} agrega informaci\'on parcial al banco de los procesos.
 
 Las caracter\'isticas de \textbf{\CCP} lo hacen un formalismo declarativo en cual permite la implementaci\'on de diferentes sistemas reactivos. En este area \textbf{\CCP} se ha extendido para modelar diferentes tipos de concurrencia y abordar problemas que surgen en la modelaci\'on de sistemas reactivos, dichas extensiones incluyen, no-determinismo, movilidad y comportamiento sincronizado. La extension mas resiente agrega modalidades epist\'emica y espacial, que permiten modelar comportamiento distribuido, el cual no rea posible con las extensiones antes mencionadas.
 
-Sin embargo, esta extension requiere de algunas definiciones particulares sobre los conceptos usados en \textbf{\CCP}.
+Este cap\'itulo presenta algunas definiciones particulares requeridas para posteriormente definir las extensiones del modelo \textbf{\CCP}. 
+
+La Secci\'on~\ref{srs.sccp} presenta el Sistema de Restricciones Simples. Las secciones~\ref{ser.sccp} y~\ref{sepr.sccp} presentan el sistema espacial y epist\'emico de restricciones, respectivamente, y sus propiedades. La secci\'on~\ref{ecp.sccp} presentan \SCCP y \ECCP, dos variaciones del modelo \CCP. Finalmente, la Secci\'on~\ref{soe.sccp} presenta la sem\'antica operacional estructurada para espacios y conocimiento en procesos.
+
+%una especificaci\'on formal de ESI en la sin- taxis de Maude [3]. La especificaci\'on formal consta de un m\'odulo fun- cional que define la sintaxis y los tipos requeridos para especificar los estados del protocolo. Este m\'odulo incluye, entre otros, la definici\'on de procesos, identificadores, valores de memoria, etc. Las transiciones de ESI estan formalizadas a partir de reglas de reescritura que son parte de un m\'odulo de sistema.%Adicionalmente, este cap\'itulo presenta ejemplos de algunas simu- laciones del protocolo que usan la especificaci\'on formal y el comando search de Maude.
 
 % Secci\'on: Sistema de restricciones simple
 \section{Sistema de Restricciones Simple}
-\label{srs.cap3}
+\label{srs.sccp}
 
 El modelo \textbf{\CCP} es param\'etrico en un sistema de restricciones (\textit{CS}). Esto significa que los par\'ametros del proceso son restricciones que pertenecen a alguno de las teor\'ias de primer orden utilizadas en el sistema de restricciones. El \textit{CS} es la estructura que especifica las interdependencias de la informaci\'on usada en el banco compartido. 
 
@@ -25,7 +29,7 @@ Un sistema de restricciones es un ret\'iculo algebraico completo \[C = (Con, Con
 
 % Secci\'on: Sistema espacial de restricciones 
 \section{Sistema Espacial de Restricciones}
-\label{ser.cap3}
+\label{ser.sccp}
 
 Para \textbf{\SCCP} es necesario definir un sistema espacial de restricciones, el cual es una extensi\'on de la definici\'on de un sistema de restricciones. El objetivo es modelar un sistema distribuido de multiples agentes en el que cada agente tiene su propio espacio de computaci\'on. Esto se obtiene agregando la noci\'on de espacio para un agente, denotado por una funci\'on $\sfunc{c}_i$, que significa que una restricci\'on $c$ esta contenida en el espacio del agente $i$. Formalmente, un \textit{sistema espacial de restricciones de n agentes} se define como sigue:
 
@@ -51,7 +55,7 @@ Por ultimo, se debe introducir el concepto de \textit{informaci\'on compartida} 
 
 % Secci\'on: Sistema epist\'emico de restricciones 
 \section{Sistema Epist\'emico de Restricciones}
-\label{sepr.cap3}
+\label{sepr.sccp}
 
 Mientras que la informaci\'on en n-SCS representa lo que puede ser entendido como creencias, el objetivo de un sistema epist\'emico de restricciones es modelar conocimiento. Por lo tanto, cada informaci\'on $c$ es un hecho que un agente $i$ conoce. Este hecho es representado por la misma estructura de n-SCS, es decir, $\sfunc{c}_i$. Desde un punto de vista epist\'emico, el concepto de consistencia del espacio no se mantiene, puesto que es imposible para un agente tener conocimiento inconsistente. En otras palabras, cada pieza de conocimiento de un agente, debe ser cierta, y por esta raz\'on no aplica el concepto de consistencia del espacio.
 
@@ -74,7 +78,7 @@ Ahora se presentan dos variantes del modelo \textbf{\CCP}, llamados programaci\'
 
 % Subsecci\'on: Sintaxis de procesos
 \subsection{Sintaxis de procesos}
-\label{spr.cap3}
+\label{spr.sccp}
 
 Ahora se presenta la sintaxis para los procesos \textbf{\SCCP} y \textbf{\ECCP}.
 
@@ -102,7 +106,7 @@ Para \textbf{\SCCP} el sistema de restricci\'on es n-SCS, y para \textbf{\ECCP} 
 %%% Secci\'on: Sem\'antica operacional estructurada para espacios y conocimiento en procesos %%%
 
 \section{Sem\'antica operacional estructurada}
-\label{soe.esi}
+\label{soe.sccp}
 
 La semantica operacional estructurada (SOS) 
 La reducci\'on es hecha por medio de configuraciones de la forma $\langle P,d\rangle \rightarrow \langle P',d'\rangle$, donde $P,P'$ denotan procesos, y $c,c'$ denotan el banco de los procesos. Las reglas comunes entre ambos lenguajes se expresan a continuaci\'on. El simbolo $\gamma$ representa un grupo de configuraciones.
