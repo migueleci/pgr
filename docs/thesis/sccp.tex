@@ -4,21 +4,14 @@
 \chapter{\SCCP}
 \label{cap3.sccp}      
 
-... introducci\'on al capitulo
-
-%%% Secci\'on: Modalidades espaciales y epist\'emicas en sistemas de restricciones %%%
-
-\section{Modalidades espaciales y epist\'emicas en sistemas de restricciones}
-\label{mod.cap3}
-
-Concurrent constraint programming (\textbf{\CCP}) es un modelo computacional en el cual agentes (procesos, usuarios, etc) interact\'uan sobre un banco de informaci\'on compartido, el cual puede contener informaci\'on parcial. La notaci\'on cl\'asica de las operaciones \textit{read} and \textit{write} es reemplazada por la notaci\'on \textit{ask} and \textit{tell}. La operaci\'on \textit{ask} intenta inferir si es posible obtener informaci\'on de los procesos, mientras que la operaci\'on \textit{tell} agrega informaci\'on parcial al banco de los procesos.
+Concurrent Constraint Programming (\textbf{\CCP}) es un modelo computacional en el cual agentes (procesos, usuarios, etc) interact\'uan sobre un banco de informaci\'on compartido, el cual puede contener informaci\'on parcial. La notaci\'on cl\'asica de las operaciones \textit{read} and \textit{write} es reemplazada por la notaci\'on \textit{ask} and \textit{tell}. La operaci\'on \textit{ask} intenta inferir si es posible obtener informaci\'on de los procesos, mientras que la operaci\'on \textit{tell} agrega informaci\'on parcial al banco de los procesos.
 
 Las caracter\'isticas de \textbf{\CCP} lo hacen un formalismo declarativo en cual permite la implementaci\'on de diferentes sistemas reactivos. En este area \textbf{\CCP} se ha extendido para modelar diferentes tipos de concurrencia y abordar problemas que surgen en la modelaci\'on de sistemas reactivos, dichas extensiones incluyen, no-determinismo, movilidad y comportamiento sincronizado. La extension mas resiente agrega modalidades epist\'emica y espacial, que permiten modelar comportamiento distribuido, el cual no rea posible con las extensiones antes mencionadas.
 
 Sin embargo, esta extension requiere de algunas definiciones particulares sobre los conceptos usados en \textbf{\CCP}.
 
-% Subsecci\'on: Sistema de restricciones simple
-\subsection{Sistema de Restricciones Simple}
+% Secci\'on: Sistema de restricciones simple
+\section{Sistema de Restricciones Simple}
 \label{srs.cap3}
 
 El modelo \textbf{\CCP} es param\'etrico en un sistema de restricciones (\textit{CS}). Esto significa que los par\'ametros del proceso son restricciones que pertenecen a alguno de las teor\'ias de primer orden utilizadas en el sistema de restricciones. El \textit{CS} es la estructura que especifica las interdependencias de la informaci\'on usada en el banco compartido. 
@@ -30,48 +23,48 @@ De acuerdo con~\cite{DEBOER199537} las restricciones del sistema se pueden ver c
 Un sistema de restricciones es un ret\'iculo algebraico completo \[C = (Con, Con_0, \sqsubseteq, \sqcup, true, false)\] donde $Con$ es el conjunto de restricciones, $Con_0$ es el conjunto de elementos compactos de $Con$ y esta ordenado con respecto a $\sqsubseteq$, $\sqcup$ es la operaci\'on del l\'imite inferior definido en subconjuntos, y $true, false$ son son el menor y mayor elemento de $Con$.
 \end{definition}
 
-% Subsecci\'on: Sistema espacial de restricciones 
-\subsection{Sistema Espacial de Restricciones}
+% Secci\'on: Sistema espacial de restricciones 
+\section{Sistema Espacial de Restricciones}
 \label{ser.cap3}
 
-Para \textbf{\SCCP} es necesario definir un sistema espacial de restricciones, el cual es una extensi\'on de la definici\'on de un sistema de restricciones. El objetivo es modelar un sistema distribuido de multiples agentes en el que cada agente tiene su propio espacio de computaci\'on. Esto se obtiene agregando la noci\'on de espacio para un agente, denotado por una funci\'on $s_i(c)$, que significa que una restricci\'on $c$ esta contenida en el espacio del agente $i$. Formalmente, un \textit{sistema espacial de restricciones de n agentes} se define como sigue:
+Para \textbf{\SCCP} es necesario definir un sistema espacial de restricciones, el cual es una extensi\'on de la definici\'on de un sistema de restricciones. El objetivo es modelar un sistema distribuido de multiples agentes en el que cada agente tiene su propio espacio de computaci\'on. Esto se obtiene agregando la noci\'on de espacio para un agente, denotado por una funci\'on $\sfunc{c}_i$, que significa que una restricci\'on $c$ esta contenida en el espacio del agente $i$. Formalmente, un \textit{sistema espacial de restricciones de n agentes} se define como sigue:
 
 \theoremstyle{definition}
 \begin{definition}[Sistema espacial de restricciones de n agentes (n-SCS)]
-Un sistema espacial de restricciones de n agentes (n-SCS) es un sistema de restricciones \textbf{C} provisto con n mapas ($s_1, \mathellipsis,s_n$) sobre su conjunto de restricciones $Con$.  Cada mapa $s_i: Con \rightarrow Con$ debe satisfacer las siguientes propiedades: 
+Un sistema espacial de restricciones de n agentes (n-SCS) es un sistema de restricciones \textbf{C} provisto con n mapas ($\sfunc{\cdot}_1, \mathellipsis,\sfunc{\cdot}_n$) sobre su conjunto de restricciones $Con$.  Cada mapa $\sfunc{\cdot}_i: Con \rightarrow Con$ debe satisfacer las siguientes propiedades: 
 \begin{enumerate} 
-	\item [\it{S.1}] \ $s_i(true)=true$
-	\item [\it{S.2}] \ $s_i(c\sqcup d)=c\sqcup d$
-	\item [\it{S.3}] \ $c \sqsubseteq d \Rightarrow s_i(c) \sqsubseteq s_i(d)$
+	\item [\it{S.1}] \ $\sfunc{true}_i=true$
+	\item [\it{S.2}] \ $\sfunc{c\sqcup d}_i=c\sqcup d$
+	\item [\it{S.3}] \ $c \sqsubseteq d \Rightarrow \sfunc{c}_i \sqsubseteq \sfunc{d}_i$
 \end{enumerate}
 \end{definition}
 
-Esto muestra que cada $s_i$ es el espacio de funci\'on del agente $i$. Formalmente un c-scs puede ser denotado \[C = (Con, Con_0, \sqsubseteq, \sqcup, true, false, s_1, \mathellipsis, s_n).\] 
+Esto muestra que cada $s_i$ es el espacio de funci\'on del agente $i$. Formalmente un c-scs puede ser denotado \[C = (Con, Con_0, \sqsubseteq, \sqcup, true, false, \sfunc{\cdot}_1, \mathellipsis,\sfunc{\cdot}_n).\] 
 
 La ecuaci\'on S.1 expone que tener un banco local sin informaci\'on es igual a no tener informaci\'on globalmente.  La ecuaci\'on S.2 hace posible unir informaci\'on diferente que esta en el mismo espacio, finalmente la ecuaci\'on S.3 significa que si $c$ puede ser derivado de $d$, entonces cualquier agente puede derivar esto en su propio espacio.
 
 En un modelo n-SCS, nada previene que haya informaci\'on inconsistente entre agentes. Esto es conocido como \textit{confinamiento de inconsistencias}.
 
-Existe otra propiedad en los sistemas espaciales de restricciones llamada: \textit{preservaci\'on de diferencia}. Esta propiedad se refiere al hecho de que en algunos casos puede suceder $s_i(c)=s_i(d)$ con $c\neq d$. Esto puede ser interpretado como la imposibilidad del agente $i$ de distinguir entre $c$ y $d$. Sin embargo, en algunas aplicaciones esta propiedad puede ser necesaria.
+Existe otra propiedad en los sistemas espaciales de restricciones llamada: \textit{preservaci\'on de diferencia}. Esta propiedad se refiere al hecho de que en algunos casos puede suceder $\sfunc{c}_i=\sfunc{d}_i$ con $c\neq d$. Esto puede ser interpretado como la imposibilidad del agente $i$ de distinguir entre $c$ y $d$. Sin embargo, en algunas aplicaciones esta propiedad puede ser necesaria.
 
 Por ultimo, se debe introducir el concepto de \textit{informaci\'on compartida} e \textit{informaci\'on global}. Informalmente, \textit{informaci\'on compartida} sobre un grupo \textbf{G} se refiere a la informaci\'on que es compartida entre agentes de dicho grupo. Mientras que \textit{informaci\'on global} se refiere al hecho de que informaci\'on $c$ esta presente en cada espacio anidado.
 
-% Subsecci\'on: Sistema epist\'emico de restricciones 
-\subsection{Sistema Epist\'emico de Restricciones}
+% Secci\'on: Sistema epist\'emico de restricciones 
+\section{Sistema Epist\'emico de Restricciones}
 \label{sepr.cap3}
 
-Mientras que la informaci\'on en n-SCS representa lo que puede ser entendido como creencias, el objetivo de un sistema epist\'emico de restricciones es modelar conocimiento. Por lo tanto, cada informaci\'on $c$ es un hecho que un agente $i$ conoce. Este hecho es representado por la misma estructura de n-SCS, es decir, $s_i(c)$. Desde un punto de vista epist\'emico, el concepto de consistencia del espacio no se mantiene, puesto que es imposible para un agente tener conocimiento inconsistente. En otras palabras, cada pieza de conocimiento de un agente, debe ser cierta, y por esta raz\'on no aplica el concepto de consistencia del espacio.
+Mientras que la informaci\'on en n-SCS representa lo que puede ser entendido como creencias, el objetivo de un sistema epist\'emico de restricciones es modelar conocimiento. Por lo tanto, cada informaci\'on $c$ es un hecho que un agente $i$ conoce. Este hecho es representado por la misma estructura de n-SCS, es decir, $\sfunc{c}_i$. Desde un punto de vista epist\'emico, el concepto de consistencia del espacio no se mantiene, puesto que es imposible para un agente tener conocimiento inconsistente. En otras palabras, cada pieza de conocimiento de un agente, debe ser cierta, y por esta raz\'on no aplica el concepto de consistencia del espacio.
 
 \theoremstyle{definition}
 \begin{definition}[Sistema epist\'emico de restricciones de n agentes (n-ECS)]
-Un sistema epist\'emico de restricciones de n agentes (n-ECS) es un sistema n-SCS cuyas funciones de espacio $s_1, \mathellipsis, s_n$ tambi\'en son operadores de clausura, y ademas de las propiedades S.1, S.2 y S.3, satisfacen:
+Un sistema epist\'emico de restricciones de n agentes (n-ECS) es un sistema n-SCS cuyas funciones de espacio $\sfunc{\cdot}_1, \mathellipsis,\sfunc{\cdot}_n$ tambi\'en son operadores de clausura, y ademas de las propiedades S.1, S.2 y S.3, satisfacen:
 \begin{enumerate} 
-	\item [\it{S.4}] \ $c \sqsubseteq s_i(c)$
-	\item [\it{S.5}] \ $s_i(s_i(c))=s_i(c)$
+	\item [\it{S.4}] \ $c \sqsubseteq \sfunc{c}_i$
+	\item [\it{S.5}] \ $\sfunc{\sfunc{c}_i}_i=\sfunc{c}_i$
 \end{enumerate}
 \end{definition}
 
-La propiedad S.4 expone que si un agente conoce una pieza de informaci\'on, entonces esa informaci\'on debe ser cierta. Esto significa que $s_i(c)$ contiene por lo menos tanta informaci\'on como $c$. De otro lado, la segunda propiedad se refiere al hecho de que un agente es consiente de la informaci\'on que conoce. 
+La propiedad S.4 expone que si un agente conoce una pieza de informaci\'on, entonces esa informaci\'on debe ser cierta. Esto significa que $\sfunc{c}_i$ contiene por lo menos tanta informaci\'on como $c$. De otro lado, la segunda propiedad se refiere al hecho de que un agente es consiente de la informaci\'on que conoce. 
 
 %%% Secci\'on: Espacios y conocimiento en procesos %%%
 \section{Espacios y conocimiento en procesos}
@@ -86,7 +79,7 @@ Ahora se presentan dos variantes del modelo \textbf{\CCP}, llamados programaci\'
 Ahora se presenta la sintaxis para los procesos \textbf{\SCCP} y \textbf{\ECCP}.
 
 \theoremstyle{definition}
-\begin{definition}[Sintaxis general.]
+\begin{definition}[Sintaxis general]
 Los t\'erminos de ambos lenguajes es presentada por la siguiente sintaxis: \[P,Q\ldots \; ::= \;\Stop\mid \tell(c) \mid \ask(c)\rightarrow P \mid P \parallel Q  \mid \K i P.\]
 %\[
 %\begin{array}{rl}
@@ -137,15 +130,14 @@ $
 \label{fig:opsem}
 \end{figure}
 
-Las reglas mostradas en la figura~\ref{fig:opsem} confirman lo explicado hasta este punto del trabajo. Por ejemplo, en la regla \textbf{T} la restricci\'on $c$ se agrega al banco y luego el proceso se reduce a \textbf{0}. En el caso de la regla \textbf{A}, si la guarda $c$ es implicaci\'on del banco, entonces el proceso se reduce y se ejecuta $P$. \textbf{PL} muestra que se puede ejecutar $P$ o $Q$. Por ultimo, el proceso que es ejecutado dentro del espacio de un agente, la restricci\'on se agrega dentro del espacio de dicho agente. Estas reglas funcionan para las reducciones comunes en \textbf{\SCCP} y \textbf{\ECCP}. Sin embargo, en \textbf{\ECCP} hay una regla adicional la cual permite modelar el hecho de que la informaci\'on conocida por un agente $i$ se convierte en un hecho. Esta regla se define a continuaci\'on. 
-
+Las reglas mostradas en la figura~\ref{fig:opsem} confirman lo explicado hasta este punto del trabajo. Por ejemplo, en la regla $\rTell$ la restricci\'on $c$ se agrega al banco y luego el proceso se reduce a \textbf{0}. En el caso de la regla $\rAsk$, si la guarda $c$ es implicaci\'on del banco, entonces el proceso se reduce y se ejecuta $P$. $\rPar$ muestra que se puede ejecutar $P$ o $Q$. Por ultimo, el proceso que es ejecutado dentro del espacio de un agente, la restricci\'on se agrega dentro del espacio de dicho agente. Estas reglas funcionan para las reducciones comunes en \textbf{\SCCP} y \textbf{\ECCP}. Sin embargo, en \textbf{\ECCP} hay una regla adicional la cual permite modelar el hecho de que la informaci\'on conocida por un agente $i$ se convierte en un hecho. Esta regla se define a continuaci\'on. 
 
 \begin{figure}
 %\resizebox{.98\textwidth}{!}{
 $
 \begin{array}{c}
 \infer[\rSp]{\conf{\K i P}{c} \redi
-\conf{\K i {P'}} {c\sqcup \sfunc{c'}_i}} {\conf{P}{c^i} \redi \conf{P'}{c'}}
+\conf{\K i {P'} \parallel P'} {c}} {\conf{P}{c} \redi \conf{P'}{c'}}
 \end{array}
 $
 %}
@@ -153,18 +145,4 @@ $
 \label{fig:opsem1}
 \end{figure}
 
-
 Despu\'es de definir el lenguaje que se va a usar, se procede a definir la especificaci\'on formal para dicho lenguaje. 
-
-
-
-
-
-
-
-
-
-
-
-
-
