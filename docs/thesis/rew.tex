@@ -4,7 +4,7 @@
 \chapter{Una teor\'ia de reescritura para SCCP (R)}
 \label{chapter.rew}
 
-Este cap\'itulo presenta una especificaci\'on formal del modelo \SCCP en la sintaxis de Maude~\cite{maude-book}. La especificaci\'on formal consta de un m\'odulo funcional que define el identificador de un agente; un m\'odulo funcional que define la sintaxis y los tipos requeridos para especificar los diferentes tipos de comandos disponibles en el modelo; y un m\'odulo funcional que define la sintaxis y los tipos requeridos para especificar los estados del modelo. Este m\'odulo incluye, entre otros, la definici\'on de un agente y una operaci\'on. La transferencia de informaci\'on en \SCCP esta formalizada a partir de de reglas de reescritura que son parte de un m\'odulo de sistema.
+Este cap\'itulo presenta una especificaci\'on formal del modelo \SCCP en la sintaxis de Maude~\cite{maude-book}. La especificaci\'on formal consta de un m\'odulo funcional que define el identificador de un agente; un m\'odulo funcional que define la sintaxis y los tipos requeridos para especificar los diferentes tipos de comandos u operadores disponibles en el modelo; y un m\'odulo funcional que define la sintaxis y los tipos requeridos para especificar los estados del modelo. Este m\'odulo incluye, entre otros, la definici\'on de un agente y un proceso. La transferencia de informaci\'on en \SCCP esta formalizada a partir de de reglas de reescritura que son parte de un m\'odulo de sistema.
 
 Adicionalmente, este cap\'itulo presenta ejemplos de algunas simulaciones del modelo que usan la especificaci\'on formal y el comando \cde{rewrite} de Maude.
 
@@ -28,13 +28,12 @@ El identificador de un agente est\'a representado por el sort \cde{Aid} definido
 El identificador esta definido como una secuencia de n\'umeros naturales, representados por \cde{NAT}, concatenados con punto. La identidad izquierda de un identificador esta representada por \cde{root}, de forma que \cde{root.1} es equivalente a \cde{1}. Los n\'umeros de izquierda a derecha indican el espacio y subespacio al cual pertenece el agente, es decir, el identificador \cde{4.2.1} indica que el agente pertenece al espacio \cde{4}, dentro de este al subespacio \cde{2}. 
 
 %% Secci\'on:  %%
-\section{Modelamiento formal de los comandos}
+\section{Modelamiento formal de los operadores}
 \label{syntax.rew}
 
+Los operadores descritos en~\ref{fig:opsem} est\'an representados por el sort \cde{SCCPCmd} en el modulo funcional \cde{SCCP-SYNTAX} tal como se muestra a continuaci\'on:
+
 \begin{maude}
-fmod SCCP-SYNTAX is
-  pr INTEGER .
-  pr AGENT-ID .
   sort SCCPCmd .
 
   op 0 : -> SCCPCmd . 
@@ -43,8 +42,9 @@ fmod SCCP-SYNTAX is
   op ask<_>_->_ : Aid Boolean SCCPCmd -> SCCPCmd .
   op _||_ : SCCPCmd SCCPCmd -> SCCPCmd [assoc gather (e E) ] .
   op <_>[_] : Aid SCCPCmd -> SCCPCmd .
-endfm
 \end{maude}
+
+
 
 %% Secci\'on:  %%
 \section{Modelamiento formal de agentes y procesos}
