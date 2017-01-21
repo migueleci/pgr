@@ -21,7 +21,7 @@ El modelo \textbf{\CCP} es param\'etrico en un sistema de restricciones (del ing
 De acuerdo con~\cite{DEBOER199537} las restricciones del sistema se pueden ver como un ret\'iculo algebraico completo. Este ret\'iculo es provisto de un orden parcial $\sqsubseteq$. Los detalles de un \textit{CS} se introducen en la Definici\'on~\ref{def:CS}.
 
 \begin{definition}\label{def:CS}
-Un \textit{sistema de restricciones} es un ret\'iculo algebraico completo \[C = (Con, Con_0, \sqsubseteq, \sqcup, \textit{true}, \textit{false})\] donde $Con$ es el conjunto de restricciones, $Con_0$ es el conjunto de elementos compactos de $Con$ y est\'a ordenado con respecto a $\sqsubseteq$, $\sqcup$ es la operaci\'on del l\'imite inferior definido en subconjuntos, y $true y false$ son los elementos m\'inimo y m\'aximo de $Con$, respectivamente.
+Un \textit{sistema de restricciones} es un ret\'iculo algebraico completo \[C = (Con, Con_0, \sqsubseteq, \sqcup, \textit{true}, \textit{false})\] donde $Con$ es el conjunto de restricciones, $Con_0$ es el conjunto de elementos compactos de $Con$ y est\'a ordenado con respecto a $\sqsubseteq$, $\sqcup$ es la operaci\'on del l\'imite inferior definido en subconjuntos, y $true$ y $false$ son los elementos m\'inimo y m\'aximo de $Con$, respectivamente. 
 \end{definition}
 
 % Secci\'on: Sistema espacial de restricciones 
@@ -154,5 +154,32 @@ Despu\'es de definir el lenguaje que se va a usar, se concluye este capitulo con
 \section{Ejemplo}
 \label{exam.sccp}
 
+Se puede considerar un modelo \SCCP y \ECCP como un \'arbol. La ra\'iz del \'arbol corresponde al espacio o agente m\'as exterior, denominado como el \textit{super agente}. Cada nodo del \'arbol corresponde a la informaci\'on contenida en el espacio de cada agente. Las aristas definen la jerarqu\'ia de los agentes. 
 
+La Figura~\ref{fig:sccptree} corresponde al estado inicial del SCS \[ d \defsymbol (V>10) \sqcup \sfunc{W=3 \sqcup\sfunc{X=17}_3}_1 \sqcup \sfunc{Y>4 \sqcup\sfunc{Z=20}_1}_2. \]
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=3in]{SCCP.png} 
+   \caption{Jerarqu\'ia de agentes}
+   \label{fig:sccptree}
+\end{figure}
+
+Se puede utilizar un proceso de la forma $\sfunc{\tell(m)}_i$ para representar un mensaje $m$ para un agente $i$. De forma que, el proceso $\sfunc{\tell(T=51)}_1$ agregara esa restricci\'on al banco de informaci\'on del agente $1$. Un proceso de la forma $\sfunc{\ask Z>10 \rightarrow S>3}_2$ no puede evolucionar debido a que no es posible derivar $Z>10$ del banco de informaci\'on del agente $2$ (i.e. $Y<0$). Mientas que el proceso $\sfunc{\sfunc{\ask Z>10 \rightarrow S>3}_1}_2$ si puede evolucionar puesto que $Z>10 \sqsubseteq Z=20$. Un proceso de la forma $\sfunc{\sfunc{\ask Z>10 \rightarrow S>3}_1}_2 \| \sfunc{\tell(T=51)}_1$ ejecuta ambos procesos al mismo tiempo, de forma que el resultado e el descrito anteriormente. 
+
+Si se define 
+\\ $R \defsymbol \sfunc{ V = 42 }_3 \parallel T = 8 $, 
+\\ $P \defsymbol \askp{ Y > 0 } { Z > 10 }$,
+\\ $Q \defsymbol \askp{ T > 7 } { \sfunc{ S \neq 2 }_2 }$.
+
+Entonces, el proceso $S = \sfunc{R}_1 \parallel \sfunc{ P }_2 \parallel \sfunc{ Q }_1$ debe evolucionar tal como lo describe la Figura~\ref{fig:sccptree2}.
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=3.5in]{SCCP-1.png} 
+   \caption{Evoluci\'on del sistema}
+   \label{fig:sccptree2}
+\end{figure}
+
+En el capitulo~\ref{chapter.rew} se muestra esta derivaci\'on utilizando la especificaci\'on formal.
 
