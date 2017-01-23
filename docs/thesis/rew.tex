@@ -25,7 +25,14 @@ El identificador de un agente est\'a representado por el sort \cde{Aid} definido
   op _._ : Aid Aid -> Aid [assoc left id: root] .
 \end{maude}
 
-El identificador esta definido como una secuencia de n\'umeros naturales, representados por \cde{NAT}, concatenados con punto. La identidad izquierda de un identificador esta representada por \cde{root}, de forma que \cde{root.1} es equivalente a \cde{1}. Los n\'umeros de izquierda a derecha indican el espacio y subespacio al cual pertenece el agente, es decir, el identificador \cde{4.2.1} indica que el agente pertenece al espacio \cde{4}, dentro de este al subespacio \cde{2}. 
+El identificador esta definido como una secuencia de n\'umeros naturales, representados por \cde{NAT}, concatenados con punto. La identidad izquierda de un identificador esta representada por \cde{root}, de forma que \cde{root.1} es equivalente a \cde{1}. Los n\'umeros de izquierda a derecha indican el espacio y subespacio al cual pertenece el agente, es decir, el identificador \cde{4.2.1} significa que el agente pertenece al espacio \cde{4}, dentro de este al subespacio \cde{2}, tal como se indica en la Figura~\ref{fig:agentid}.
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=3in]{idagent.png} 
+   \caption{Identificador de un agente}
+   \label{fig:agentid}
+\end{figure}
 
 %% Secci\'on:  %%
 \section{Modelamiento formal de los operadores}
