@@ -51,10 +51,11 @@ Los operadores descritos en la Definici\'on~\ref{def:gensyn} est\'an representad
   op <_>[_] : Aid SCCPCmd -> SCCPCmd .
 \end{maude}
 
-El argumento del operador $\textbf{tell(c)}$ es la restricci\'on o informaci\'on que se va a adicionar al banco de un agente, representado por un elemento de tipo \cde{Boolean}. El operador $\textbf{ask(c)} \rightarrow \textbf{P}$ tiene como argumentos la condici\'on a ser evaluada dentro del banco de informaci\'on del agente y el proceso a llevarse a cabo. Cada uno de estos argumentos esta representado por elementos del tipo \cde{Boolean} y \cde{SCCPCmd}, respectivamente.
+El argumento del operador \cde{tell_} es la restricci\'on o informaci\'on que se va a adicionar al banco de un agente, representado por un elemento de tipo \cde{Boolean}. El operador \cde{ask_->_} tiene como argumentos la condici\'on a ser evaluada dentro del banco de informaci\'on del agente y el proceso a llevarse a cabo. Cada uno de estos argumentos esta representado por elementos del tipo \cde{Boolean} y \cde{SCCPCmd}, respectivamente.
 
-%El proceso $P\|Q$ es para la ejecuci\'on en paralelo de procesos.
-%El proceso $[P]_i$ ejecuta $P$ dentro del espacio de computaci\'on del agente $i$.
+El operador \cde{ask_->_} permite verificar la satisfacibilidad de la restricci\'on dentro del banco de informaci\'on de un agente, en este modelo se presenta una extensi\'on a este operador mediante la cual se puede verificar la satisfacibilidad de la restricci\'on en un agente de menor jerarqu\'ia (i.e. el agente con \cde{ID} 4 puede preguntar al agente con \cde{ID} 4.2 o 2.3.1). Este operador esta definido como \cde{ask<_>_->_} y adicionalmente tiene como operador el identificador del agente de menor jerarqu\'ia, representado por un elemento de tipo \cde{AGENT-ID}.
+
+El operador \cde{_||_} tiene como argumentos los procesos que se van a ejecutar en paralelo, representados por elementos de tipo \cde{AGENT-ID}. Finalmente, los argumentos del operador \cde{<_>[_]} son el identificador del agente y el proceso a ejecutar, representados por elementos del tipo \cde{AGENT-ID} y \cde{SCCPCmd}, respectivamente. 
 
 %% Secci\'on:  %%
 \section{Modelamiento formal de agentes y procesos}
