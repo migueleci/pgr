@@ -53,42 +53,33 @@ Los operadores descritos en la Definici\'on~\ref{def:gensyn} est\'an representad
 
 El argumento del operador \cde{tell_} es la restricci\'on o informaci\'on que se va a adicionar al banco de un agente, representado por un elemento de tipo \cde{Boolean}. El operador \cde{ask_->_} tiene como argumentos la condici\'on a ser evaluada dentro del banco de informaci\'on del agente y el proceso a llevarse a cabo. Cada uno de estos argumentos esta representado por elementos del tipo \cde{Boolean} y \cde{SCCPCmd}, respectivamente.
 
-El operador \cde{ask_->_} permite verificar la satisfacibilidad de la restricci\'on dentro del banco de informaci\'on de un agente, en este modelo se presenta una extensi\'on a este operador mediante la cual se puede verificar la satisfacibilidad de la restricci\'on en un agente de menor jerarqu\'ia (i.e. el agente con \cde{ID} 4 puede preguntar al agente con \cde{ID} 4.2 o 2.3.1). Este operador esta definido como \cde{ask<_>_->_} y adicionalmente tiene como operador el identificador del agente de menor jerarqu\'ia, representado por un elemento de tipo \cde{AGENT-ID}.
+El operador \cde{ask_->_} permite verificar la satisfacibilidad de la restricci\'on dentro del banco de informaci\'on de un agente, en este modelo se presenta una extensi\'on a este operador mediante la cual se puede verificar la satisfacibilidad de la restricci\'on en un agente de menor jerarqu\'ia (i.e. el agente con \cde{ID} 4 puede preguntar al agente con \cde{ID} 4.2 o 2.3.1). Este operador esta definido como \cde{ask<_>_->_} y adicionalmente tiene como operador el identificador del agente de menor jerarqu\'ia, representado por un elemento de tipo \cde{Aid}.
 
-El operador \cde{_||_} tiene como argumentos los procesos que se van a ejecutar en paralelo, representados por elementos de tipo \cde{AGENT-ID}. Finalmente, los argumentos del operador \cde{<_>[_]} son el identificador del agente y el proceso a ejecutar, representados por elementos del tipo \cde{AGENT-ID} y \cde{SCCPCmd}, respectivamente. 
+El operador \cde{_||_} tiene como argumentos los procesos que se van a ejecutar en paralelo, representados por elementos de tipo \cde{Aid}. Finalmente, los argumentos del operador \cde{<_>[_]} son el identificador del agente y el proceso a ejecutar, representados por elementos del tipo \cde{Aid} y \cde{SCCPCmd}, respectivamente. 
 
 %% Secci\'on:  %%
 \section{Modelamiento formal de agentes y procesos}
 \label{state.rew}
 
-\begin{maude}
-fmod SCCP-STATE is
-  pr SCCP-SYNTAX .
-  pr SMT-UTIL .
+Los agentes y procesos est\'an representados como objetos por el sort \cde{Obj} definido en el modulo funcional \cde{SCCP-STATE} de la siguiente manera:
 
+\begin{maude}
   sorts Cid Obj Cnf Sys .
   subsorts Obj < Cnf .
+  
   ops store process : -> Cid .
   op [_,_,_] : Cid Aid Boolean -> Obj [ctor] .
   op [_,_,_] : Cid Aid SCCPCmd -> Obj [ctor] .
   op mt : -> Cnf [ctor] .
   op __ : Cnf Cnf -> Cnf [ctor assoc comm id: mt] .
   op {_} : Cnf -> Sys [ctor] .
-
-  vars L L0    : Aid .
-  vars C C0    : Boolean .
-  vars X       : Cnf .
-
-  --- auxiliary operations
-  op exists-store? : Cnf Aid -> Bool .
-  eq exists-store?(mt, L)
-   = false .
-  eq exists-store?( [ process, L0, C0 ] X, L)
-   = exists-store?(X,L) .
-  eq exists-store?( [ store, L0, C0 ] X, L)
-   = (L0 == L) or-else exists-store?(X,L) .
-endfm
 \end{maude}
+
+El sort \cde{Cid} representa el identificador de clase, en este caso agentes y procesos designados como \cde{store} y \cde{process}, respectivamente. Un agente esta representado como objeto de la forma \cde{[_,_,_]} cuyos argumentos son el identificador de clase (i.e. \cde{store}), el identificador del agente y su banco de informaci\'on. Cada uno de estos argumentos est\'an representados por elementos del tipo \cde{Cid}, \cde{Aid} y \cde{Boolean}, respectivamente.
+
+Los argumentos de un proceso son el identificador de clase (i.e. \cde{process}), el identificador del agente y el proceso a ejecutar dentro del espacio de dicho agente. Estos argumentos est\'an representados por elementos del tipo \cde{Cid}, \cde{Aid} y \cde{SCCPCmd}, respectivamente.
+
+Los estados del sistema est\'an representados por el sort \cde{Sys} definido como una sopa de agentes y procesos, dicha sopa es conmutativa, asociativa y tiene un elemento identidad. En la sintaxis de Maude, estos atributos se agregan incluyendo las palabras clave \cde{assoc}, \cde{comm} y \cde{id} en la declaraci\'on de las operaciones. El elemento identidad es \cde{mt}.
 
 %% Secci\'on:  %%
 \section{Modelamiento formal de las transiciones}
