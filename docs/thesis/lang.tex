@@ -4,7 +4,7 @@
 \chapter{Lenguaje de programaci\'on}
 \label{cap6.sccp}
 
-... introducci\'on
+... introducci\'on 
 
 %% Secci\'on:  %%
 \section{secci\'on}
@@ -12,6 +12,23 @@
 
 ... secci\'on 1
 
-%\begin{grammar}
-%<system> ::= <variables>? <body> 
-%\end{grammar}
+\begin{flalign*}
+\nterm{system} & ::= \nterm{variables}? \nterm{body} \\
+\nterm{variables} & ::= `var' \nterm{ID}+ (`Int' | `Bool') \\
+\nterm{body} & ::= `begin' \nterm{processLine}+ `end' \\
+\nterm{processLine} & ::= \nterm{process} `.'  \\
+\nterm{process} & ::= `tell(' \ \nterm{constraint}  `)' \\
+	& \bor `ask' \ (`<' \ \nterm{location} `>')? \nterm{constraint} `->'  \nterm{process} \\
+	& \bor \nterm{process} \ `||' \ \nterm{process} \\
+	& \bor  `[' \ \nterm{process} \ `]\_' \ \nterm{integer} \\
+\nterm{constraint} & ::= \nterm{boolean} \\
+	& \bor \nterm{ID} \\
+	& \bor \nterm{expression} \\
+	& \bor \nterm{constraint} \ `and' \ \nterm{constraint} \\
+\nterm{location} & ::= \nterm{integer} (`.' \nterm{integer})* \\
+\nterm{expression} & ::= \nterm{ID} \nterm{operator} ( \nterm{ID} \ | \ \nterm{integer} ) \\
+\nterm{operator} & ::= `>' \ | \ `<' \ | \ `=' \ | \ `=/=' \ | \ `>=' \ | \ `<=' \\
+\nterm{boolean} & ::= `true' \ | \ `false' \\
+\nterm{integer} & ::= [0-9]+ \\
+\nterm{ID} & ::= [A-Z] [A-Z0-9]*
+\end{flalign*}
