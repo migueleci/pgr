@@ -191,11 +191,15 @@ alcanzabilidad, se puede resolver el problema de satisfacci\'on usando un
 procedimiento de {\em model-checking}~\cite{clarke-book}.
 
 %Secci\'on: Ret\'iculo Algebraico Completo
-\section{{\em Ret\'iculo Algebraico Completo}}
+\section{Ret\'iculo Algebraico Completo}
 \label{rac.prelim}
 
-Una relaci\'on binaria $\leq$ definida en un conjunto $A$ es un \textit{orden parcial} del 
-conjunto $A$ si se mantienen las condiciones \textit{C1}, \textit{C2} y \textit{C3}.
+Esta secci\'on presenta la definici\'on de un \textit{Ret\'iculo Algebraico Completo}, 
+para m\'as informaci\'on se refiere al lector a~\cite{burris1981course}. 
+
+Una relaci\'on binaria $\leq$ definida en un conjunto $A$ es un 
+\textit{orden parcial} del conjunto $A$ si se mantienen las 
+condiciones \textit{C1}, \textit{C2} y \textit{C3}.
 
 \begin{enumerate}  
 	\item [\it{C1}] \ Reflexividad. \ $a \leq a$
@@ -203,30 +207,36 @@ conjunto $A$ si se mantienen las condiciones \textit{C1}, \textit{C2} y \textit{
 	\item [\it{C3}] \ Transitividad. \ $a \leq b$ y $b \leq c$ implica $a \leq b$
 \end{enumerate}
 
-Un conjunto no vac\'io con orden parcial es llamado un \textit{conjunto parcialmente 
-ordenado}, o m\'as brevemente un \textit{poset} (del ingl\'es, \textit{partially ordered set}).
+Un conjunto no vac\'io con orden parcial es llamado un \textit{conjunto 
+parcialmente ordenado}, o m\'as brevemente un \textit{poset} 
+(del ingl\'es, \textit{partially ordered set}).
 
-Un conjunto parcialmente ordenado $L$ es un \textit{ret\'iculo} si y solo si para cada $a$, 
-$b$ en $L$ existen sup$\{a,b\}$ e inf$\{a,b\}$. Donde sup$\{a,b\}$ es el \textit{menor cota superior} o 
-\textit{supremo}, e inf$\{a,b\}$ es la \textit{mayor cota inferior} o \textit{\'infimo}.
+Un conjunto parcialmente ordenado $L$ es un \textit{ret\'iculo} si y 
+solo si para cada $a$, $b$ en $L$ existen sup$\{a,b\}$ e inf$\{a,b\}$. 
+Donde sup$\{a,b\}$ es el \textit{menor cota superior} o \textit{supremo}, 
+e inf$\{a,b\}$ es la \textit{mayor cota inferior} o \textit{\'infimo}.
 
-Un conjunto parcialmente ordenado $P$ es \textit{completo} si para cada subconjunto $A$ 
-de $P$ existen sup $A$ e inf $A$. Todos los conjuntos parcialmente ordenados completos son 
-ret\'iculos, y un ret\'iculo $L$ que es completo como conjunto parcialmente ordenado, es un 
-\textit{ret\'iculo completo}.
+Un conjunto parcialmente ordenado $P$ es \textit{completo} si para 
+cada subconjunto $A$ de $P$ existen sup $A$ e inf $A$. Todos los 
+conjuntos parcialmente ordenados completos son ret\'iculos, y un 
+ret\'iculo $L$ que es completo como conjunto parcialmente ordenado, 
+es un \textit{ret\'iculo completo}.
 
-Por ejemplo, si $L$ es un conjunto de proporciones, $\vee$ y $\wedge$ denotan 
-la disjunci\'on y la conjunci\'on, respectivamente (i.e. ``or'' y ``and''). Entonces las 
-identidades \textit{L1} a \textit{L4} son propiedades conocidasde la l\'ogica proposicional. 
+Por ejemplo, si $L$ es un conjunto de proporciones, $\vee$ y $\wedge$ 
+denotan la disjunci\'on y la conjunci\'on, respectivamente (i.e. ``or'' y ``and''). 
+Entonces las identidades \textit{L1} a \textit{L4} son propiedades 
+conocidasde la l\'ogica proposicional. 
 
-Un ejemplo de \textit{ret\'iculo completo} son los n\'umeros naturales, ordenados por divisibilidad. 
-El supremo esta dado por el m\'inimo com\'un multiplo y el \'infimo por el m\'aximo com\'un divisor. Para conjuntos 
+Un ejemplo de \textit{ret\'iculo completo} son los n\'umeros naturales, 
+ordenados por divisibilidad. El supremo esta dado por el m\'inimo 
+com\'un multiplo y el \'infimo por el m\'aximo com\'un divisor. Para conjuntos 
 infinitos el supremo e \'infimo son el $0$ y $1$, respectivamente. 
 
-Si se remueve el $0$ del conjunto anteriormente descrito, ya no es un \textit{ret\'iculo completo} puesto 
-que no tiene supremo para todos los subconjuntos. Aunque sigue siendo un \textit{ret\'iculo}.
+Si se remueve el $0$ del conjunto anteriormente descrito, ya no 
+es un \textit{ret\'iculo completo} puesto que no tiene supremo para 
+todos los subconjuntos. Aunque sigue siendo un \textit{ret\'iculo}.
 
-Para m\'as informaci\'on se refiere al lector a~\cite{burris1981course}.
+
 
 
 
