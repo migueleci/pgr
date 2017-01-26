@@ -3,13 +3,12 @@
 \chapter{Lenguaje de programaci\'on}
 \label{chapter.lang}
 
-Este cap\'itulo presenta una propuesta de un lenguaje de programaci\'on basado en el modelo \SCCP definido en el Cap\'itulo~\ref{chapter.sccp}. 
-%una especificación formal del modelo SCCPen la sintaxis de Maude [4]. La especificación formal consta de un módulo funcional que define el identificador de un agente; un módulo funcional que define la sintaxis y los tipos requeridos para especificar los dife- rentes tipos de comandos u operadores disponibles en el modelo; y un módulo funcional que define la sintaxis y los tipos requeridos para es- pecificar los estados del modelo. Este módulo incluye, entre otros, la definición de un agente y un proceso. La transferencia de información en SCCPesta formalizada a partir de de reglas de reescritura que son parte de un módulo de sistema.
+Este cap\'itulo presenta una propuesta de un lenguaje de programaci\'on basado en el modelo \SCCP definido en el Cap\'itulo~\ref{chapter.sccp}. La principal raz\'on para crear este lenguaje es permitir a los programadores tener una medio m\'as sencillo para modelar sistemas distribuidos de informaci\'on. 
 
-La Secci\'on~\ref{ebnf.lang} presenta la sintaxis del lenguaje de programaci\'on en la notaci\'on eBNF. La Secci\'on~\ref{.lang} muestra c\'omo el lenguaje esta relacionado con el modelo \SCCP descrito en el Cap\'itulo~\ref{chapter.sccp}. La Secci\'on~\ref{.lang} presenta una explicaci\'on de los nuevos elementos del lenguaje. Por \'ultimo, la Secci\'on~\ref{example.lang} contiene algunos ejemplos del funcionamiento del lenguaje de programaci\'on.
+La Secci\'on~\ref{ebnf.lang} presenta la sintaxis del lenguaje de programaci\'on en la notaci\'on EBNF. La Secci\'on~\ref{aa.lang} muestra c\'omo el lenguaje esta relacionado con el modelo \SCCP descrito en el Cap\'itulo~\ref{chapter.sccp}. La Secci\'on~\ref{ss.lang} presenta una explicaci\'on de los nuevos elementos del lenguaje. Por \'ultimo, la Secci\'on~\ref{example.lang} contiene algunos ejemplos del funcionamiento del lenguaje de programaci\'on.
 
 %% Secci\'on:  %%
-\section{eBNF del lenguaje}
+\section{EBNF del lenguaje}
 \label{ebnf.lang}
 
 EBNF (del ing\'es, Extended Backus-Naur Form) es un metalenguaje utilizado para definir formalmente la sintaxis de gram\'aticas libres de contexto, que utiliza expresiones regulares para permitir escribir especificaciones compactas. 
@@ -18,29 +17,45 @@ Una descripci\'on EBNF es una lista no ordenada de reglas EBNF. Cada una de las 
 
 Los nombres asignados a las reglas EBNF en el lado izquierdo pueden ser utilizados como parte de la definici\'on asociada a las reglas EBNF, inclusive en la misma regla, y siempre se encuentran delimitados por los caracteres `$\langle$' y `$\rangle$'. 
 
-Las reglas EBNF pueden incluir nueve caracteres con significado especial: $::=$, $|$, $+$, $*$, $[$, $]$, $($, $)$ y $;$. Los dem\'as caracteres ademas de los nombres y los listados anteriormente se definen por si mismos (v.gr. letras, d\'igitos, signos de puntuaci\'on). Cada regla EBNF debe finalizar con el car\'acter `$;$'.
+Las reglas EBNF pueden incluir diez caracteres con significado especial: `$::=$', `$|$', `$+$', `$*$', `$[$', `$]$', `$($', `$)$', `$?$' y `$;$'. Los dem\'as caracteres ademas de los nombres y los listados anteriormente se definen por si mismos (v.gr. letras, d\'igitos, signos de puntuaci\'on). A continuaci\'on se presenta una explicaci\'on de algunos de los caracteres especiales:
 
+\begin{itemize}
+\item Cada regla EBNF debe finalizar con el car\'acter `$;$'. 
+\item `$*$' es un operador unario posfijo, el cual indica que la expresi\'on aparece cero o m\'as veces. 
+\item `$+$' es un operador unario posfijo, el cual indica que la expresi\'on aparece una o m\'as veces.
+\item `$?$' es un operador unario posfijo, el cual indica que la expresi\'on aparece cero o una vez.
+\item Multiples opciones en la definici\'on de un regla EBNF deben estar separadas por el car\'acter `$|$'.
+\item Todas las expresiones delimitadas por comillas simples aparecen de la misma forma en el lenguaje de programaci\'on.
+\end{itemize}
+
+\begin{figure}
 
 \begin{flalign*}
 \nterm{system} & ::= \nterm{variables}? \nterm{body} \ ; \\
-\nterm{variables} & ::= `var' \nterm{ID}+ (`Int' | `Bool') \ ; \\
-\nterm{body} & ::= `begin' \nterm{processLine}+ `end' \ ; \\
-\nterm{processLine} & ::= \nterm{process} `.'  \ ; \\
-\nterm{process} & ::= `tell(' \ \nterm{constraint}  `)' \ ; \\
-	& \bor `ask' \ (`<' \ \nterm{location} `>')? \nterm{constraint} `->'  \nterm{process} \ ; \\
-	& \bor \nterm{process} \ `||' \ \nterm{process} \ ; \\
-	& \bor  `[' \ \nterm{process} \ `]\_' \ \nterm{integer} \ ; \\
+\nterm{variables} & ::= \textterm{var} \nterm{ID}+ \ (\textterm{Int} | \textterm{Bool}) \ ; \\
+\nterm{body} & ::= \textterm{begin} \nterm{processLine}+ \ \textterm{end} \ ; \\
+\nterm{processLine} & ::= \nterm{process} \textterm{.}  \ ; \\
+\nterm{process} & ::= \textterm{tell(} \ \nterm{constraint}  \textterm{)} \ ; \\
+	& \bor \textterm{ask} \ (\textterm{<} \ \nterm{location} \textterm{>})? \ \nterm{constraint} \textterm{->}  \nterm{process} \ ; \\
+	& \bor \nterm{process} \textterm{||}  \nterm{process} \ ; \\
+	& \bor  \textterm{[}  \nterm{process}  \textterm{]\_} \ \nterm{integer} \ ; \\
 \nterm{constraint} & ::= \nterm{boolean} \ ; \\
 	& \bor \nterm{ID} \ ; \\
 	& \bor \nterm{expression} \ ; \\
-	& \bor \nterm{constraint} \ `and' \ \nterm{constraint} \ ; \\
-\nterm{location} & ::= \nterm{integer} (`.' \nterm{integer})* \ ; \\
-\nterm{expression} & ::= \nterm{ID} \nterm{operator} ( \nterm{ID} \ | \ \nterm{integer} ) \ ; \\
-\nterm{operator} & ::= `>' \ | \ `<' \ | \ `=' \ | \ `=/=' \ | \ `>=' \ | \ `<=' \ ; \\
-\nterm{boolean} & ::= `true' \ | \ `false' \ ; \\
-\nterm{integer} & ::= [0-9]+ \ ; \\
-\nterm{ID} & ::= [A-Z] [A-Z0-9]* \ ; 
+	& \bor \nterm{constraint} \ \textterm{and} \ \nterm{constraint} \ ; \\
+\nterm{location} & ::= \nterm{integer} (\textterm{.} \nterm{integer})* \ ; \\
+\nterm{expression} & ::= \nterm{ID} \nterm{operator} ( \nterm{id} \ | \ \nterm{integer} ) \ ; \\
+\nterm{operator} & ::= \textterm{>} \ | \ \textterm{<} \ | \ \textterm{=} \ | \ \textterm{=/=} \ | \ \textterm{>=} \ | \ \textterm{<=} \ ; \\
+\nterm{boolean} & ::= \textterm{true} \ | \ \textterm{false} \ ; \\
+\nterm{integer} & ::= \textnormal{[0-9]}+ \ ; \\
+\nterm{id} & ::= \textnormal{[A-Z] [A-Z0-9]}* \ ;  
 \end{flalign*}
+
+\caption{EBNF del lenguaje de programaci\'on.}
+\label{fig:ebnf}
+\end{figure}
+
+En la Figura~\ref{fig:ebnf} se presenta la descripci\'on EBNF del lenguaje de programaci\'on propuesto. La explicaci\'on de cada una de las reglas EBNF se presenta en las secciones~\ref{aa.lang} y ~\ref{ss.lang}.
 
 %% Secci\'on:  %%
 \section{aa}
@@ -48,11 +63,21 @@ Las reglas EBNF pueden incluir nueve caracteres con significado especial: $::=$,
 
 explain how a subset of the language relates to the \SCCP definition of previous section
 
+\begin{itemize}
+\item \cde{system} esta definido
+\end{itemize}
+
+
 %% Secci\'on:  %%
 \section{ss}
 \label{ss.lang}
 
 explain the new constructs of the language
+
+\begin{itemize}
+\item \cde{system} esta definido
+\end{itemize}
+
 
 %% Secci\'on:  %%
 \section{Ejemplo}
