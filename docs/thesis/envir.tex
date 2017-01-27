@@ -1,13 +1,44 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Cap\'itulo: Ambiente para el lenguaje de programaci\'on %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% !TEX root = main.tex
+
 \chapter{Ambiente para el lenguaje de programaci\'on}
 \label{chapter.envir}
 
+
+En este cap\'itulo se preset
 ... introducci\'on
 
-%% Secci\'on:  %%
-\section{secci\'on}
-\label{s1.envir}
+La Secci\'on~\ref{parser.envir} presenta la descripci\'on del parser utilizado por la herramienta. La Secci\'on~\ref{implem.envir} presenta  
+La Secci\'on~\ref{gui.envir} presenta una introducci\'on a la interfaz gr\'afica y las funcionalidades de la herramienta. Finalmente, la Secci\'on~\ref{example.envir} presenta algunos ejemplos del pr\'acticos del uso de la herramienta.
 
-... secci\'on 1
+%% Secci\'on:  %%
+\section{Parser}
+\label{parser.envir}
+
+Cuando se interpreta un lenguaje, es de mucha utilidad usar un un \'arbol de sintaxis concreta (del ingl\'es, \textit{Concrete Syntax Tree}, abreviado CST), tradicionalmente denominados \textit{parse tree}, para representar la estructura sint\'actica del c\'odigo fuente de acuerdo con alguna gram\'atica libre de contexto. Este CST puede ser construido por un parser en el proceso de traducci\'on del codigo fuente y compilaci\'on. 
+
+Un \textit{parser} es un software que a partir de una entrada (i.e. c\'odigo fuente) produce una estructura de datos (i.e. CST o parse tree) basado en una representaci\'on estructural del lenguaje de programaci\'on utilizado para generar la entrada (i.e. EBNF), verificando durante el proceso que la sintaxis sea correcta. El parser es precedido por un analizador l\'exico o \textit{lexer}, el cual crea expresiones o \textit{tokens} a partir de una secuencia de caracteres. 
+
+Sin embrago, construir un parser desde cero es complicado e innecesario debido a que existen multiples herramientas que proveen la construcci\'on del CST de forma automatizada en diferentes lenguajes de programaci\'on, entre ellos Python (v.gr. ANTLR, PyPEG, Parsiomonious).
+
+La herramienta propuesta brinda al programador una interacci\'on sencilla a trav\'es del lenguaje de programaci\'on presentado en el Cap\'itulo~\ref{chapter.lang}, el cual es ejecutado en el fondo en el ambiente de Maude por medio de la especificaci\'on formal del Cap\'itulo~\ref{chapter.rew}, para lograrlo se requiere una traducci\'on por medio de un parser. Para este trabajo se escogio ANTLR~\cite{Parr:2013:DAR:2501720}, un generador parser para leer, procesar, ejecutar y traducir texto estructurado o archivos binarios.
+
+ANTLR genera un parser en Python a partir de la descripci\'on EBNF del lenguaje de programaci\'on, el parser puede construir el \textit{parser tree} de cualquier c\'odigo fuente escrito correctamente en el lenguaje de programaci\'on. Mediante un lexer que se  desarrollado espec\'ificamente para dicho lenguaje se genera el c\'odigo equivalente en Maude. 
+
+%% Secci\'on:  %%
+\section{Detalles de la implementaci\'on}
+\label{implem.envir}
+
+El
+... secci\'on 2
+
+%% Secci\'on:  %%
+\section{Interfaz gr\'afica}
+\label{gui.envir}
+
+... secci\'on 3
+
+%% Secci\'on:  %%
+\section{Ejemplo}
+\label{example.envir}
+
+Ejemplos
