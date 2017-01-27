@@ -3,9 +3,9 @@
 \chapter{Lenguaje de programaci\'on}
 \label{chapter.lang}
 
-Este cap\'itulo presenta una propuesta de un lenguaje de programaci\'on basado en el modelo \SCCP definido en el Cap\'itulo~\ref{chapter.sccp}. La principal raz\'on para crear este lenguaje es permitir a los programadores tener una medio m\'as sencillo para modelar sistemas distribuidos de informaci\'on. 
+Este cap\'itulo presenta una propuesta de un lenguaje de programaci\'on basado en el modelo \SCCP definido en el Cap\'itulo~\ref{chapter.sccp}. La principal raz\'on para crear este lenguaje es permitir a los programadores tener una medio m\'as sencillo para modelar sistemas distribuidos de informaci\'on.  
 
-La Secci\'on~\ref{ebnf.lang} presenta la sintaxis del lenguaje de programaci\'on en la notaci\'on EBNF. La Secci\'on~\ref{aa.lang} muestra c\'omo el lenguaje esta relacionado con el modelo \SCCP descrito en el Cap\'itulo~\ref{chapter.sccp}. La Secci\'on~\ref{ss.lang} presenta una explicaci\'on de los nuevos elementos del lenguaje. Por \'ultimo, la Secci\'on~\ref{example.lang} contiene algunos ejemplos del funcionamiento del lenguaje de programaci\'on.
+La Secci\'on~\ref{ebnf.lang} presenta la sintaxis del lenguaje de programaci\'on en la notaci\'on EBNF. La Secci\'on~\ref{sccp.lang} muestra c\'omo el lenguaje esta relacionado con el modelo \SCCP descrito en el Cap\'itulo~\ref{chapter.sccp}. La Secci\'on~\ref{new.lang} presenta una explicaci\'on de los nuevos elementos del lenguaje. Por \'ultimo, la Secci\'on~\ref{example.lang} contiene algunos ejemplos del funcionamiento del lenguaje de programaci\'on.
 
 %% Secci\'on:  %%
 \section{EBNF del lenguaje}
@@ -13,11 +13,11 @@ La Secci\'on~\ref{ebnf.lang} presenta la sintaxis del lenguaje de programaci\'on
 
 EBNF (del ing\'es, Extended Backus-Naur Form) es un metalenguaje utilizado para definir formalmente la sintaxis de gram\'aticas libres de contexto, que utiliza expresiones regulares para permitir escribir especificaciones compactas. 
 
-Una descripci\'on EBNF es una lista no ordenada de reglas EBNF. Cada una de las reglas EBNF esta compuesta de tres partes: el lado izquierdo, el lado derecho y el s\'imbolo `$::=$' separando los dos lados, este s\'imbolo debe ser leido como ``se define como''~\cite{ebnfdoc}. El lado izquierdo contiene una palabra escrita en min\'uscula, la cual indica el nombre de la regla EBNF. En el lado derecho se encuentra la definici\'on asociada al este nombre. 
+Una descripci\'on EBNF es una lista no ordenada de reglas EBNF. Cada una de las reglas EBNF esta compuesta de tres partes: el lado izquierdo, el lado derecho y el s\'imbolo `$::=$' separando los dos lados, este s\'imbolo debe ser leido como ``se define como''~\cite{ebnfdoc}. El lado izquierdo contiene una palabra escrita en min\'uscula y cursiva delimitada por los caracteres `$\langle$' y `$\rangle$', la cual indica el nombre de la regla EBNF. En el lado derecho se encuentra la definici\'on asociada al este nombre. 
 
-Los nombres asignados a las reglas EBNF en el lado izquierdo pueden ser utilizados como parte de la definici\'on asociada a las reglas EBNF, inclusive en la misma regla, y siempre se encuentran delimitados por los caracteres `$\langle$' y `$\rangle$'. 
+Los nombres asignados en el lado izquierdo de las reglas EBNF pueden ser utilizados como parte de la definici\'on asociada en el lado derecho de las reglas, inclusive dentro de la misma regla, es decir, que puede haber recursi\'on en la descripci\'on del lenguaje.
 
-Las reglas EBNF pueden incluir diez caracteres con significado especial: `$::=$', `$|$', `$+$', `$*$', `$[$', `$]$', `$($', `$)$', `$?$' y `$;$'. Los dem\'as caracteres ademas de los nombres y los listados anteriormente se definen por si mismos (v.gr. letras, d\'igitos, signos de puntuaci\'on). A continuaci\'on se presenta una explicaci\'on de algunos de los caracteres especiales:
+Las reglas EBNF pueden incluir diez caracteres con significado especial: `$::=$', `$|$', `$+$', `$*$', `$[$', `$]$', `$($', `$)$', `$?$' y `$;$'. Todos los dem\'as caracteres diferentes de los listados anteriormente y de los nombres de las reglas EBNF se definen por si mismos (v.gr. letras, d\'igitos, signos de puntuaci\'on). A continuaci\'on se presenta una explicaci\'on de algunos de los caracteres especiales:
 
 \begin{itemize}
 \item Cada regla EBNF debe finalizar con el car\'acter `$;$'. 
@@ -32,19 +32,19 @@ Las reglas EBNF pueden incluir diez caracteres con significado especial: `$::=$'
 
 \begin{flalign*}
 \nterm{system} & ::= \nterm{variables}? \nterm{body} \ ; \\
-\nterm{variables} & ::= \textterm{var} \nterm{ID}+ \ (\textterm{Int} | \textterm{Bool}) \ ; \\
-\nterm{body} & ::= \textterm{begin} \nterm{processLine}+ \ \textterm{end} \ ; \\
-\nterm{processLine} & ::= \nterm{process} \textterm{.}  \ ; \\
+\nterm{variables} & ::= \textterm{var} \nterm{id}+ \ (\textterm{Int} | \textterm{Bool}) \ ; \\
+\nterm{body} & ::= \textterm{begin} \nterm{processline}+ \ \textterm{end} \ ; \\
+\nterm{processline} & ::= \nterm{process} \textterm{.}  \ ; \\
 \nterm{process} & ::= \textterm{tell(} \ \nterm{constraint}  \textterm{)} \ ; \\
 	& \bor \textterm{ask} \ (\textterm{<} \ \nterm{location} \textterm{>})? \ \nterm{constraint} \textterm{->}  \nterm{process} \ ; \\
 	& \bor \nterm{process} \textterm{||}  \nterm{process} \ ; \\
 	& \bor  \textterm{[}  \nterm{process}  \textterm{]\_} \ \nterm{integer} \ ; \\
 \nterm{constraint} & ::= \nterm{boolean} \ ; \\
-	& \bor \nterm{ID} \ ; \\
+	& \bor \nterm{id} \ ; \\
 	& \bor \nterm{expression} \ ; \\
 	& \bor \nterm{constraint} \ \textterm{and} \ \nterm{constraint} \ ; \\
 \nterm{location} & ::= \nterm{integer} (\textterm{.} \nterm{integer})* \ ; \\
-\nterm{expression} & ::= \nterm{ID} \nterm{operator} ( \nterm{id} \ | \ \nterm{integer} ) \ ; \\
+\nterm{expression} & ::= \nterm{id} \nterm{operator} ( \nterm{id} \ | \ \nterm{integer} ) \ ; \\
 \nterm{operator} & ::= \textterm{>} \ | \ \textterm{<} \ | \ \textterm{=} \ | \ \textterm{=/=} \ | \ \textterm{>=} \ | \ \textterm{<=} \ ; \\
 \nterm{boolean} & ::= \textterm{true} \ | \ \textterm{false} \ ; \\
 \nterm{integer} & ::= \textnormal{[0-9]}+ \ ; \\
@@ -55,13 +55,15 @@ Las reglas EBNF pueden incluir diez caracteres con significado especial: `$::=$'
 \label{fig:ebnf}
 \end{figure}
 
-En la Figura~\ref{fig:ebnf} se presenta la descripci\'on EBNF del lenguaje de programaci\'on propuesto. La explicaci\'on de cada una de las reglas EBNF se presenta en las secciones~\ref{aa.lang} y ~\ref{ss.lang}.
+En la Figura~\ref{fig:ebnf} se presenta la descripci\'on EBNF del lenguaje de programaci\'on propuesto. La explicaci\'on de cada una de las reglas EBNF se presenta en las secciones~\ref{sccp.lang} y ~\ref{new.lang}.
 
 %% Secci\'on:  %%
-\section{aa}
-\label{aa.lang}
+\section{Relaci\'on con \SCCP}
+\label{sccp.lang}
 
-explain how a subset of the language relates to the \SCCP definition of previous section
+El lenguaje de programaci\'on que se propone est\'a basado en el modelo \SCCP presentado en el Cap\'itulo~\ref{chapter.sccp}, y es ejecutado en el ambiente de Maude por medio de la especificaci\'on formal presentada en el Cap\'itulo~\ref{chapter.rew}. Por esta raz\'on el lenguaje debe proveer la sintaxis parar los procesos que se han definido hasta el momento. Esta secci\'on contiene una explicaci\'on de la relaci\'on entre la definici\'on de \SCCP y las reglas EBNF de la Figura~\ref{fig:ebnf}.
+
+En primer lugar el 
 
 \begin{itemize}
 \item \cde{system} esta definido
@@ -69,8 +71,8 @@ explain how a subset of the language relates to the \SCCP definition of previous
 
 
 %% Secci\'on:  %%
-\section{ss}
-\label{ss.lang}
+\section{Nuevas caracter\'isticas}
+\label{new.lang}
 
 explain the new constructs of the language
 
