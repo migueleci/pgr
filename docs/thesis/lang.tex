@@ -31,7 +31,7 @@ Las reglas EBNF pueden incluir diez caracteres con significado especial: `$::=$'
 \begin{figure}
 
 \begin{flalign*}
-\nterm{system} & ::= \nterm{variables}? \nterm{body} \ ; \\
+\nterm{system} & ::= \nterm{variables}* \nterm{body} \ ; \\
 \nterm{variables} & ::= \textterm{var} \nterm{id}+ \ (\textterm{Int} | \textterm{Bool}) \ ; \\
 \nterm{body} & ::= \textterm{begin} \nterm{processline}+ \ \textterm{end} \ ; \\
 \nterm{processline} & ::= \nterm{process} \textterm{.}  \ ; \\
@@ -61,29 +61,102 @@ En la Figura~\ref{fig:ebnf} se presenta la descripci\'on EBNF del lenguaje de pr
 \section{Relaci\'on con \SCCP}
 \label{sccp.lang}
 
-El lenguaje de programaci\'on que se propone est\'a basado en el modelo \SCCP presentado en el Cap\'itulo~\ref{chapter.sccp}, y es ejecutado en el ambiente de Maude por medio de la especificaci\'on formal presentada en el Cap\'itulo~\ref{chapter.rew}. Por esta raz\'on el lenguaje debe proveer la sintaxis parar los procesos que se han definido hasta el momento. Esta secci\'on contiene una explicaci\'on de la relaci\'on entre la definici\'on de \SCCP y las reglas EBNF de la Figura~\ref{fig:ebnf}.
+El lenguaje de programaci\'on que se propone est\'a basado en el modelo \SCCP presentado en el Cap\'itulo~\ref{chapter.sccp}, y es ejecutado en el ambiente de Maude por medio de la especificaci\'on formal presentada en el Cap\'itulo~\ref{chapter.rew}. Por esta raz\'on el lenguaje debe proveer la sintaxis parar los procesos que se han definido hasta el momento. 
 
-En primer lugar el 
+Esta secci\'on contiene una explicaci\'on de la relaci\'on entre la definici\'on de \SCCP y algunas de las reglas EBNF de la Figura~\ref{fig:ebnf}. En primer lugar se define el identificador de un agente denominado \cde{location}.
 
 \begin{itemize}
-\item \cde{system} esta definido
+\item \nterm{integer} est\'a definido como cualquier valor entre 0 y 9 repetida una o m\'as veces.
+\item \nterm{location} est\'a definido como un \nterm{integer} unido a cero o m\'as repeticiones de un `\cde{.}' y un \nterm{integer}.
 \end{itemize}
 
+Los procesos que se describen en la Definici\'on~\ref{def:gensyn} y la Secci\'on~\ref{syntax.rew} son nombrados \nterm{process}, para definirlo se requiere de algunos elementos adicionales, entre los que se encuentran, la definici\'on de un banco de informaci\'on de un agente o la restricci\'on como argumento de un proceso, nombrado \nterm{constraint}. Estos elementos se explican a continuaci\'on:
+
+\begin{itemize}
+\item \nterm{boolean} est\'a definido como cualquier valor entre \cde{true} y \cde{false}.
+\item \nterm{operator} est\'a definido como cualquier valor entre \textterm{>}, \textterm{<}, \textterm{=}, \textterm{=/=}, \textterm{>=} y \textterm{<=}.
+\item \nterm{expression} est\'a definido como un \nterm{id}, seguido de un \nterm{operator} y un \nterm{id} o un \nterm{integer}. 
+\item \nterm{constraint} est\'a definido como cualquier opci\'on entre \nterm{boolean}, \nterm{id}, \nterm{expression} y dos \nterm{constraint} unidos por una conjunci\'on l\'ogica (i.e. \textterm{and}).
+\end{itemize}
+
+Un proceso, denominado \nterm{process} en el lenguaje de programaci\'on, hace referencia a los 5 procesos del modelo \SCCP, incluyendo la descrita extensi\'on de la Secci\'on~\ref{syntax.rew}. La sintaxis es similar a la presentada en la especificaci\'on formal, con algunas excepciones. El proceso \tell \ debe incluir un \nterm{constraint} contenido entre par\'entesis. El proceso \ask \ contiene un \nterm{constraint} y un \nterm{process}, adicionalmente puede incluir un elemento de tipo \nterm{location} relacionando al identificador de un agente de menor jerarqu\'ia. El proceso de ejecuci\'on en paralelo contiene los procesos a ser ejecutados en paralelo. Finalmente el proceso de especificaci\'on del espacio de ejecuci\'on requiere del proceso a ejecutar \nterm{process} y un numero referente al identificador del agente de menor jerarqu\'ia donde se va a ejecutar el proceso.
 
 %% Secci\'on:  %%
 \section{Nuevas caracter\'isticas}
 \label{new.lang}
 
-explain the new constructs of the language
+Debido a que el objetivo del lenguaje propuesto es brindar a los programadores un medio m\'as sencillo para modelar sistemas distribuidos de informaci\'on por medio del modelo \SCCP, se incluyen algunas caracter\'isticas que faciliten el uso del lenguaje y la especificaci\'on de un sistema, como la declaraci\'on de variables.
 
-\begin{itemize}
-\item \cde{system} esta definido
-\end{itemize}
+Un programa \nterm{system} tiene dos partes: el encabezado \nterm{variables} y el cuerpo \nterm{body}. El primero incluye la declaraci\'on de las variables, en donde se le asigna un nombre \nterm{id} y un tipo (v.gr. \textterm{Int} o \textterm{Bool}), as\'i la sentencia \cde{var X T Int} indica que \cde{X} y \cde{T} son variables de tipo entero. Un programa puede incluir cero o m\'as declaraciones, y un \nterm{id} no puede corresponder a dos variables de diferentes tipos. Toda variable utilizada dentro del cuerpo del programa debe estar declarada en el encabezado, de lo contrario se producir\'a un error en la compilaci\'on.  
 
+El cuerpo del programa debe comenzar con la palabra \textterm{begin} y finalizar con \textterm{end}, si alguna de estas palabras no se incluye se producir\'a un error en la compilaci\'on. El interprete omite todas las lineas que se encuentren despu\'es de la palabra \textterm{end}. Cada linea del cuerpo del programa debe corresponder a uno de los procesos explicados en la Secci\'on~\ref{sccp.lang} finalizando con \textterm{.}.
+
+Para mayor claridad en el uso del lenguaje de programaci\'on en la Secci\'on~\ref{example.lang} se presentan algunos ejemplos.
 
 %% Secci\'on:  %%
 \section{Ejemplo}
 \label{example.lang}
 
-encode the example from the previous section in the language
-encode another example in the language
+Considere el ejemplo que se trabaj\'o en las secciones~\ref{example.sccp} y~\ref{example.rew}. El programa requerido para llegar al estado inicial del sistema $d$ se presenta a continuaci\'on: 
+
+\begin{sccp}
+var V W X Y Z Int
+begin
+tell(V > 10) .
+[tell(W = 3)]_1 || [[tell(X = 17)]_3]_1 .
+[tell(Y > 4)]_2 || [[tell(Z = 20)]_1]_2 .
+end
+\end{sccp}
+
+Todas los procesos pueden ser escritos en una sola linea utilizando procesos en paralelo, para facilidad en la lectura en el ejemplo anterior se presentan multiples lineas de forma que se genera el \'arbol de la Figura~\ref{fig:sccptree} de izquierda a derecha. Ahora se definene los procesos $R$, $P$ y $Q$ respectivamente como:
+
+\begin{sccp}
+[tell(V = 42)]_3 || tell(T = 8)
+ask Y > 0 -> tell(Z > 10) 
+ask T > 7 -> [tell(S =/= 2)]_2 
+\end{sccp}
+
+Con los procesos $R$, $P$ y $Q$ se construye $S$ y se agrega al programa para alcanzar el estado final del sistema presentado en la Figura~\ref{fig:sccptree2}, el programa se muestra a continuaci\'on:
+
+\begin{sccp}
+var V W X Y Z Int
+var S T Int
+begin
+tell(V > 10) .
+[tell(W = 3)]_1 || [[tell(X = 17)]_3]_1 .
+[tell(Y > 4)]_2 || [[tell(Z = 20)]_1]_2 .
+[[tell(V = 42)]_3 || tell(T = 8)]_1 || 
+[ask Y > 0 -> tell(Z > 10) ]_2 || 
+[ask T > 7 -> [tell(S =/= 2)]_2 ]_1 .
+end
+\end{sccp}
+
+Tal como se indico en la Secci\'on~\ref{new.lang} un proceso debe terminar con el car\'acter \textterm{.}, por lo tanto cuando el proceso es extenso como $S$ puede ser separado en multiples lineas para facilitar su manejo. En este cap\'itulo se presenta el programa que lleva al estado final del sistema, su ejecuci\'on y verificaci\'on se realiza en el Cap\'itulo~\ref{chapter.envir}.
+
+Considere otro sistema descrito en el siguiente programa: 
+
+\begin{sccp}
+var B0 B1 Bool
+var X C Int
+var Y B Int
+begin
+tell(true) .
+ask true -> tell(X >= 5) .
+[[tell(B0)]_1 || ask < 1 > B0 -> tell(Y < X)]_1 .
+tell(true) || ask X > 1 -> tell(B1) .
+[tell(X >= 5)]_2 .
+ask B1 -> tell(C >= 5) .
+end
+\end{sccp}
+
+A partir del programa anterior se representa el estado final esperado del sistema representado en la Figura~\ref{fig:langexample}. Debido a que la informaci\'on que tiene o transmite un agente simboliza relaciones o restricciones sobre las variables del sistema, el banco de infomaci\'on de un agente puede ser representado por elementos de tipo \cde{Bool}, tal como las variables \cde{B0} y \cde{B1}. 
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=3.5in]{langexample.png} 
+   \caption{Estado inicial ejemplo \SCCP}
+   \label{fig:langexample}
+\end{figure}
+
+La ejecuci\'on y verificaci\'on del programa se realiza en el Cap\'itulo~\ref{chapter.envir}.
+

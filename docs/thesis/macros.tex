@@ -113,6 +113,29 @@
 
 \DefineVerbatimEnvironment{maude2}{Verbatim}{fontsize=\scriptsize}
 
+% code
+\lstdefinelanguage{sccp}{%
+   keywords={
+    , begin, end
+    , var, Int, Bool
+    }
+}
+\lstnewenvironment{sccp}
+{\lstset{language=SCCP ,
+    keywordstyle=\color{blue}
+  , basicstyle=\ttfamily\singlespacing\small
+  , commentstyle={}
+  , columns=flexible
+  , numbers=none
+  , showstringspaces=false
+  , keepspaces=true
+  , aboveskip=-3pt
+  } 
+}
+{}
+
+\DefineVerbatimEnvironment{sccp2}{Verbatim}{fontsize=\scriptsize}
+
 %%%%%%%
 
 \usepackage{proof} 
