@@ -3,9 +3,9 @@
 \chapter{Lenguaje de programaci\'on}
 \label{chapter.lang}
 
-Este cap\'itulo presenta una propuesta de un lenguaje de programaci\'on basado en el modelo \SCCP definido en el Cap\'itulo~\ref{chapter.sccp}. La principal raz\'on para crear este lenguaje es permitir a los programadores tener una medio m\'as sencillo para modelar sistemas distribuidos de informaci\'on.  
+Este cap\'itulo presenta una propuesta de un lenguaje de programaci\'on basado en el modelo \SCCP \ definido en el Cap\'itulo~\ref{chapter.sccp}. La principal raz\'on para crear este lenguaje es permitir a los programadores tener una medio m\'as sencillo para modelar sistemas distribuidos de informaci\'on.  
 
-La Secci\'on~\ref{ebnf.lang} presenta la sintaxis del lenguaje de programaci\'on en la notaci\'on EBNF. La Secci\'on~\ref{sccp.lang} muestra c\'omo el lenguaje esta relacionado con el modelo \SCCP descrito en el Cap\'itulo~\ref{chapter.sccp}. La Secci\'on~\ref{new.lang} presenta una explicaci\'on de los nuevos elementos del lenguaje. Por \'ultimo, la Secci\'on~\ref{example.lang} contiene algunos ejemplos del funcionamiento del lenguaje de programaci\'on.
+La Secci\'on~\ref{ebnf.lang} presenta la sintaxis del lenguaje de programaci\'on en la notaci\'on EBNF. La Secci\'on~\ref{sccp.lang} muestra c\'omo el lenguaje esta relacionado con el modelo \SCCP \ descrito en el Cap\'itulo~\ref{chapter.sccp}. La Secci\'on~\ref{new.lang} presenta una explicaci\'on de los nuevos elementos del lenguaje. Por \'ultimo, la Secci\'on~\ref{example.lang} contiene algunos ejemplos del funcionamiento del lenguaje de programaci\'on.
 
 %% Secci\'on:  %%
 \section{EBNF del lenguaje}
@@ -13,7 +13,7 @@ La Secci\'on~\ref{ebnf.lang} presenta la sintaxis del lenguaje de programaci\'on
 
 EBNF (del ing\'es, Extended Backus-Naur Form) es un metalenguaje utilizado para definir formalmente la sintaxis de gram\'aticas libres de contexto, que utiliza expresiones regulares para permitir escribir especificaciones compactas. 
 
-Una descripci\'on EBNF es una lista no ordenada de reglas EBNF. Cada una de las reglas EBNF esta compuesta de tres partes: el lado izquierdo, el lado derecho y el s\'imbolo `$::=$' separando los dos lados, este s\'imbolo debe ser leido como ``se define como''~\cite{ebnfdoc}. El lado izquierdo contiene una palabra escrita en min\'uscula y cursiva delimitada por los caracteres `$\langle$' y `$\rangle$', la cual indica el nombre de la regla EBNF. En el lado derecho se encuentra la definici\'on asociada al este nombre. 
+Una descripci\'on EBNF es una lista no ordenada de reglas EBNF. Cada una de las reglas EBNF esta compuesta de tres partes: el lado izquierdo, el lado derecho y el s\'imbolo `$::=$' separando los dos lados, este s\'imbolo debe ser leido ``se define como''~\cite{ebnfdoc}. El lado izquierdo contiene una palabra escrita en min\'uscula y cursiva delimitada por los caracteres `$\langle$' y `$\rangle$', la cual indica el nombre de la regla EBNF. En el lado derecho se encuentra la definici\'on asociada a este nombre. 
 
 Los nombres asignados en el lado izquierdo de las reglas EBNF pueden ser utilizados como parte de la definici\'on asociada en el lado derecho de las reglas, inclusive dentro de la misma regla, es decir, que puede haber recursi\'on en la descripci\'on del lenguaje.
 
@@ -61,12 +61,12 @@ En la Figura~\ref{fig:ebnf} se presenta la descripci\'on EBNF del lenguaje de pr
 \section{Relaci\'on con \SCCP}
 \label{sccp.lang}
 
-El lenguaje de programaci\'on que se propone est\'a basado en el modelo \SCCP presentado en el Cap\'itulo~\ref{chapter.sccp}, y es ejecutado en el ambiente de Maude por medio de la especificaci\'on formal presentada en el Cap\'itulo~\ref{chapter.rew}. Por esta raz\'on el lenguaje debe proveer la sintaxis parar los procesos que se han definido hasta el momento. 
+El lenguaje de programaci\'on que se propone est\'a basado en el modelo \SCCP \ presentado en el Cap\'itulo~\ref{chapter.sccp}, y es ejecutado en el ambiente de Maude por medio de la especificaci\'on formal presentada en el Cap\'itulo~\ref{chapter.rew}. Por esta raz\'on el lenguaje debe proveer la sintaxis parar los procesos que se han definido hasta el momento. 
 
-Esta secci\'on contiene una explicaci\'on de la relaci\'on entre la definici\'on de \SCCP y algunas de las reglas EBNF de la Figura~\ref{fig:ebnf}. En primer lugar se define el identificador de un agente denominado \cde{location}.
+Esta secci\'on contiene una explicaci\'on de la relaci\'on entre la definici\'on de \SCCP \ y algunas de las reglas EBNF de la Figura~\ref{fig:ebnf}. En primer lugar se define el identificador de un agente denominado \cde{location}.
 
 \begin{itemize}
-\item \nterm{integer} est\'a definido como cualquier valor entre 0 y 9 repetida una o m\'as veces.
+\item \nterm{integer} est\'a definido como cualquier valor entre 0 y 9 repetido una o m\'as veces.
 \item \nterm{location} est\'a definido como un \nterm{integer} unido a cero o m\'as repeticiones de un `\cde{.}' y un \nterm{integer}.
 \end{itemize}
 
@@ -79,7 +79,7 @@ Los procesos que se describen en la Definici\'on~\ref{def:gensyn} y la Secci\'on
 \item \nterm{constraint} est\'a definido como cualquier opci\'on entre \nterm{boolean}, \nterm{id}, \nterm{expression} y dos \nterm{constraint} unidos por una conjunci\'on l\'ogica (i.e. \textterm{and}).
 \end{itemize}
 
-Un proceso, denominado \nterm{process} en el lenguaje de programaci\'on, hace referencia a los 5 procesos del modelo \SCCP, incluyendo la descrita extensi\'on de la Secci\'on~\ref{syntax.rew}. La sintaxis es similar a la presentada en la especificaci\'on formal, con algunas excepciones. El proceso \tell \ debe incluir un \nterm{constraint} contenido entre par\'entesis. El proceso \ask \ contiene un \nterm{constraint} y un \nterm{process}, adicionalmente puede incluir un elemento de tipo \nterm{location} relacionando al identificador de un agente de menor jerarqu\'ia. El proceso de ejecuci\'on en paralelo contiene los procesos a ser ejecutados en paralelo. Finalmente el proceso de especificaci\'on del espacio de ejecuci\'on requiere del proceso a ejecutar \nterm{process} y un numero referente al identificador del agente de menor jerarqu\'ia donde se va a ejecutar el proceso.
+Un proceso, denominado \nterm{process} en el lenguaje de programaci\'on, hace referencia a los 5 procesos del modelo \SCCP, incluyendo la extensi\'on de \ask \ descrita de la Secci\'on~\ref{syntax.rew}. La sintaxis es similar a la presentada en la especificaci\'on formal, salvo algunas modificaciones. El proceso \tell \ debe incluir un \nterm{constraint} contenido entre par\'entesis. El proceso \ask \ contiene un \nterm{constraint} y un \nterm{process}, adicionalmente puede incluir un elemento de tipo \nterm{location} relacionando al identificador de un agente de menor jerarqu\'ia. El proceso de ejecuci\'on en paralelo contiene los procesos a ser ejecutados en paralelo. Finalmente el proceso de especificaci\'on del espacio de ejecuci\'on requiere del proceso a ejecutar \nterm{process} y un numero \nterm{integer} referente al identificador del agente de menor jerarqu\'ia donde se va a ejecutar el proceso.
 
 %% Secci\'on:  %%
 \section{Nuevas caracter\'isticas}
@@ -87,9 +87,9 @@ Un proceso, denominado \nterm{process} en el lenguaje de programaci\'on, hace re
 
 Debido a que el objetivo del lenguaje propuesto es brindar a los programadores un medio m\'as sencillo para modelar sistemas distribuidos de informaci\'on por medio del modelo \SCCP, se incluyen algunas caracter\'isticas que faciliten el uso del lenguaje y la especificaci\'on de un sistema, como la declaraci\'on de variables.
 
-Un programa \nterm{system} tiene dos partes: el encabezado \nterm{variables} y el cuerpo \nterm{body}. El primero incluye la declaraci\'on de las variables, en donde se le asigna un nombre \nterm{id} y un tipo (v.gr. \textterm{Int} o \textterm{Bool}), as\'i la sentencia \cde{var X T Int} indica que \cde{X} y \cde{T} son variables de tipo entero. Un programa puede incluir cero o m\'as declaraciones, y un \nterm{id} no puede corresponder a dos variables de diferentes tipos. Toda variable utilizada dentro del cuerpo del programa debe estar declarada en el encabezado, de lo contrario se producir\'a un error en la compilaci\'on.  
+Un programa \nterm{system} tiene dos partes: el encabezado \nterm{variables} y el cuerpo \nterm{body}. El encabezado contiene la declaraci\'on de las variables a las cuales se les asigna un nombre \nterm{id} y un tipo (v.gr. \textterm{Int} o \textterm{Bool}), por ejemplo la sentencia \cde{var X T Int} indica que \cde{X} y \cde{T} son variables de tipo entero. Un programa puede incluir cero o m\'as declaraciones, y un \nterm{id} no puede corresponder a dos variables de diferentes tipos. Toda variable utilizada dentro del cuerpo del programa debe estar declarada en el encabezado, de lo contrario se producir\'a un error en la compilaci\'on.  
 
-El cuerpo del programa debe comenzar con la palabra \textterm{begin} y finalizar con \textterm{end}, si alguna de estas palabras no se incluye se producir\'a un error en la compilaci\'on. El interprete omite todas las lineas que se encuentren despu\'es de la palabra \textterm{end}. Cada linea del cuerpo del programa debe corresponder a uno de los procesos explicados en la Secci\'on~\ref{sccp.lang} finalizando con \textterm{.}.
+El cuerpo del programa debe comenzar con la palabra \textterm{begin} y finalizar con \textterm{end}, si alguna de estas palabras no se incluye se producir\'a un error en la compilaci\'on. Cada linea del cuerpo del programa debe corresponder a uno de los procesos explicados en la Secci\'on~\ref{sccp.lang} finalizada con el car\'acter \textterm{.}. El interprete omite todas las lineas que se encuentren despu\'es de la palabra \textterm{end}.
 
 Para mayor claridad en el uso del lenguaje de programaci\'on en la Secci\'on~\ref{example.lang} se presentan algunos ejemplos.
 
@@ -97,7 +97,7 @@ Para mayor claridad en el uso del lenguaje de programaci\'on en la Secci\'on~\re
 \section{Ejemplo}
 \label{example.lang}
 
-Considere el ejemplo que se trabaj\'o en las secciones~\ref{example.sccp} y~\ref{example.rew}. El programa requerido para llegar al estado inicial del sistema $d$ se presenta a continuaci\'on: 
+Considere el ejemplo que se trabaj\'o en las secciones~\ref{example.sccp} y~\ref{example.rew}. El programa requerido para obtener el estado inicial del sistema $d$ se presenta a continuaci\'on: 
 
 \begin{sccp}
 var V W X Y Z Int
@@ -116,7 +116,7 @@ ask Y > 0 -> tell(Z > 10)
 ask T > 7 -> [tell(S =/= 2)]_2 
 \end{sccp}
 
-Con los procesos $R$, $P$ y $Q$ se construye $S$ y se agrega al programa para alcanzar el estado final del sistema presentado en la Figura~\ref{fig:sccptree2}, el programa se muestra a continuaci\'on:
+Con los procesos $R$, $P$ y $Q$ se construye $S$ y se agrega al estado inicial para alcanzar el estado final del sistema presentado en la Figura~\ref{fig:sccptree2}, el programa se muestra a continuaci\'on:
 
 \begin{sccp}
 var V W X Y Z Int
@@ -149,7 +149,7 @@ ask B1 -> tell(C >= 5) .
 end
 \end{sccp}
 
-A partir del programa anterior se representa el estado final esperado del sistema representado en la Figura~\ref{fig:langexample}. Debido a que la informaci\'on que tiene o transmite un agente simboliza relaciones o restricciones sobre las variables del sistema, el banco de infomaci\'on de un agente puede ser representado por elementos de tipo \cde{Bool}, tal como las variables \cde{B0} y \cde{B1}. 
+A partir del programa descrito anteriormente el estado final esperado del sistema es representado en la Figura~\ref{fig:langexample}. Debido a que la informaci\'on que tiene o transmite un agente simboliza relaciones o restricciones sobre las variables del sistema, el banco de infomaci\'on de un agente puede ser representado por elementos de tipo \cde{Bool}, tal como las variables \cde{B0} y \cde{B1}. 
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
