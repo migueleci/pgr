@@ -3,12 +3,9 @@
 \chapter{Ambiente para el lenguaje de programaci\'on}
 \label{chapter.envir}
 
+El programador requiere de una herramienta que le permita ejecutar sistemas distribuidos basados en \SCCP \ modelados en el lenguaje de programaci\'on presentado en el Capi\'tulo~\ref{chapter.lang}. Este cap\'itulo presenta una herramienta desarrollada en Python 3 con una interfaz gr\'afica sencilla y facil de usar, con la que se puede verificar la evaluci\'on de un sistema luego de realizar multiples operaciones de transferencia de informaci\'on entre diferentes agentes. La interpretaci\'on del lenguaje de programaci\'on se realiza por medio de un parser y un analizador l\'exico con los que se genera el codigo equivalente en Maude.  Luego de obtener el estado final del sistema en Maude, se traduce para mostrar el resultado al usuario por medio de la interfaz gr\'afica.
 
-En este cap\'itulo se preset
-... introducci\'on
-
-La Secci\'on~\ref{parser.envir} presenta la descripci\'on del parser utilizado por la herramienta. La Secci\'on~\ref{implem.envir} presenta  
-La Secci\'on~\ref{gui.envir} presenta una introducci\'on a la interfaz gr\'afica y las funcionalidades de la herramienta. Finalmente, la Secci\'on~\ref{example.envir} presenta algunos ejemplos del pr\'acticos del uso de la herramienta.
+La Secci\'on~\ref{parser.envir} presenta la descripci\'on del parser utilizado en la herramienta. La Secci\'on~\ref{implem.envir} presenta algunos detalles de su implementaci\'on y funcionamiento. La Secci\'on~\ref{gui.envir} presenta una introducci\'on a la interfaz gr\'afica y las funcionalidades de la herramienta. Finalmente, la Secci\'on~\ref{example.envir} presenta algunos ejemplos  pr\'acticos del uso de la herramienta propuesta.
 
 %% Secci\'on:  %%
 \section{Parser}
@@ -48,10 +45,13 @@ La interfaz g\'afica de la herramienta esta desarrollada por medio de Tkinter, l
    \label{fig:tool1}
 \end{figure}
 
-En la Figura~\ref{fig:tool1} se muestra la ventana principal de la herramienta, donde el programador ingresa el programa o sistema a ejecutar en el lenguaje de programaci\'on propuesto en el Cap\'itulo~\ref{chapter.lang}. Esta ventana cuenta con un editor de texto y una barra con cuatro botones, explicados a continuaci\'on:
+En la Figura~\ref{fig:tool1} se muestra la ventana principal de la herramienta, donde el programador ingresa el programa o sistema a ejecutar en el lenguaje de programaci\'on propuesto en el Cap\'itulo~\ref{chapter.lang}. Esta ventana cuenta con un editor de texto y una barra inferior con cuatro botones. El editor de texto identificado con el n\'umero \textbf{1}, permite copiar, cortar, pegar y desplazamiento vertical, actualmente no tiene implementado funciones de deshacer y rehacer. La funcionalidad de los botones se explica a continuaci\'on:
 
 \begin{itemize}
-\item
+\item El boton \textbf{2} permite abrir documentos de texto en formatos \cde{.txt}, \cde{.maude} o \cde{.in}, por medio de una ventana de manejo de archivos. Cuando se selecciona el archivo el contenido se muestra autom\'aticamente en el editor de texto.
+\item El boton \textbf{3} permite guardar en un documento texto de formato \cde{.txt}, \cde{.maude} o \cde{.in} el contenido actual del editor de texto, por medio de una ventana de manejo de archivos.
+\item El boton \textbf{4} ejecuta el programa escrito en el editor de texto. En caso de que la sintaxis sea incorrecta se muestra un mensaje en el editor de texto, en el caso contrario se muestra la ventana de resultados.
+\item El boton \textbf{5} permite salir de la herramienta. 
 \end{itemize}
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
@@ -61,10 +61,13 @@ En la Figura~\ref{fig:tool1} se muestra la ventana principal de la herramienta, 
    \label{fig:tool2}
 \end{figure}
 
+En la Figura~\ref{fig:tool2} se muestra la ventana de respuestas, en donde se muestra al programador la evoluci\'on del sistema ingresado. Esta ventana cuenta con un cuadro de texto y una barra inferior con dos botones. En el cuadro de texto identificado con el n\'umero \textbf{1} se muestra el resultado de la ejecuci\'on del sistema, en caso de que haya un error en el sistema escrito por el programador se muestra un mensaje correspondiente. El cuadro de texto no permite modificar o seleccionar el texto. Los botones \textbf{2} y \textbf{3} permiten guardar el contenido del texto en un archivo de formato \cde{.txt}, \cde{.maude} o \cde{.out}, y cerrar la ventana de resultados, respectivamente.
 
+Las dos ventanas cuentan con un menu desplegable con las mismas funcionalidades explicadas en esta secci\'on. Este cap\'itulo concluye con algunos ejemplos del funcionamiento de la herramienta.
 
 %% Secci\'on:  %%
 \section{Ejemplo}
 \label{example.envir}
+
 
 Ejemplos
