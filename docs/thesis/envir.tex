@@ -50,7 +50,7 @@ En la Figura~\ref{fig:tool1} se muestra la ventana principal de la herramienta, 
 \begin{itemize}
 \item El boton \textbf{2} permite abrir documentos de texto en formatos \cde{.txt}, \cde{.maude} o \cde{.in}, por medio de una ventana de manejo de archivos. Cuando se selecciona el archivo el contenido se muestra autom\'aticamente en el editor de texto.
 \item El boton \textbf{3} permite guardar en un documento texto de formato \cde{.txt}, \cde{.maude} o \cde{.in} el contenido actual del editor de texto, por medio de una ventana de manejo de archivos.
-\item El boton \textbf{4} ejecuta el programa escrito en el editor de texto. En caso de que la sintaxis sea incorrecta se muestra un mensaje en el editor de texto, en el caso contrario se muestra la ventana de resultados.
+\item El boton \textbf{4} ejecuta el programa escrito en el editor de texto. En caso de que la sintaxis sea incorrecta se muestra un mensaje de error en la ventana de resultados.
 \item El boton \textbf{5} permite salir de la herramienta. 
 \end{itemize}
 
@@ -63,11 +63,61 @@ En la Figura~\ref{fig:tool1} se muestra la ventana principal de la herramienta, 
 
 En la Figura~\ref{fig:tool2} se muestra la ventana de respuestas, en donde se muestra al programador la evoluci\'on del sistema ingresado. Esta ventana cuenta con un cuadro de texto y una barra inferior con dos botones. En el cuadro de texto identificado con el n\'umero \textbf{1} se muestra el resultado de la ejecuci\'on del sistema, en caso de que haya un error en el sistema escrito por el programador se muestra un mensaje correspondiente. El cuadro de texto no permite modificar o seleccionar el texto. Los botones \textbf{2} y \textbf{3} permiten guardar el contenido del texto en un archivo de formato \cde{.txt}, \cde{.maude} o \cde{.out}, y cerrar la ventana de resultados, respectivamente.
 
+En la ventana de respuestas se presenta el estado final del sistema en dos secciones, los agentes existentes y sus respectivos bancos de informaci\'on, y los procesos que no se pudieron ejecutar. 
+
 Las dos ventanas cuentan con un menu desplegable con las mismas funcionalidades explicadas en esta secci\'on. Este cap\'itulo concluye con algunos ejemplos del funcionamiento de la herramienta.
 
 %% Secci\'on:  %%
 \section{Ejemplo}
 \label{example.envir}
 
+Utilizando la herramienta propuesta en este cap\'itulo se utiliza el ejemplo trabajado en las secciones anteriores para verificar que se llega al esta final deseado a partir del c\'odigo escrito en la Secci\'on~\ref{example.lang}. En la Figura~\ref{fig:toolin1} se muestra el estado incial $d$ junto con el proceso $S$.
 
-Ejemplos
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=5in]{toolex1.png} 
+   \caption{Estado inicial $d$ del sistema}
+   \label{fig:toolin1}
+\end{figure}
+
+En la Figura~\ref{fig:toolout1} se muestra el estado final del sistema obtenido de la herramienta, el resultado concuerda con el estado final esperado descrito en la Figura~\ref{fig:sccptree2}. En el resultado los agentes (\textit{spaces}) son listados con su identificador (\textit{location}) y su banco de informaci\'on (\textit{constraint}). 
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \begin{subfigure}[b]{5in}
+      \includegraphics[width=1\linewidth]{toolex2.png}
+      \caption{}
+      \label{fig:Ng1} 
+   \end{subfigure}
+   \begin{subfigure}[b]{5in}
+      \includegraphics[width=1\linewidth]{toolex22.png}
+      \caption{}
+      \label{fig:Ng2}
+   \end{subfigure}
+   \caption{Estado final del sistema}
+   \label{fig:toolout1}
+\end{figure}
+
+Considere un sistema en el cual no se puede ejecutar un proceso \ask \ debido a que la restricci\'on no es satisfacible por el banco de informaci\'on del agente. En el siguiente ejemplo existen dos procesos que se pueden ejecutar, por lo tanto el sistema no evoluciona y el resultado debe coincidir con su estado inicial. El estado inicial del sistema se describe a continuaci\'on:
+
+\begin{sccp}
+var A B C D Int
+begin
+tell(A =/= 10) .
+ask A = 10 -> tell(B >= 5) .
+[tell(C > 5) || ask C > 6 -> tell(D = 8)]_1 .
+end
+\end{sccp}
+
+En la Figura~\ref{fig:toolout3} se observa que existen dos procesos que no fueron ejecutados, el primero de ellos debido a que \cde{A = 10} no es satisfacible a partir de \cde{A =/= 10}. 
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=5in]{toolex3.png} 
+   \caption{Estado final del sistema con procesos no ejecutados}
+   \label{fig:toolout3}
+\end{figure}
+
+Finalmente, si el programador no define una variable usada dentro del sistema se genera un mensaje de error, debido a que el lexer no sabe como manejar el token y por lo tanto no se genera la expresi\'on correspondiente. El mensaje ``\cde{Sorry, there is an error!. Check your specification and try again.}'' aparece en la ventada de resultados.
+
+
