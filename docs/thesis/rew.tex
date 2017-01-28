@@ -5,6 +5,8 @@
 
 Este cap\'itulo presenta una especificaci\'on formal del modelo \SCCP en la sintaxis de Maude~\cite{maude-book}. La especificaci\'on formal consta de un m\'odulo funcional que define el identificador de un agente; un m\'odulo funcional que define la sintaxis y los tipos requeridos para especificar los diferentes tipos de comandos u operadores disponibles en el modelo; y un m\'odulo funcional que define la sintaxis y los tipos requeridos para especificar los estados del modelo. Este m\'odulo incluye, entre otros, la definici\'on de un agente y un proceso. La transferencia de informaci\'on en \SCCP esta formalizada a partir de de reglas de reescritura que son parte de un m\'odulo de sistema.
 
+La especificaci\'on formal utiliza el modulo \cde{SMT}, una t\'ecnica innovadora que combina el capacidad de la reescritura de t\'erminos, algoritmos de emparejamiento (\textit{matching}), y SMT-solver. Por medio del modulo \cde{SMT} las restricciones son codificadas como formulas en una teor\'ia con relaci\'on de satisfacibilidad determinada por el SMT-solver.
+
 Adicionalmente, este cap\'itulo presenta ejemplos de algunas simulaciones del modelo que usan la especificaci\'on formal y el comando \cde{rewrite} de Maude.
 
 Las secciones~\ref{aid.rew},~\ref{syntax.rew} y~\ref{state.rew} presentan los m\'odulos funcionales \cde{AGENT-ID}, \cde{SCCP-SYNTAX} y \cde{SCCP-STATE}, respectivamente. La Secci\'on~\ref{rules.rew} presenta el modulo de sistema \cde{SCCP} que especifica las transiciones del modelo. Finalmente, la Secci\'on~\ref{example.rew} presenta algunos ejemplos de simulaci\'on del modelo usando el comando \cde{rewrite} de Maude.
