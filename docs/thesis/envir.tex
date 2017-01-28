@@ -28,14 +28,40 @@ ANTLR genera un parser en Python a partir de la descripci\'on EBNF del lenguaje 
 \section{Detalles de la implementaci\'on}
 \label{implem.envir}
 
-La herramienta propuesta esta desarrollada en Python 3, 
-... secci\'on 2
+La herramienta propuesta esta desarrollada en Python 3, un lenguaje de programaci\'on de alto nivel. Debido a que el an\'alisis del sistema \SCCP \ se realiza en Maude, la herramienta provee un enlace entre el parser generado por ANTLR y del ambiente de Maude, a trav\'es del modulo \cde{subprocess} el cual permite crear nuevos procesos y conectarse con su canal de entrada, salida y errores. Este modulo permite ejecutar comandos en la terminal y obtener la salida, tal como se muestra a continuaci\'on: \[\cde{path = subprocess.check_output("pwd",shell=True)},\] en el ejemplo se usa el metodo \cde{subprocess.check_output} para 
+ejecutar el comando \cde{pwd} y obtener su resultado, que en este caso es el directorio donde se esta trabajando.
+
+Adicionalmente la herramienta cuenta con una funci\'on que realiza la traducci\'on del estado final del sistema ejecutado en Maude para presentarlo al usuario, en este caso no se utiliz\'o un parser puesto que no se requiere una sintaxis formal para mostrar los resultados.
+
+La herramienta esta divida en dos directorios: Python y Maude. En el primer directorio se encuentran la interfaz gr\'afica, el parser y el lexer; y en el segundo se encuentra la especificaci\'on formal. Su ejecuci\'on se realiza a trav\'es de la linea de comandos.
 
 %% Secci\'on:  %%
 \section{Interfaz gr\'afica}
 \label{gui.envir}
 
-... secci\'on 3
+La interfaz g\'afica de la herramienta esta desarrollada por medio de Tkinter, la libreria mas utilizada para desarrollo de aplicaciones GUI {del ingl\'es, \textit{Graphical User Interface}} en Python. Esta herramienta cuenta con dos ventanas, las cuales se describen en las Figuras~\ref{fig:tool1} y~\ref{fig:tool2}.
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=5in]{tool1.png}
+   \caption{Ventana principal}
+   \label{fig:tool1}
+\end{figure}
+
+En la Figura~\ref{fig:tool1} se muestra la ventana principal de la herramienta, donde el programador ingresa el programa o sistema a ejecutar en el lenguaje de programaci\'on propuesto en el Cap\'itulo~\ref{chapter.lang}. Esta ventana cuenta con un editor de texto y una barra con cuatro botones, explicados a continuaci\'on:
+
+\begin{itemize}
+\item
+\end{itemize}
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=5in]{tool2.png} 
+   \caption{Ventana de resultados}
+   \label{fig:tool2}
+\end{figure}
+
+
 
 %% Secci\'on:  %%
 \section{Ejemplo}
