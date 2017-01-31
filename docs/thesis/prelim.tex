@@ -184,27 +184,38 @@ todos los subconjuntos. Aunque sigue siendo un \textit{ret\'iculo}.
 \section{\textit{SMT-Solving}}
 \label{smt.prelim}
 
-Satisfacibilidad es el problema de determinar si una formula que expresa una 
-restricci\'o tiene un modelo o una soluci\'on. Un gran n\'umero de problemas 
+Satisfacibilidad es el problema de determinar si una f\'ormula que expresa una 
+restricci\'on tiene un modelo o una soluci\'on. Un gran n\'umero de problemas 
 pueden ser descritos en t\'erminos de satisfacibilidad (i.e., problemas de 
-grafos, puzzles como Sudoku, verificaci\'on de software y hardware, 
+grafos, rompecabezas como Sudoku, verificaci\'on de software y hardware, 
 optimizaci\'on, generaci\'on de casos de prueba). Muchos de estos 
-problemas pueden ser representados por formulas Booleanas y resueltos 
-utilizando un solucionador de satisfacibilidad Boleana (del ingl\'es, \textit{Boolean 
+problemas pueden ser representados por f\'ormulas Booleanas y resueltos 
+utilizando un solucionador de satisfacibilidad Booleana (del ingl\'es, \textit{Boolean 
 Satisfiability Solver}, abreviado SAT-Solver). Otros problemas requieren 
 la expresividad de la aritm\'etica, cuantificadores, operadores de tipos de 
 datos, entre otros. Esta clase de problemas pueden ser manejados por 
 teor\'ias de satisfacibilidad m\'odulo (del ingl\'es, \textit{Satisfiability 
-Modulo Theories}, abreviado SMT)~\cite{deMoura2007}. 
+Modulo Theories}, abreviado SMT)~\cite{deMoura2007}. En este caso, las 
+f\'ormulas de inter\'es pueden ser expresadas en l\'ogica de primer orden, lo 
+cual hace que \textit{SMT-Solving} sea m\'as general que SAT-Solving. Sin 
+embargo, el problema de decisi\'on asociado deja de ser decidible: este es, 
+b\'asicamente, el precio que se paga por contar con m\'as expresividad en el 
+lenguaje de f\'ormulas.
 
 El t\'ermino SMT es usado para describir el problema de satisfacibilidad 
 para una teor\'ia arbitraria o combinaciones de estas. El programa que 
-soluciona este problema es denominado \textit{SMT-solver}~\cite{Kroening:2008:DPA:1391237}.
+soluciona este problema es denominado \textit{SMT-solver}~\cite{Kroening:2008:DPA:1391237}. 
+En particular, un SMT-Solver es un programa de computador que integra 
+procedimientos de decisi\'on y semi-decisi\'on para fragmentos espec\'ificos 
+de la l\'ogica de primer orden y sus teor\'as respectivas. En este trabajo se 
+usan procedimientos de decisi\'on y semi-decisi\'on sobre los enteros para 
+codificar un sistema de restricciones sobre enteros.
 
-Maude, en sus versiones mas recientes utiliza CVC4 como SMT-Solver 
-suministrando funcionalidades para reescritura. El m\'odulo de reescritura SMT 
-es una t\'ecnica ideal para modelar y analizar propiedades de alcanzabilidad de
-sistemas abiertos de estados infinitos~\cite{Rocha2017269}.
+Maude, en sus versiones m\'as recientes utiliza CVC4 como SMT-Solver 
+suministrando funcionalidades para reescritura m\'odulo f\'ormulas o 
+restricciones en la sintaxis de teor\'ias soportadas por su lenguaje. 
+La extensi\'on de l\'ogica de reescritura a reesritura m\'otulo SMT es una 
+apuesta reciente para modelar y analizar sistemas abiertos de estados 
+infinitos~\cite{Rocha2017269}.
 
-En este trabajo se usan procedimientos de decisi\'on y semi-decisi\'on 
-sobre los enteros para codificar un sistema de restricciones sobre enteros.
+
