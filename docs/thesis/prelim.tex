@@ -184,12 +184,27 @@ todos los subconjuntos. Aunque sigue siendo un \textit{ret\'iculo}.
 \section{\textit{SMT-Solving}}
 \label{smt.prelim}
 
-\begin{enumerate}
-\item Qu\'e es SMT-Solving y su relaci\'on con procedimientos de decisi\'on.
-\item Qu\'e es un SMT-Solver
-\item Maude, en sus versiones mas recientes utiliza CVC4 como SMT-Solver suministrando funcionalidades para reescritura. M\'odulo SMT [citar articulo de camilo JLAMP 2017].
-\item En este trabajo se usan procedimientos de decisi\'on y semi-decisi\'on sobre los enteros para codificar un sistema de restricciones sobre enteros.
-\end{enumerate}
+Satisfacibilidad es el problema de determinar si una formula que expresa una 
+restricci\'o tiene un modelo o una soluci\'on. Un gran n\'umero de problemas 
+pueden ser descritos en t\'erminos de satisfacibilidad (i.e., problemas de 
+grafos, puzzles como Sudoku, verificaci\'on de software y hardware, 
+optimizaci\'on, generaci\'on de casos de prueba). Muchos de estos 
+problemas pueden ser representados por formulas Booleanas y resueltos 
+utilizando un solucionador de satisfacibilidad Boleana (del ingl\'es, \textit{Boolean 
+Satisfiability Solver}, abreviado SAT-Solver). Otros problemas requieren 
+la expresividad de la aritm\'etica, cuantificadores, operadores de tipos de 
+datos, entre otros. Esta clase de problemas pueden ser manejados por 
+teor\'ias de satisfacibilidad m\'odulo (del ingl\'es, \textit{Satisfiability 
+Modulo Theories}, abreviado SMT)~\cite{deMoura2007}. 
 
+El t\'ermino SMT es usado para describir el problema de satisfacibilidad 
+para una teor\'ia arbitraria o combinaciones de estas. El programa que 
+soluciona este problema es denominado \textit{SMT-solver}~\cite{Kroening:2008:DPA:1391237}.
 
+Maude, en sus versiones mas recientes utiliza CVC4 como SMT-Solver 
+suministrando funcionalidades para reescritura. El m\'odulo de reescritura SMT 
+es una t\'ecnica ideal para modelar y analizar propiedades de alcanzabilidad de
+sistemas abiertos de estados infinitos~\cite{Rocha2017269}.
 
+En este trabajo se usan procedimientos de decisi\'on y semi-decisi\'on 
+sobre los enteros para codificar un sistema de restricciones sobre enteros.
