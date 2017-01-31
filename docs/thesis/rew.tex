@@ -1,15 +1,15 @@
 % !TEX root = main.tex
 
-\chapter{Una teor\'ia de reescritura para SCCP (R)}
+\chapter{Una teor\'ia de reescritura para SCCP}
 \label{chapter.rew}
 
-Este cap\'itulo presenta una especificaci\'on formal del modelo \SCCP en la sintaxis de Maude~\cite{maude-book}. La especificaci\'on formal consta de un m\'odulo funcional que define el identificador de un agente; un m\'odulo funcional que define la sintaxis y los tipos requeridos para especificar los diferentes tipos de comandos u operadores disponibles en el modelo; y un m\'odulo funcional que define la sintaxis y los tipos requeridos para especificar los estados del modelo. Este m\'odulo incluye, entre otros, la definici\'on de un agente y un proceso. La transferencia de informaci\'on en \SCCP esta formalizada a partir de de reglas de reescritura que son parte de un m\'odulo de sistema.
+Este cap\'itulo presenta una especificaci\'on formal del modelo $\SCCP$ en la sintaxis de Maude~\cite{maude-book}. La especificaci\'on formal consta de un m\'odulo funcional que define el identificador de un agente y que a su vez indica su ubicaci\'on en la jerarqu\'ia de procesos; un m\'odulo funcional que define la sintaxis y los tipos requeridos para especificar los diferentes tipos de comandos u operadores disponibles en el modelo; y un m\'odulo funcional que define la sintaxis y los tipos requeridos para especificar los estados del modelo. Este m\'odulo incluye, entre otros, la definici\'on de un agente y un proceso. La transferencia de informaci\'on en $\SCCP$ esta formalizada a partir de de reglas de reescritura que son parte de un m\'odulo de sistema.
 
-La especificaci\'on formal utiliza el modulo \cde{SMT}, una t\'ecnica innovadora que combina el capacidad de la reescritura de t\'erminos, algoritmos de emparejamiento (\textit{matching}), y SMT-solver. Por medio del modulo \cde{SMT} las restricciones son codificadas como formulas en una teor\'ia con relaci\'on de satisfacibilidad determinada por el SMT-solver.
+La especificaci\'on formal utiliza el modulo \cde{SMT}, una t\'ecnica innovadora que combina el capacidad de la reescritura de t\'erminos, algoritmos de emparejamiento (\textit{matching}), y un SMT-solver. Por medio del m\'odulo \cde{SMT} las restricciones son codificadas como formulas en una teor\'ia con relaci\'on de satisfacibilidad determinada por el SMT-solver.
 
 Adicionalmente, este cap\'itulo presenta ejemplos de algunas simulaciones del modelo que usan la especificaci\'on formal y el comando \cde{rewrite} de Maude.
 
-Las secciones~\ref{aid.rew},~\ref{syntax.rew} y~\ref{state.rew} presentan los m\'odulos funcionales \cde{AGENT-ID}, \cde{SCCP-SYNTAX} y \cde{SCCP-STATE}, respectivamente. La Secci\'on~\ref{rules.rew} presenta el modulo de sistema \cde{SCCP} que especifica las transiciones del modelo. Finalmente, la Secci\'on~\ref{example.rew} presenta algunos ejemplos de simulaci\'on del modelo usando el comando \cde{rewrite} de Maude.
+Las secciones~\ref{aid.rew},~\ref{syntax.rew} y~\ref{state.rew} presentan los m\'odulos funcionales \cde{AGENT-ID}, \cde{SCCP-SYNTAX} y \cde{SCCP-STATE}, respectivamente. La Secci\'on~\ref{rules.rew} presenta el m\'odulo de sistema \cde{SCCP} que especifica las transiciones del modelo. Finalmente, la Secci\'on~\ref{example.rew} presenta algunos ejemplos de simulaci\'on del modelo usando el comando \cde{rewrite} de Maude.
 
 %% Secci\'on: Especificaci\'on AGENT-ID%%
 \section{Modelamiento formal del identificador}
@@ -26,9 +26,9 @@ El identificador de un agente est\'a representado por el sort \cde{Aid} definido
   op _._ : Aid Aid -> Aid [assoc left id: root] .
 \end{maude}
 
-El identificador esta definido como una secuencia de n\'umeros naturales, representados por \cde{NAT}, concatenados con punto. El identificador es asociativo y tiene un elemento identidad izquierda. En la sintaxis de Maude, estos atributos se agregan incluyendo las palabras clave \cde{assoc} y \cde{left id} en la declaraci\'on de la operaci\'on. 
+El identificador est\'a definido como una secuencia de n\'umeros naturales, representados por \cde{NAT}, concatenados con punto. El identificador es asociativo y tiene un elemento identidad izquierdo. En la sintaxis de Maude, estos atributos se agregan incluyendo las palabras clave \cde{assoc} y \cde{left id} en la declaraci\'on de la operaci\'on. 
 
-La identidad izquierda de un identificador esta representada por \cde{root}, de forma que \cde{root.1} es equivalente a \cde{1}. Los n\'umeros de izquierda a derecha indican el espacio y subespacio al cual pertenece el agente, es decir, el identificador \cde{4.2.1} significa que el agente pertenece al espacio \cde{4}, dentro de este al subespacio \cde{2}, tal como se indica en la Figura~\ref{fig:agentid}.
+La identidad izquierda de un identificador est\'a representada por \cde{root}, de forma que \cde{root.1} es equivalente a \cde{1}. Los n\'umeros de izquierda a derecha indican el espacio y subespacio al cual pertenece el agente, es decir, el identificador \cde{4.2.1} significa que el agente pertenece al espacio \cde{4}, dentro de este al subespacio \cde{2}, tal como se indica en la Figura~\ref{fig:agentid}.
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
@@ -54,9 +54,9 @@ Los operadores descritos en la Definici\'on~\ref{def:gensyn} est\'an representad
   op <_>[_] : Aid SCCPCmd -> SCCPCmd .
 \end{maude}
 
-El argumento del operador \cde{tell_} es la restricci\'on que se va a adicionar al banco de informaci\'on de un agente, representado por un elemento de tipo \cde{Boolean}. El operador \cde{ask_->_} tiene como argumentos la condici\'on a ser evaluada dentro del banco de informaci\'on del agente y el proceso a llevarse a cabo. Cada uno de estos argumentos esta representado por elementos del tipo \cde{Boolean} y \cde{SCCPCmd}, respectivamente.
+El argumento del operador \cde{tell_} es la restricci\'on que se va a adicionar al banco de informaci\'on de un agente, representado por un elemento de tipo \cde{Boolean}. El operador \cde{ask_->_} tiene como argumentos la condici\'on a ser evaluada dentro del banco de informaci\'on del agente y el proceso a llevarse a cabo. Cada uno de estos argumentos est\'a representado por elementos del tipo \cde{Boolean} y \cde{SCCPCmd}, respectivamente.
 
-El operador \cde{ask_->_} permite verificar la satisfacibilidad de la restricci\'on dentro del banco de informaci\'on de un agente, en este modelo se presenta una extensi\'on a este operador mediante la cual se puede verificar la satisfacibilidad de la restricci\'on en un agente de menor jerarqu\'ia (i.e. el agente con \cde{ID} 4 puede preguntar al agente con \cde{ID} 4.2 o 4.3.1). Este operador esta definido como \cde{ask<_>_->_} y adicionalmente tiene como argumento el identificador del agente de menor jerarqu\'ia, representado por un elemento de tipo \cde{Aid}.
+El operador \cde{ask_->_} permite verificar la satisfacibilidad de la restricci\'on dentro del banco de informaci\'on de un agente, en este modelo se presenta una extensi\'on a este operador mediante la cual se puede verificar la satisfacibilidad de la restricci\'on en un agente de menor jerarqu\'ia (i.e., el agente con identificador 4 puede preguntar al agente con identificador 4.2 o 4.3.1). Este operador esta definido como \cde{ask<_>_->_} y adicionalmente tiene como argumento el identificador del agente dentro de su jerarqu\'ia, representado por un elemento de tipo \cde{Aid}.
 
 El operador \cde{_||_} tiene como argumentos los procesos que se van a ejecutar en paralelo, representados por elementos de tipo \cde{SCCPCmd}. Finalmente, los argumentos del operador \cde{<_>[_]} son el identificador del agente y el proceso a ejecutar, representados por elementos del tipo \cde{Aid} y \cde{SCCPCmd}, respectivamente. 
 
@@ -64,7 +64,7 @@ El operador \cde{_||_} tiene como argumentos los procesos que se van a ejecutar 
 \section{Modelamiento formal de agentes y procesos}
 \label{state.rew}
 
-Los agentes y procesos est\'an representados como objetos por el sort \cde{Obj} definido en el modulo funcional \cde{SCCP-STATE} de la siguiente manera:
+Los agentes y procesos est\'an representados como objetos por el tipo \cde{Obj} definido en el modulo funcional \cde{SCCP-STATE} de la siguiente manera:
 
 \begin{maude}
   sorts Cid Obj Cnf Sys .
@@ -78,17 +78,17 @@ Los agentes y procesos est\'an representados como objetos por el sort \cde{Obj} 
   op {_} : Cnf -> Sys [ctor] .
 \end{maude}
 
-El sort \cde{Cid} representa el identificador de clase, en este caso agentes y procesos designados como \cde{store} y \cde{process}, respectivamente. Un agente esta representado como un objeto de la forma \cde{[_,_,_]} cuyos argumentos son el identificador de clase (i.e. \cde{store}), el identificador del agente y su banco de informaci\'on. Cada uno de estos argumentos est\'an representados por elementos del tipo \cde{Cid}, \cde{Aid} y \cde{Boolean}, respectivamente.
+El tipo \cde{Cid} representa el identificador de clase, en este caso agentes y procesos designados como \cde{store} y \cde{process}, respectivamente. Un agente est\'a representado como un objeto de la forma \cde{[_,_,_]} cuyos argumentos son el identificador de clase (i.e., \cde{store}), el identificador del agente y su banco de informaci\'on. Cada uno de estos argumentos est\'a representado por elementos del tipo \cde{Cid}, \cde{Aid} y \cde{Boolean}, respectivamente.
 
-Los argumentos de un proceso son el identificador de clase (i.e. \cde{process}), el identificador del agente y el proceso a ejecutar dentro del espacio de dicho agente. Estos argumentos est\'an representados por elementos del tipo \cde{Cid}, \cde{Aid} y \cde{SCCPCmd}, respectivamente.
+Los argumentos de un proceso son el identificador de clase (i.e., \cde{process}), el identificador del agente y el proceso a ejecutar dentro del espacio de dicho agente. Estos argumentos est\'an representados por elementos del tipo \cde{Cid}, \cde{Aid} y \cde{SCCPCmd}, respectivamente.
 
-Los estados del sistema est\'an representados por el sort \cde{Sys} definido como una sopa de agentes y procesos, dicha sopa es conmutativa, asociativa y tiene un elemento identidad. En la sintaxis de Maude, estos atributos se agregan incluyendo las palabras clave \cde{comm}, \cde{assoc} y \cde{id} en la declaraci\'on de las operaciones. El elemento identidad es \cde{mt}.
+Los estados del sistema est\'an representados por el tipo \cde{Sys} definido como una sopa de agentes y procesos; dicha sopa es conmutativa, asociativa y tiene elemento identidad \cde{mt}. En la sintaxis de Maude, estos atributos se agregan incluyendo las palabras clave \cde{comm}, \cde{assoc} y \cde{id} en la declaraci\'on de las operaciones. El elemento identidad es \cde{mt}.
 
 %% Secci\'on:  %%
 \section{Modelamiento formal de las transiciones}
 \label{rules.rew}
 
-Las transiciones concurrentes del sistema est\'an modeladas por seis reglas de reescritura en la sintaxis de Maude, que corresponden a los operadores descritos en la Secci\'on~\ref{syntax.rew}. En las transiciones los procesos se ejecutan y se modifica el banco de informaci\'on de los agentes. Las reglas de reescritura se especifican a continuaci\'on: 
+Las transiciones concurrentes del sistema est\'an modeladas por seis reglas de reescritura en la sintaxis de Maude y que definen la sem\'antica de los operadores descritos en la Secci\'on~\ref{syntax.rew}. En las transiciones, los procesos se ejecutan y el banco de informaci\'on de los agentes puede ser modificado. Las reglas de reescritura se especifican a continuaci\'on: 
 
 \begin{maude}
   rl [tell] :
@@ -123,9 +123,9 @@ Las transiciones concurrentes del sistema est\'an modeladas por seis reglas de r
        [ store, L0 . L1, true ] X } .
 \end{maude}
 
-Las reglas \cde{[ask]}, \cde{[ask-ext0]} y \cde{[ext-ask1]} son reglas condicionales, es decir, requieren que una condici\'on especifica se cumpla para poder ser ejecutadas, dicha condici\'on debe ser de tipo \cde{Boolean}.
+Las reglas \cde{[ask]}, \cde{[ask-ext0]} y \cde{[ext-ask1]} son reglas condicionales, es decir, requieren que una condici\'on especifica se cumpla para poder ser ejecutadas, dicha condici\'on debe ser de tipo \cde{Boolean}. En particular, un llamado \[\cde{check-unsat(}\phi\cde{)} \] en el cual $\phi$ es una restricci\'on resuelta en una invocaci\'on al SMT-Solver disponible en Maude. Esta invocaci\'on resulta en un valor Booleano indicando si la f\'ormula $\phi$ es satisfacible o no. Note que $\phi$ no es satisfacible siempre y cuando $\phi$ es una f\'ormula v\'alida en el modelo sobre el cual opera el SMT-Solver. De esta manera, las tres reglas mencionadas anteriormente ... en los cuales la restricci\'on sobre la cual se consulta al SMT-Solver es v\'alida, tal y como se define la sem\'antica de $\SCCP$ en la Secci\'on~\ref{ser.sccp}.
 
-Adicionalmente, se incluyen dos ecuaciones correspondientes a transiciones concurrentes no observables. La primer ecuaci\'on reemplaza un proceso inactivo (i.e. que no hace nada) por el elemento identidad del sistema \cde{mt}, y la segunda ecuaci\'on une dos agentes con el mismo identificador mediante una conjunci\'on l\'ogica de sus bancos de informaci\'on. Estas ecuaciones se especifican a continuaci\'on:
+Adicionalmente, se incluyen dos ecuaciones correspondientes a transiciones concurrentes no observables. La primer ecuaci\'on reemplaza un proceso inactivo (i.e., que no hace nada) por el elemento identidad del sistema \cde{mt}, y la segunda ecuaci\'on une dos agentes con el mismo identificador mediante una conjunci\'on l\'ogica de sus bancos de informaci\'on. Estas ecuaciones se especifican a continuaci\'on:
 
 \begin{maude}
   eq [ process, L, 0 ]
@@ -138,9 +138,9 @@ Adicionalmente, se incluyen dos ecuaciones correspondientes a transiciones concu
 \section{Ejemplo}
 \label{example.rew}
 
-Esta secci\'on muestra c\'omo evoluciona el sistema usando la especificaci\'on de los operadores en la Secci\'on~\ref{syntax.rew}, los agentes y procesos en la Secci\'on~\ref{state.rew} y las reglas de reescritura de la Secci\'on~\ref{rules.rew}.
+Esta secci\'on muestra c\'omo especificar y ejecutar el sistema de la Secci\'on~\ref{example.sccp} usando la especificaci\'on de los operadores en la Secci\'on~\ref{syntax.rew}, los agentes y procesos en la Secci\'on~\ref{state.rew} y las reglas de reescritura de la Secci\'on~\ref{rules.rew}.
 
-Considere el ejemplo del Cap\'itulo~\ref{chapter.sccp}, el estado inicial $d$ puede ser escrito de la siguiente manera:
+En el ejemplo de la Secci\'on~\ref{example.sccp}, el estado inicial $d$ puede ser escrito en la sintaxis de la especificaci\'on Maude de la siguiente manera:
 
 \begin{maude}
 { [store, root, (V:Integer > 10)]
@@ -160,7 +160,7 @@ Los procesos $R$, $P$ y $Q$ se definen respectivamente c\'omo:
               < 2 >[tell(S:Integer =/== 2)])]
 \end{maude}
 
-Por lo tanto, el proceso $S = \sfunc{R}_1 \parallel \sfunc{ P }_2 \parallel \sfunc{ Q }_1$ puede ser escrito as\'i:
+Por lo tanto, el proceso $S = \sfunc{R}_1 \parallel \sfunc{ P }_2 \parallel \sfunc{ Q }_1$ puede ser escrito como se muestra a continuaci\'on::
 
 \begin{maude}
 [process, root, (((< 1 >[(< 3 >[tell(V:Integer === 42)]) || 
@@ -205,5 +205,13 @@ Finalmente, se presenta un ejemplo de la extensi\'on del operador $\ask$ descrit
    < 2 . 1 >[tell(M:Integer >= 4)])]
 \end{maude}
 
-Este proceso verifica la satisfacibilidad de la restricci\'on \cde{W:Integer < 15} dentro del banco de informaci\'on del agente \cde{1} y posteriormente ejecuta el proceso \cde{< 2 . 1 >[tell(M:Integer >= 4)]}, el cual agrega la restricci\'on \cde{M:Integer >= 4} al banco de informaci\'on del agente \cde{2.1}.
+Este proceso verifica la satisfacibilidad de la restricci\'on \cde{W:Integer < 15} dentro del banco de informaci\'on del Agente \cde{1} y posteriormente ejecuta el proceso \cde{< 2 . 1 >[tell(M:Integer >= 4)]}, el cual agrega la restricci\'on \cde{M:Integer >= 4} al banco de informaci\'on del Agente \cde{2.1}, tal como se muestra a continuaci\'on:
 
+\begin{maude}
+{ [store,root,V:Integer > (10).Integer] 
+  [store,(1).NzNat,W:Integer === (3).Integer] 
+  [store,(2).NzNat,Y:Integer > (4).Integer] 
+  [store,1 . 3,X:Integer === (17).Integer] 
+  [store,2 . 1,Z:Integer === (20).Integer 
+           and M:Integer >= (4).Integer] }
+\end{maude}

@@ -137,63 +137,8 @@ Maude cuenta con dos tipos de m\'odulos: funcional y de sistema.
  un t\'ermino $t$ a su forma $E/A$-can\'onica y luego usar una regla con $R$
  m\'odulo $A$ para lograr el efecto de reescribir con $R$ m\'odulo $E \cup A$.
 
-%Secci\'on: LTL model-checking
-\section{{\em LTL model-checking}}
-\label{ltl.prelim}
-
-Con {\em LTL model-checking} es posible demostrar propiedades de l\'ogica
-lineal temporal para m\'odulos de sistema que tienen una cantidad finita de
-estados alcanzables desde un estado unicial dado.
-
-Una estructura de Kripke~\cite{clarke-book} es un sistema (total) de
-transiciones sin etiquetar al cual se le agrega una colecci\'on de
-predicados de estados unarios en su conjunto de estados.
-Suponiendo que dado un m\'odulo de sistema \cde{M}, el cual especifica una
-teor\'ia de reescritura $\rcal = (\Sigma,E,R)$, se tiene:
-
-\begin{itemize}
-   \item elegido un tipo $k = \cuad{s}$ en \cde{M} para los estados.
-   
-   \item definido alg\'un conjunto de predicados de estado $\Pi$ y su
-	sem\'antica en el conjunto de ecuaciones $D$.
-\end{itemize}
-
-Se define la estructura de Kripke $\kcal(\rcal,k)_{\Pi}$ sobre el conjunto
-de predicados at\'omicos $AP_{\Pi}$. Dado un estado inicial $\rel{t}{k}$ y
-una formula LTL $\varphi \in LTL(AP)_\Pi$ se quiere obtener un
-procedimiento para decidir la relaci\'on
-
-$\kcal(\rcal,k)_{\Pi}, \cuad{t} \models \varphi$,
-
-\noindent que significa que desde el estado inicial $\cuad{t}$ se
-satisface $\varphi$ en la estructura de Kripke $\kcal(\rcal,k)_{\Pi}$.
-En general, esta relaci\'on es indecidible pero puede convertirse en
-decidible si se cumplen las siguientes condiciones:
-
-\begin{enumerate}
-   \item el conjunto de estados en $\rel{t}{k}$ que son alcanzables desde
-	$\cuad{t}$ es finito, y
-
-   \item la teor\'ia de reescritura $\rcal = (\Sigma,E,R)$ especificada
-	por el m\'odulo \cde{M} y las ecuaciones $D$, satisfacen que:
-	\begin{itemize}
-	   \item $E$ y $E \cup D$ son (simples) Church-Rosser~\cite{DBLP:journals/jlp/DuranM12}
-		y terminante~\cite{Lucas2009207}, m\'odulo algunos axiomas
-		de $A$, con $(\Sigma,E) \subseteq (\Sigma \cup \Pi, E \cup D)$
-		una extensi\'on protegida, y
-
-	   \item $R$ es (simple) coherente con relaci\'on a $E$, de nuevo,
-		m\'odulo algunos axiomas de $A$.
-	\end{itemize}
-\end{enumerate}
-
-Bajo estas suposiciones, los predicados de estados $\Pi$ y la relaci\'on de 
-transici\'on $\fa{\rcal}{1}$, son calculables y, dada la suposici\'on de
-alcanzabilidad, se puede resolver el problema de satisfacci\'on usando un
-procedimiento de {\em model-checking}~\cite{clarke-book}.
-
 %Secci\'on: Ret\'iculo Algebraico Completo
-\section{Ret\'iculo Algebraico Completo}
+\section{Ret\'iculo algebraico completo}
 \label{rac.prelim}
 
 Esta secci\'on presenta la definici\'on de un \textit{Ret\'iculo Algebraico Completo}, 
@@ -210,35 +155,41 @@ condiciones \textit{C1}, \textit{C2} y \textit{C3}.
 \end{enumerate}
 
 Un conjunto no vac\'io con orden parcial es llamado un \textit{conjunto 
-parcialmente ordenado}, o m\'as brevemente un \textit{poset} 
+parcialmente ordenado} o m\'as brevemente un \textit{poset} 
 (del ingl\'es, \textit{partially ordered set}).
 
 Un conjunto parcialmente ordenado $L$ es un \textit{ret\'iculo} si y 
 solo si para cada $a$, $b$ en $L$ existen sup$\{a,b\}$ e inf$\{a,b\}$. 
-Donde sup$\{a,b\}$ es el \textit{menor cota superior} o \textit{supremo}, 
-e inf$\{a,b\}$ es la \textit{mayor cota inferior} o \textit{\'infimo}.
+La expresi\'on sup$\{a,b\}$ denota la \textit{menor cota superior} o \textit{supremo}, 
+e inf$\{a,b\}$ la \textit{mayor cota inferior} o \textit{\'infimo}.
 
 Un conjunto parcialmente ordenado $P$ es \textit{completo} si para 
 cada subconjunto $A$ de $P$ existen sup $A$ e inf $A$. Todos los 
-conjuntos parcialmente ordenados completos son ret\'iculos, y un 
-ret\'iculo $L$ que es completo como conjunto parcialmente ordenado, 
+conjuntos parcialmente ordenados completos son ret\'iculos. Un 
+ret\'iculo $L$ que es completo como conjunto parcialmente ordenado 
 es un \textit{ret\'iculo completo}.
 
 Por ejemplo, si $L$ es un conjunto de proporciones, $\vee$ y $\wedge$ 
-denotan la disjunci\'on y la conjunci\'on, respectivamente (i.e. ``or'' y ``and''). 
-Entonces las identidades \textit{L1} a \textit{L4} son propiedades 
-conocidasde la l\'ogica proposicional. 
-
-Un ejemplo de \textit{ret\'iculo completo} son los n\'umeros naturales, 
-ordenados por divisibilidad. El supremo esta dado por el m\'inimo 
-com\'un multiplo y el \'infimo por el m\'aximo com\'un divisor. Para conjuntos 
-infinitos el supremo e \'infimo son el $0$ y $1$, respectivamente. 
-
+denotan la disjunci\'on y la conjunci\'on, respectivamente (i.e. ``or'' y ``and''), 
+entonces las identidades \textit{L1} a \textit{L4} son propiedades 
+conocidasde la l\'ogica proposicional. Un ejemplo de \textit{ret\'iculo completo} 
+son los n\'umeros naturales, ordenados por divisibilidad. El supremo esta dado 
+por el m\'inimo com\'un m\'ultiplo y el \'infimo por el m\'aximo com\'un divisor. 
+Para conjuntos infinitos el supremo e \'infimo son el $0$ y $1$, respectivamente. 
 Si se remueve el $0$ del conjunto anteriormente descrito, ya no 
 es un \textit{ret\'iculo completo} puesto que no tiene supremo para 
 todos los subconjuntos. Aunque sigue siendo un \textit{ret\'iculo}.
 
+%Secci\'on: Ret\'iculo Algebraico Completo
+\section{\textit{SMT-Solving}}
+\label{smt.prelim}
 
+\begin{enumerate}
+\item Qu\'e es SMT-Solving y su relaci\'on con procedimientos de decisi\'on.
+\item Qu\'e es un SMT-Solver
+\item Maude, en sus versiones mas recientes utiliza CVC4 como SMT-Solver suministrando funcionalidades para reescritura. M\'odulo SMT [citar articulo de camilo JLAMP 2017].
+\item En este trabajo se usan procedimientos de decisi\'on y semi-decisi\'on sobre los enteros para codificar un sistema de restricciones sobre enteros.
+\end{enumerate}
 
 
 
