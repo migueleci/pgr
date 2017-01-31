@@ -82,13 +82,13 @@ El tipo \cde{Cid} representa el identificador de clase, en este caso agentes y p
 
 Los argumentos de un proceso son el identificador de clase (i.e., \cde{process}), el identificador del agente y el proceso a ejecutar dentro del espacio de dicho agente. Estos argumentos est\'an representados por elementos del tipo \cde{Cid}, \cde{Aid} y \cde{SCCPCmd}, respectivamente.
 
-Los estados del sistema est\'an representados por el tipo \cde{Sys} definido como una sopa de agentes y procesos; dicha sopa es conmutativa, asociativa y tiene elemento identidad \cde{mt}. En la sintaxis de Maude, estos atributos se agregan incluyendo las palabras clave \cde{comm}, \cde{assoc} y \cde{id} en la declaraci\'on de las operaciones. El elemento identidad es \cde{mt}.
+Los estados del sistema est\'an representados por el tipo \cde{Sys} definido como una sopa de agentes y procesos representada por el tipo \cde{Cnf}; dicha sopa es conmutativa, asociativa y tiene elemento identidad \cde{mt}. En la sintaxis de Maude, estos atributos se agregan incluyendo las palabras clave \cde{comm}, \cde{assoc} y \cde{id} en la declaraci\'on de las operaciones. 
 
 %% Secci\'on:  %%
 \section{Modelamiento formal de las transiciones}
 \label{rules.rew}
 
-Las transiciones concurrentes del sistema est\'an modeladas por seis reglas de reescritura en la sintaxis de Maude y que definen la sem\'antica de los operadores descritos en la Secci\'on~\ref{syntax.rew}. En las transiciones, los procesos se ejecutan y el banco de informaci\'on de los agentes puede ser modificado. Las reglas de reescritura se especifican a continuaci\'on: 
+Las transiciones concurrentes del sistema est\'an modeladas por seis reglas de reescritura en la sintaxis de Maude y que definen la sem\'antica de los operadores descritos en la Secci\'on~\ref{syntax.rew}. En las transiciones, los procesos se ejecutan y el banco de informaci\'on de los agentes puede ser modificado. Las regla de reescritura aplican sobre los estados del sistema, es decir, sobre un elemento de tipo \cde{Sys} definido e la Secci\'on~\ref{state.rew}. La ecuaci\'on \cde{exists-store?} en la regla \cde{ext-ask1} verifica si en el sistema existe un agente a partir de su identificador, cada uno de estos argumentos est\'a representado por elementos del tipo \cde{Cnf} y \cde{Aid}, respectivamente. Las reglas de reescritura se especifican a continuaci\'on: 
 
 \begin{maude}
   rl [tell] :
@@ -123,7 +123,7 @@ Las transiciones concurrentes del sistema est\'an modeladas por seis reglas de r
        [ store, L0 . L1, true ] X } .
 \end{maude}
 
-Las reglas \cde{[ask]}, \cde{[ask-ext0]} y \cde{[ext-ask1]} son reglas condicionales, es decir, requieren que una condici\'on especifica se cumpla para poder ser ejecutadas, dicha condici\'on debe ser de tipo \cde{Boolean}. En particular, un llamado \[\cde{check-unsat(}\phi\cde{)} \] en el cual $\phi$ es una restricci\'on resuelta en una invocaci\'on al SMT-Solver disponible en Maude. Esta invocaci\'on resulta en un valor Booleano indicando si la f\'ormula $\phi$ es satisfacible o no. Note que $\phi$ no es satisfacible siempre y cuando $\phi$ es una f\'ormula v\'alida en el modelo sobre el cual opera el SMT-Solver. De esta manera, las tres reglas mencionadas anteriormente ... en los cuales la restricci\'on sobre la cual se consulta al SMT-Solver es v\'alida, tal y como se define la sem\'antica de $\SCCP$ en la Secci\'on~\ref{ser.sccp}.
+Las reglas \cde{[ask]}, \cde{[ask-ext0]} y \cde{[ext-ask1]} son reglas condicionales, es decir, requieren que una condici\'on especifica se cumpla para poder ser ejecutadas, dicha condici\'on debe ser de tipo \cde{Boolean}. En particular, un llamado \[\cde{check-unsat(}\phi\cde{)} \] en el cual $\phi$ es una restricci\'on, resuelta en una invocaci\'on al SMT-Solver disponible en Maude. Esta invocaci\'on resulta en un valor Booleano indicando si la f\'ormula $\phi$ es satisfacible o no. Note que $\phi$ no es satisfacible siempre y cuando $\phi$ es una f\'ormula v\'alida en el modelo sobre el cual opera el SMT-Solver. De esta manera, las tres reglas mencionadas anteriormente definen transiciones en los cuales la restricci\'on sobre la cual se consulta al SMT-Solver es v\'alida, tal y como se define la sem\'antica de $\SCCP$ en la Secci\'on~\ref{ser.sccp}.
 
 Adicionalmente, se incluyen dos ecuaciones correspondientes a transiciones concurrentes no observables. La primer ecuaci\'on reemplaza un proceso inactivo (i.e., que no hace nada) por el elemento identidad del sistema \cde{mt}, y la segunda ecuaci\'on une dos agentes con el mismo identificador mediante una conjunci\'on l\'ogica de sus bancos de informaci\'on. Estas ecuaciones se especifican a continuaci\'on:
 
